@@ -33,32 +33,42 @@ body {
   to { stroke-dashoffset: 0; }
 }
 
-/* SVG text line drawing */
-@keyframes fillText {
+/* SVG background line art - starts invisible, draws in, stays faint */
+@keyframes svgFadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes drawAndFade {
+  0% { stroke-dashoffset: var(--dash-len); stroke-opacity: 0; }
+  10% { stroke-opacity: 1; }
+  100% { stroke-dashoffset: 0; stroke-opacity: 1; }
+}
+
+@keyframes fillFaint {
   from { fill: transparent; }
   to { fill: currentColor; }
 }
 
-.hero-text-line-art .text-draw {
-  stroke-dasharray: 1500;
-  stroke-dashoffset: 1500;
-  animation: drawLine 2.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards,
-             fillText 1s ease forwards 2.5s;
-  color: #5C4830;
+/* Container: hidden at first, then fades in */
+.hero-text-line-art {
+  opacity: 0;
+  animation: svgFadeIn 0.3s ease 0.5s forwards;
 }
 
-.hero-text-line-art .text-draw-line {
-  stroke-dasharray: 300;
-  stroke-dashoffset: 300;
-  animation: drawLine 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+.hero-text-line-art .text-draw-bg {
+  --dash-len: 3000;
+  stroke-dasharray: var(--dash-len);
+  stroke-dashoffset: var(--dash-len);
+  animation: drawAndFade 3s cubic-bezier(0.25, 0.1, 0.25, 1) 0.5s forwards,
+             fillFaint 1.5s ease 3s forwards;
+  color: rgba(223, 208, 192, 0.25);
 }
 
-.hero-text-line-art .text-draw-sub {
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200;
-  animation: drawLine 2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards,
-             fillText 1s ease forwards 3.5s;
-  color: #A88E6E;
+.hero-text-line-art .text-draw-line-bg {
+  --dash-len: 500;
+  stroke-dasharray: var(--dash-len);
+  stroke-dashoffset: var(--dash-len);
+  animation: drawAndFade 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
 /* ========== Animations ========== */

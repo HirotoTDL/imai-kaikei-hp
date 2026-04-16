@@ -48,7 +48,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=20260416f">
+  <link rel="stylesheet" href="css/style.css?v=20260416g">
 </head>
 <body class="font-sans text-gray-800 bg-white">
 
@@ -109,26 +109,23 @@
   <!-- ========== HERO ========== -->
   <section id="hero" class="relative min-h-screen flex items-center overflow-hidden bg-warm-bg paper-texture">
 
-    <!-- SVG line art animation (right side, desktop) -->
-    <div class="absolute right-0 top-0 w-full lg:w-[50%] h-full pointer-events-none z-10 flex items-center justify-center">
-      <svg class="hero-text-line-art w-[90%] max-w-md h-auto opacity-50 lg:opacity-100" viewBox="0 0 360 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- IMAI - large, bold -->
-        <text class="text-draw" x="180" y="80" text-anchor="middle" font-family="'Noto Serif JP', serif" font-size="72" font-weight="700" letter-spacing="16" stroke="#5C4830" stroke-width="1.2" fill="none">IMAI</text>
-        <!-- Divider -->
-        <line class="text-draw-line" x1="60" y1="100" x2="300" y2="100" stroke="#C9A87C" stroke-width="0.8" style="animation-delay:1.2s"/>
-        <!-- ACCOUNTING OFFICE -->
-        <text class="text-draw" x="180" y="135" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="16" font-weight="400" letter-spacing="10" stroke="#8C7252" stroke-width="0.5" fill="none" style="animation-delay:1.5s">ACCOUNTING</text>
-        <text class="text-draw" x="180" y="165" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="16" font-weight="400" letter-spacing="14" stroke="#8C7252" stroke-width="0.5" fill="none" style="animation-delay:1.8s">OFFICE</text>
-        <!-- Small divider -->
-        <line class="text-draw-line" x1="130" y1="180" x2="230" y2="180" stroke="#C9A87C" stroke-width="0.5" style="animation-delay:2.2s"/>
-        <!-- Subtitle -->
-        <text class="text-draw-sub" x="180" y="205" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="10" letter-spacing="3" stroke="#A88E6E" stroke-width="0.4" fill="none" style="animation-delay:2.4s">岐阜県中津川市の税理士事務所</text>
-      </svg>
+    <!-- SVG line art - behind text, overlapping content area -->
+    <div class="absolute inset-0 flex items-center pointer-events-none z-10 overflow-hidden">
+      <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <svg class="hero-text-line-art w-full h-auto ml-auto lg:w-[85%]" viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0">
+          <!-- IMAI - very large background text -->
+          <text class="text-draw-bg" x="400" y="150" text-anchor="middle" font-family="'Noto Serif JP', serif" font-size="160" font-weight="700" letter-spacing="30" stroke="#DFD0C0" stroke-width="0.6" fill="none">IMAI</text>
+          <!-- ACCOUNTING OFFICE -->
+          <text class="text-draw-bg" x="400" y="220" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="24" font-weight="300" letter-spacing="20" stroke="#DFD0C0" stroke-width="0.3" fill="none" style="animation-delay:1.5s">ACCOUNTING OFFICE</text>
+          <!-- Thin line -->
+          <line class="text-draw-line-bg" x1="200" y1="240" x2="600" y2="240" stroke="#E8DDD0" stroke-width="0.5" style="animation-delay:2.2s"/>
+        </svg>
+      </div>
     </div>
 
-    <!-- Content (left side) -->
+    <!-- Content (left side, on top) -->
     <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-28 pb-20 lg:pt-0 lg:pb-0">
-      <div class="lg:max-w-[48%]">
+      <div class="lg:max-w-[55%]">
         <p class="text-wood font-medium text-sm tracking-[0.25em] mb-6 animate-fade-in-up" style="animation-delay: 0.2s">
           岐阜県中津川市の税理士事務所
         </p>
@@ -688,6 +685,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260416f"></script>
+  <script src="js/main.js?v=20260416g"></script>
 </body>
 </html>
