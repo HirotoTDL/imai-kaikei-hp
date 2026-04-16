@@ -19,16 +19,16 @@
         extend: {
           colors: {
             forest: {
-              50: '#f0f5fa',
-              100: '#e1eaf4',
-              200: '#c3d5e9',
-              300: '#96b5d6',
-              400: '#6a95c0',
-              500: '#4778a8',
-              600: '#35608e',
-              700: '#2B5080',
-              800: '#1e3a5e',
-              900: '#14284a',
+              50: '#f2f6fb',
+              100: '#e4ecf6',
+              200: '#c9d9ed',
+              300: '#a3bfde',
+              400: '#7da5ce',
+              500: '#5588b8',
+              600: '#3f6d9e',
+              700: '#336090',
+              800: '#264a6e',
+              900: '#1a3350',
             },
             wood: {
               light: '#D4B896',
@@ -36,7 +36,7 @@
               dark: '#8A7058',
             },
             warm: {
-              bg: '#F8FAFB',
+              bg: '#F6F8FA',
               card: '#FDFEFE',
             }
           },
@@ -145,7 +145,7 @@
       </h1>
 
       <p class="text-white/80 text-base sm:text-lg md:text-xl leading-relaxed mb-12 max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 0.6s">
-        中津川・恵那で40年。地域の経営者に寄り添い続けてきた事務所が、<br class="hidden sm:block">
+        中津川・恵那の経営者に寄り添い続けてきた事務所が、<br class="hidden sm:block">
         最新のIT・AIも活用して、あなたの「困った」を解決します。
       </p>
 
@@ -371,15 +371,8 @@
       <div class="grid md:grid-cols-2 gap-10 lg:gap-20 max-w-5xl mx-auto">
         <div class="team-card scroll-reveal-left">
           <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100/80 transition-all duration-500">
-            <div class="team-photo-placeholder aspect-[4/3] bg-gradient-to-br from-forest-100 to-forest-50 flex items-center justify-center relative">
-              <div class="text-center relative z-10">
-                <div class="w-24 h-24 mx-auto bg-white/60 rounded-full flex items-center justify-center mb-3">
-                  <svg class="w-12 h-12 text-forest-400" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
-                    <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
-                  </svg>
-                </div>
-                <p class="text-forest-500 text-xs tracking-wider">PHOTO</p>
-              </div>
+            <div class="team-photo-placeholder aspect-[4/3] bg-gradient-to-br from-forest-50 to-white flex items-center justify-center relative p-6">
+              <img src="images/masayoshi_illust.png" alt="今井正義 所長" class="w-auto h-full max-h-64 object-contain relative z-10">
             </div>
             <div class="p-8 lg:p-10">
               <div class="flex items-center gap-3 mb-3">
@@ -396,15 +389,8 @@
 
         <div class="team-card scroll-reveal-right">
           <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100/80 transition-all duration-500">
-            <div class="team-photo-placeholder aspect-[4/3] bg-gradient-to-br from-forest-100 to-forest-50 flex items-center justify-center relative">
-              <div class="text-center relative z-10">
-                <div class="w-24 h-24 mx-auto bg-white/60 rounded-full flex items-center justify-center mb-3">
-                  <svg class="w-12 h-12 text-forest-400" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
-                    <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
-                  </svg>
-                </div>
-                <p class="text-forest-500 text-xs tracking-wider">PHOTO</p>
-              </div>
+            <div class="team-photo-placeholder aspect-[4/3] bg-gradient-to-br from-forest-50 to-white flex items-center justify-center relative p-6">
+              <img src="images/taito_illust.png" alt="今井泰斗 税理士" class="w-auto h-full max-h-64 object-contain relative z-10">
             </div>
             <div class="p-8 lg:p-10">
               <div class="flex items-center gap-3 mb-3">
@@ -518,12 +504,19 @@
       </div>
 
       <div class="grid lg:grid-cols-2 gap-12 items-start">
-        <div class="rounded-3xl overflow-hidden shadow-lg scroll-reveal-left">
+        <div class="scroll-reveal-left space-y-4">
+          <!-- Building photo -->
+          <div class="rounded-3xl overflow-hidden shadow-lg">
+            <img src="images/building.jpg" alt="八百健ビル外観 - 今井会計事務所" class="w-full h-auto object-cover">
+          </div>
+          <!-- Map -->
+          <div class="rounded-3xl overflow-hidden shadow-lg">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.5!2d137.5008!3d35.4875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601cb7a7e25e4f2d%3A0x0!2z5bKQ6Zic55yM5Lit5rSl5bed5biC44GL44KE44Gu5pyo55S6My02IOWFq-eZvuWBpeODk-ODqw!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
             width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade" title="今井会計事務所の所在地">
           </iframe>
+          </div>
         </div>
 
         <div class="scroll-reveal-right">
