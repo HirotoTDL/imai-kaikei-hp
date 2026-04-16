@@ -75,7 +75,17 @@ body {
   animation: drawStroke 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.4s forwards;
 }
 
-/* Logo text - draws after grid, then stroke fades out and clean fill appears */
+/* Logo text - each char has individual timing via CSS vars */
+.hero-grid-art .logo-draw-char {
+  --dash-len: 800;
+  stroke-dasharray: var(--dash-len);
+  stroke-dashoffset: var(--dash-len);
+  animation: drawStroke 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) var(--draw-delay) forwards,
+             fillClean 0.8s ease var(--fill-delay) forwards;
+  color: rgba(92, 72, 48, 0.18);
+}
+
+/* Legacy class kept for compatibility */
 .hero-grid-art .logo-draw {
   --dash-len: 3000;
   stroke-dasharray: var(--dash-len);
