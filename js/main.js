@@ -82,7 +82,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ========== Contact Form (Formspree via fetch) ==========
+// ========== Contact Form (FormSubmit.co) ==========
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', async (e) => {
@@ -112,12 +112,20 @@ if (contactForm) {
           </div>
         `;
       } else {
-        throw new Error('送信に失敗しました');
+        // FormSubmit may redirect on first use for email verification
+        // Fall back to normal form submit
+        contactForm.removeEventListener('submit', arguments.callee);
+        contactForm.submit();
       }
     } catch (err) {
-      btn.innerHTML = origText;
-      btn.disabled = false;
-      alert('送信に失敗しました。お手数ですがお電話（0573-65-5054）でお問い合わせください。');
+      // Network error — try normal form submit
+      try {
+        contactForm.submit();
+      } catch (e2) {
+        btn.innerHTML = origText;
+        btn.disabled = false;
+        alert('送信に失敗しました。お手数ですがお電話（0573-65-5054）でお問い合わせください。');
+      }
     }
   });
 }
