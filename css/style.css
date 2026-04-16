@@ -27,34 +27,28 @@ body {
   z-index: 1;
 }
 
-/* ========== Hero Background ========== */
-.hero-bg {
-  background:
-    linear-gradient(135deg, #3D2B1F 0%, #5C4830 30%, #6B553D 55%, #5C4830 75%, #3D2B1F 100%);
-  position: relative;
+/* ========== Hero SVG Line Drawing Animation ========== */
+@keyframes drawLine {
+  from { stroke-dashoffset: var(--line-length); }
+  to { stroke-dashoffset: 0; }
 }
 
-.hero-bg::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 120% 60% at 20% 90%, rgba(92, 72, 48, 0.4) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 50% at 80% 10%, rgba(107, 85, 61, 0.35) 0%, transparent 50%);
+.hero-line-art .line-draw {
+  --line-length: 2000;
+  stroke-dasharray: var(--line-length);
+  stroke-dashoffset: var(--line-length);
+  animation: drawLine 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0.35;
 }
 
-/* Mountain silhouette layers */
-.hero-bg::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 200'%3E%3Cpath d='M0,200 L0,140 Q30,100 60,130 Q80,70 100,110 Q130,50 160,90 Q180,40 200,80 Q230,25 260,70 Q280,35 300,65 Q330,20 360,60 Q380,30 400,55 Q430,15 460,50 Q490,25 520,60 Q540,35 560,70 Q590,20 620,65 Q640,40 660,75 Q690,30 720,70 Q750,45 780,80 Q800,35 820,65 Q850,20 880,55 Q910,30 940,70 Q960,45 980,80 Q1010,25 1040,60 Q1070,35 1100,75 Q1120,50 1140,85 Q1170,40 1200,70 Q1230,55 1260,90 Q1290,60 1320,100 Q1350,75 1380,110 Q1410,85 1440,130 L1440,200Z' fill='rgba(46,35,24,0.3)'/%3E%3C/svg%3E") no-repeat bottom center,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 160'%3E%3Cpath d='M0,160 L0,120 Q40,80 80,110 Q110,50 140,90 Q170,30 200,70 Q240,20 280,60 Q310,35 340,55 Q380,15 420,50 Q450,30 480,65 Q520,10 560,45 Q590,25 620,55 Q660,15 700,50 Q730,30 760,60 Q800,20 840,55 Q870,35 900,65 Q940,25 980,55 Q1010,40 1040,70 Q1080,30 1120,60 Q1150,45 1180,75 Q1220,35 1260,65 Q1290,50 1320,80 Q1360,60 1400,95 Q1420,80 1440,110 L1440,160Z' fill='rgba(46,35,24,0.18)'/%3E%3C/svg%3E") no-repeat bottom center;
-  background-size: cover, cover;
+.hero-line-art rect.line-draw {
+  --line-length: 200;
+  animation-duration: 0.8s;
+}
+
+.hero-line-art line.line-draw {
+  --line-length: 200;
+  animation-duration: 0.6s;
 }
 
 /* ========== Animations ========== */
