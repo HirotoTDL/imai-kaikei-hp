@@ -48,7 +48,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=20260416g">
+  <link rel="stylesheet" href="css/style.css?v=20260416h">
 </head>
 <body class="font-sans text-gray-800 bg-white">
 
@@ -109,16 +109,53 @@
   <!-- ========== HERO ========== -->
   <section id="hero" class="relative min-h-screen flex items-center overflow-hidden bg-warm-bg paper-texture">
 
-    <!-- SVG line art - behind text, overlapping content area -->
+    <!-- SVG logo grid animation - behind text -->
     <div class="absolute inset-0 flex items-center pointer-events-none z-10 overflow-hidden">
       <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <svg class="hero-text-line-art w-full h-auto ml-auto lg:w-[85%]" viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0">
-          <!-- IMAI - very large background text -->
-          <text class="text-draw-bg" x="400" y="150" text-anchor="middle" font-family="'Noto Serif JP', serif" font-size="160" font-weight="700" letter-spacing="30" stroke="#DFD0C0" stroke-width="0.6" fill="none">IMAI</text>
-          <!-- ACCOUNTING OFFICE -->
-          <text class="text-draw-bg" x="400" y="220" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="24" font-weight="300" letter-spacing="20" stroke="#DFD0C0" stroke-width="0.3" fill="none" style="animation-delay:1.5s">ACCOUNTING OFFICE</text>
-          <!-- Thin line -->
-          <line class="text-draw-line-bg" x1="200" y1="240" x2="600" y2="240" stroke="#E8DDD0" stroke-width="0.5" style="animation-delay:2.2s"/>
+        <svg class="hero-grid-art w-full h-auto ml-auto lg:w-[85%]" viewBox="0 0 800 340" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0">
+
+          <!-- === Logo Grid: construction geometry === -->
+          <!-- Main circles (golden ratio / proportion guides) -->
+          <circle class="grid-circle" cx="400" cy="130" r="110" stroke="#DFD0C0" stroke-width="0.4" fill="none"/>
+          <circle class="grid-circle" cx="400" cy="130" r="75" stroke="#DFD0C0" stroke-width="0.3" fill="none" style="animation-delay:0.3s"/>
+          <circle class="grid-circle" cx="400" cy="130" r="45" stroke="#E8DDD0" stroke-width="0.25" fill="none" style="animation-delay:0.5s"/>
+
+          <!-- Corner radius guides -->
+          <circle class="grid-circle" cx="280" cy="80" r="30" stroke="#E8DDD0" stroke-width="0.2" fill="none" style="animation-delay:0.6s"/>
+          <circle class="grid-circle" cx="520" cy="80" r="30" stroke="#E8DDD0" stroke-width="0.2" fill="none" style="animation-delay:0.7s"/>
+          <circle class="grid-circle" cx="280" cy="170" r="25" stroke="#E8DDD0" stroke-width="0.2" fill="none" style="animation-delay:0.8s"/>
+          <circle class="grid-circle" cx="520" cy="170" r="25" stroke="#E8DDD0" stroke-width="0.2" fill="none" style="animation-delay:0.9s"/>
+
+          <!-- Horizontal guide lines -->
+          <line class="grid-guide" x1="140" y1="60" x2="660" y2="60" stroke="#DFD0C0" stroke-width="0.3"/>
+          <line class="grid-guide" x1="140" y1="130" x2="660" y2="130" stroke="#DFD0C0" stroke-width="0.3" style="animation-delay:0.15s"/>
+          <line class="grid-guide" x1="140" y1="175" x2="660" y2="175" stroke="#DFD0C0" stroke-width="0.3" style="animation-delay:0.3s"/>
+
+          <!-- Vertical guide lines -->
+          <line class="grid-guide" x1="400" y1="20" x2="400" y2="260" stroke="#DFD0C0" stroke-width="0.3" style="animation-delay:0.1s"/>
+          <line class="grid-guide" x1="250" y1="40" x2="250" y2="200" stroke="#E8DDD0" stroke-width="0.2" style="animation-delay:0.4s"/>
+          <line class="grid-guide" x1="550" y1="40" x2="550" y2="200" stroke="#E8DDD0" stroke-width="0.2" style="animation-delay:0.45s"/>
+
+          <!-- Diagonal construction lines -->
+          <line class="grid-guide" x1="250" y1="60" x2="550" y2="175" stroke="#E8DDD0" stroke-width="0.2" style="animation-delay:0.6s"/>
+          <line class="grid-guide" x1="550" y1="60" x2="250" y2="175" stroke="#E8DDD0" stroke-width="0.2" style="animation-delay:0.65s"/>
+
+          <!-- === Logo text: drawn after grid === -->
+          <text class="logo-draw" x="400" y="160" text-anchor="middle" font-family="'Noto Serif JP', serif" font-size="140" font-weight="700" letter-spacing="28" stroke="#5C4830" stroke-width="0.8" fill="none">IMAI</text>
+
+          <!-- Subtitle text -->
+          <text class="logo-draw-sub" x="400" y="220" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="22" font-weight="300" letter-spacing="18" stroke="#8C7252" stroke-width="0.4" fill="none">ACCOUNTING OFFICE</text>
+
+          <!-- Dimension annotations (designer's marks) -->
+          <line class="grid-guide" x1="170" y1="55" x2="170" y2="170" stroke="#C9A87C" stroke-width="0.25" style="animation-delay:1.2s"/>
+          <line class="grid-guide" x1="166" y1="55" x2="174" y2="55" stroke="#C9A87C" stroke-width="0.3" style="animation-delay:1.3s"/>
+          <line class="grid-guide" x1="166" y1="170" x2="174" y2="170" stroke="#C9A87C" stroke-width="0.3" style="animation-delay:1.3s"/>
+          <line class="grid-guide" x1="630" y1="55" x2="630" y2="170" stroke="#C9A87C" stroke-width="0.25" style="animation-delay:1.4s"/>
+          <line class="grid-guide" x1="626" y1="55" x2="634" y2="55" stroke="#C9A87C" stroke-width="0.3" style="animation-delay:1.5s"/>
+          <line class="grid-guide" x1="626" y1="170" x2="634" y2="170" stroke="#C9A87C" stroke-width="0.3" style="animation-delay:1.5s"/>
+
+          <!-- Bottom label -->
+          <text class="logo-draw-label" x="400" y="275" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="11" letter-spacing="4" stroke="#A88E6E" stroke-width="0.3" fill="none">岐阜県中津川市の税理士事務所</text>
         </svg>
       </div>
     </div>
