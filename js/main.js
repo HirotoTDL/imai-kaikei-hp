@@ -82,50 +82,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ========== Contact Form (FormSubmit.co) ==========
+// ========== Contact Form (standard submit to FormSubmit.co) ==========
+// FormSubmit handles the redirect via _next hidden field
+// No fetch/AJAX needed — just show loading state on submit
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  contactForm.addEventListener('submit', () => {
     const btn = contactForm.querySelector('button[type="submit"]');
-    const origText = btn.innerHTML;
     btn.innerHTML = '送信中...';
     btn.disabled = true;
-
-    try {
-      const res = await fetch(contactForm.action, {
-        method: 'POST',
-        body: new FormData(contactForm),
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (res.ok) {
-        contactForm.innerHTML = `
-          <div class="text-center py-12">
-            <div class="w-16 h-16 bg-forest-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg class="w-8 h-8 text-forest-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-              </svg>
-            </div>
-            <h3 class="font-serif text-2xl font-bold text-gray-900 mb-3">送信が完了しました</h3>
-            <p class="text-gray-600">お問い合わせありがとうございます。<br>3営業日以内にご連絡いたします。</p>
-          </div>
-        `;
-      } else {
-        // FormSubmit may redirect on first use for email verification
-        // Fall back to normal form submit
-        contactForm.removeEventListener('submit', arguments.callee);
-        contactForm.submit();
-      }
-    } catch (err) {
-      // Network error — try normal form submit
-      try {
-        contactForm.submit();
-      } catch (e2) {
-        btn.innerHTML = origText;
-        btn.disabled = false;
-        alert('送信に失敗しました。お手数ですがお電話（0573-65-5054）でお問い合わせください。');
-      }
-    }
   });
 }

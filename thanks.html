@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>送信完了 | 今井会計事務所</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: {
+              50: '#FAF6F2', 100: '#F0E8DF', 200: '#DFD0C0',
+              700: '#5C4830', 800: '#453524',
+            },
+          },
+          fontFamily: {
+            sans: ['Noto Sans JP', 'sans-serif'],
+            serif: ['Noto Serif JP', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-sans bg-forest-50 min-h-screen flex items-center justify-center px-4">
+  <div class="text-center max-w-md">
+    <div class="w-20 h-20 bg-forest-100 rounded-full flex items-center justify-center mx-auto mb-8">
+      <svg class="w-10 h-10 text-forest-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+      </svg>
+    </div>
+    <h1 class="font-serif text-3xl font-bold text-forest-800 mb-4">送信が完了しました</h1>
+    <p class="text-gray-600 text-base leading-relaxed mb-8">
+      お問い合わせありがとうございます。<br>
+      3営業日以内にご連絡いたします。
+    </p>
+    <a href="index.html" class="inline-flex items-center justify-center bg-forest-700 text-white px-8 py-3 rounded-full font-medium hover:bg-forest-800 transition-colors">
+      トップページに戻る
+    </a>
+    <p class="text-gray-400 text-xs mt-8">&copy; 2026 今井会計事務所</p>
+  </div>
+</body>
+</html>
