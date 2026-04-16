@@ -82,6 +82,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// ========== Hero band position sync ==========
+function syncHeroBand() {
+  const block = document.getElementById('hero-text-block');
+  const band = document.getElementById('hero-band');
+  if (block && band) {
+    const rect = block.getBoundingClientRect();
+    const heroRect = block.closest('section').getBoundingClientRect();
+    band.style.top = (rect.top - heroRect.top) + 'px';
+    band.style.height = rect.height + 'px';
+  }
+}
+syncHeroBand();
+window.addEventListener('resize', syncHeroBand);
+
 // ========== Contact Form (Google Apps Script) ==========
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
