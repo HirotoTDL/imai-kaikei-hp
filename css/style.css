@@ -8,12 +8,29 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  /* Paper texture background */
+  background-color: #FBF8F4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* ========== Paper texture overlay ========== */
+.paper-texture {
+  position: relative;
+}
+
+.paper-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* ========== Hero Background ========== */
 .hero-bg {
   background:
-    linear-gradient(135deg, #264a6e 0%, #336090 30%, #3f6d9e 55%, #336090 75%, #264a6e 100%);
+    linear-gradient(135deg, #3D2B1F 0%, #5C4830 30%, #6B553D 55%, #5C4830 75%, #3D2B1F 100%);
   position: relative;
 }
 
@@ -22,12 +39,11 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 120% 60% at 20% 90%, rgba(51, 96, 144, 0.4) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 50% at 80% 10%, rgba(63, 109, 158, 0.35) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 30% at 50% 50%, rgba(176, 144, 112, 0.04) 0%, transparent 60%);
+    radial-gradient(ellipse 120% 60% at 20% 90%, rgba(92, 72, 48, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 80% 10%, rgba(107, 85, 61, 0.35) 0%, transparent 50%);
 }
 
-/* Skyline silhouette layers */
+/* Mountain silhouette layers */
 .hero-bg::after {
   content: '';
   position: absolute;
@@ -36,8 +52,8 @@ body {
   right: 0;
   height: 50%;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 200'%3E%3Cpath d='M0,200 L0,140 Q30,100 60,130 Q80,70 100,110 Q130,50 160,90 Q180,40 200,80 Q230,25 260,70 Q280,35 300,65 Q330,20 360,60 Q380,30 400,55 Q430,15 460,50 Q490,25 520,60 Q540,35 560,70 Q590,20 620,65 Q640,40 660,75 Q690,30 720,70 Q750,45 780,80 Q800,35 820,65 Q850,20 880,55 Q910,30 940,70 Q960,45 980,80 Q1010,25 1040,60 Q1070,35 1100,75 Q1120,50 1140,85 Q1170,40 1200,70 Q1230,55 1260,90 Q1290,60 1320,100 Q1350,75 1380,110 Q1410,85 1440,130 L1440,200Z' fill='rgba(20,40,74,0.3)'/%3E%3C/svg%3E") no-repeat bottom center,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 160'%3E%3Cpath d='M0,160 L0,120 Q40,80 80,110 Q110,50 140,90 Q170,30 200,70 Q240,20 280,60 Q310,35 340,55 Q380,15 420,50 Q450,30 480,65 Q520,10 560,45 Q590,25 620,55 Q660,15 700,50 Q730,30 760,60 Q800,20 840,55 Q870,35 900,65 Q940,25 980,55 Q1010,40 1040,70 Q1080,30 1120,60 Q1150,45 1180,75 Q1220,35 1260,65 Q1290,50 1320,80 Q1360,60 1400,95 Q1420,80 1440,110 L1440,160Z' fill='rgba(20,40,74,0.18)'/%3E%3C/svg%3E") no-repeat bottom center;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 200'%3E%3Cpath d='M0,200 L0,140 Q30,100 60,130 Q80,70 100,110 Q130,50 160,90 Q180,40 200,80 Q230,25 260,70 Q280,35 300,65 Q330,20 360,60 Q380,30 400,55 Q430,15 460,50 Q490,25 520,60 Q540,35 560,70 Q590,20 620,65 Q640,40 660,75 Q690,30 720,70 Q750,45 780,80 Q800,35 820,65 Q850,20 880,55 Q910,30 940,70 Q960,45 980,80 Q1010,25 1040,60 Q1070,35 1100,75 Q1120,50 1140,85 Q1170,40 1200,70 Q1230,55 1260,90 Q1290,60 1320,100 Q1350,75 1380,110 Q1410,85 1440,130 L1440,200Z' fill='rgba(46,35,24,0.3)'/%3E%3C/svg%3E") no-repeat bottom center,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 160'%3E%3Cpath d='M0,160 L0,120 Q40,80 80,110 Q110,50 140,90 Q170,30 200,70 Q240,20 280,60 Q310,35 340,55 Q380,15 420,50 Q450,30 480,65 Q520,10 560,45 Q590,25 620,55 Q660,15 700,50 Q730,30 760,60 Q800,20 840,55 Q870,35 900,65 Q940,25 980,55 Q1010,40 1040,70 Q1080,30 1120,60 Q1150,45 1180,75 Q1220,35 1260,65 Q1290,50 1320,80 Q1360,60 1400,95 Q1420,80 1440,110 L1440,160Z' fill='rgba(46,35,24,0.18)'/%3E%3C/svg%3E") no-repeat bottom center;
   background-size: cover, cover;
 }
 
@@ -125,11 +141,12 @@ body {
 /* ========== Header ========== */
 #header {
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  background-color: rgba(251, 248, 244, 0.95);
 }
 
 #header.scrolled {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 20px rgba(92, 72, 48, 0.08);
+  background-color: rgba(251, 248, 244, 0.98);
 }
 
 /* ========== Navigation ========== */
@@ -145,7 +162,7 @@ body {
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #336090, #B09070);
+  background: linear-gradient(90deg, #5C4830, #A68B5B);
   border-radius: 1px;
   transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -171,16 +188,10 @@ body {
 }
 
 /* ========== Decorative elements ========== */
-.deco-leaf {
-  position: absolute;
-  opacity: 0.04;
-  pointer-events: none;
-}
-
 .deco-circle {
   position: absolute;
   border-radius: 50%;
-  border: 1px solid rgba(51, 96, 144, 0.08);
+  border: 1px solid rgba(92, 72, 48, 0.06);
   pointer-events: none;
 }
 
@@ -193,13 +204,13 @@ body {
   font-size: 4rem;
   font-weight: 700;
   line-height: 1;
-  color: rgba(51, 96, 144, 0.05);
+  color: rgba(92, 72, 48, 0.05);
   pointer-events: none;
   transition: color 0.3s ease;
 }
 
 .service-card:hover .service-number {
-  color: rgba(51, 96, 144, 0.10);
+  color: rgba(92, 72, 48, 0.10);
 }
 
 /* ========== Service Cards ========== */
@@ -220,7 +231,7 @@ body {
   left: 0;
   width: 0;
   height: 3px;
-  background: linear-gradient(90deg, #336090, #B09070);
+  background: linear-gradient(90deg, #5C4830, #C9A87C);
   transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   border-radius: 0 0 3px 0;
 }
@@ -236,7 +247,7 @@ body {
   right: 0;
   width: 120px;
   height: 120px;
-  background: radial-gradient(circle, rgba(51, 96, 144, 0.03) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(92, 72, 48, 0.03) 0%, transparent 70%);
   border-radius: 50%;
   transform: translate(30%, 30%);
   transition: transform 0.5s ease;
@@ -267,7 +278,7 @@ body {
   left: 0;
   right: 0;
   height: 40%;
-  background: linear-gradient(to top, rgba(248, 250, 251, 0.8), transparent);
+  background: linear-gradient(to top, rgba(251, 248, 244, 0.8), transparent);
 }
 
 /* ========== FAQ ========== */
@@ -280,8 +291,8 @@ body {
 }
 
 .faq-item.active {
-  box-shadow: 0 4px 20px rgba(51, 96, 144, 0.08);
-  border-color: rgba(51, 96, 144, 0.15);
+  box-shadow: 0 4px 20px rgba(92, 72, 48, 0.08);
+  border-color: rgba(92, 72, 48, 0.15);
 }
 
 .faq-item.active .faq-icon {
@@ -304,7 +315,7 @@ body {
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(176, 144, 112, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(166, 139, 91, 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -316,8 +327,8 @@ input, select, textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #336090;
-  box-shadow: 0 0 0 4px rgba(51, 96, 144, 0.08);
+  border-color: #5C4830;
+  box-shadow: 0 0 0 4px rgba(92, 72, 48, 0.08);
 }
 
 /* ========== Buttons ========== */
@@ -329,7 +340,7 @@ textarea:focus {
 
 /* ========== Gradient text ========== */
 .text-gradient {
-  background: linear-gradient(135deg, #336090 0%, #3a6498 50%, #B09070 100%);
+  background: linear-gradient(135deg, #5C4830 0%, #8C7252 50%, #A68B5B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -337,8 +348,8 @@ textarea:focus {
 
 /* ========== Selection color ========== */
 ::selection {
-  background: rgba(51, 96, 144, 0.15);
-  color: #0a1a2e;
+  background: rgba(92, 72, 48, 0.15);
+  color: #2E2318;
 }
 
 /* ========== Scrollbar (webkit) ========== */
@@ -351,12 +362,12 @@ textarea:focus {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #b8c9df;
+  background: #DFD0C0;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8ba7c9;
+  background: #C4AD94;
 }
 
 /* ========== Counter animation ========== */
