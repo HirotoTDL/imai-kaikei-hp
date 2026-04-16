@@ -82,37 +82,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ========== Hero floating particles ==========
-function createParticles() {
-  const container = document.getElementById('hero-particles');
-  if (!container) return;
-
-  const count = window.innerWidth < 768 ? 8 : 15;
-  for (let i = 0; i < count; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    const size = Math.random() * 4 + 2;
-    particle.style.width = size + 'px';
-    particle.style.height = size + 'px';
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
-    particle.style.animationDelay = (Math.random() * 10) + 's';
-    container.appendChild(particle);
-  }
-}
-createParticles();
-
-// ========== Parallax on mouse move (desktop only) ==========
-if (window.innerWidth >= 1024) {
-  const hero = document.getElementById('hero');
-  if (hero) {
-    hero.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 10;
-      const y = (e.clientY / window.innerHeight - 0.5) * 10;
-      const content = hero.querySelector('.relative.z-10');
-      if (content) {
-        content.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-      }
-    });
-  }
-}
+// (Particles and parallax removed for GPU performance)

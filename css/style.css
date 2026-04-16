@@ -41,27 +41,7 @@ body {
   background-size: cover, cover;
 }
 
-/* ========== Floating particles ========== */
-.hero-particles {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  animation: float-particle linear infinite;
-}
-
-@keyframes float-particle {
-  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-}
+/* (Particles removed for GPU performance) */
 
 /* ========== Animations ========== */
 @keyframes fadeInUp {
@@ -82,16 +62,6 @@ body {
 @keyframes scaleIn {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-@keyframes gentle-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
 }
 
 .animate-fade-in-up {
@@ -359,20 +329,7 @@ textarea:focus {
   z-index: 0;
 }
 
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
-  background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite;
-  z-index: -1;
-}
-
-/* ========== Parallax helper ========== */
-.parallax-slow {
-  will-change: transform;
-}
+/* (shimmer + parallax removed for GPU performance) */
 
 /* ========== Gradient text ========== */
 .text-gradient {
