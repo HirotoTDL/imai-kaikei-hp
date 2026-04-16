@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>今井会計事務所 | 中津川市・恵那市の税理士</title>
+  <meta name="description" content="岐阜県中津川市の今井会計事務所。中小企業の税務顧問、相続・事業承継、クラウド会計導入支援。地域密着で経営をサポートします。">
+  <meta name="keywords" content="税理士,中津川市,恵那市,会計事務所,相続税,事業承継,クラウド会計,確定申告">
+  <meta property="og:title" content="今井会計事務所 | 中津川市・恵那市の税理士">
+  <meta property="og:description" content="地域と歩む、確かな経営支援。中津川市・恵那市の中小企業と個人事業主を支える税理士事務所。">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: {
+              50: '#f0f5ed',
+              100: '#E8F0E4',
+              200: '#c5d9bc',
+              300: '#9aba8d',
+              400: '#6d9a5a',
+              500: '#4a7a3a',
+              600: '#3a6230',
+              700: '#2D5016',
+              800: '#1e3a0e',
+              900: '#142808',
+            },
+            wood: {
+              light: '#D4A56A',
+              DEFAULT: '#B8860B',
+              dark: '#8B6914',
+            },
+            warm: {
+              bg: '#F9F7F4',
+              card: '#FEFDFB',
+            }
+          },
+          fontFamily: {
+            sans: ['Noto Sans JP', 'sans-serif'],
+            serif: ['Noto Serif JP', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="font-sans text-gray-800 bg-white">
+
+  <!-- ========== HEADER ========== -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-forest-100 transition-shadow duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <!-- Logo -->
+        <a href="#hero" class="flex items-center gap-2 group">
+          <div class="w-8 h-8 lg:w-10 lg:h-10 bg-forest-700 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+            </svg>
+          </div>
+          <div>
+            <span class="font-serif font-bold text-forest-700 text-base lg:text-lg tracking-wide">今井会計事務所</span>
+            <span class="hidden sm:block text-[10px] text-gray-400 -mt-1">IMAI Accounting Office</span>
+          </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="#about" class="nav-link text-sm font-medium text-gray-600 hover:text-forest-700 transition-colors">事務所について</a>
+          <a href="#services" class="nav-link text-sm font-medium text-gray-600 hover:text-forest-700 transition-colors">サービス</a>
+          <a href="#team" class="nav-link text-sm font-medium text-gray-600 hover:text-forest-700 transition-colors">スタッフ</a>
+          <a href="#faq" class="nav-link text-sm font-medium text-gray-600 hover:text-forest-700 transition-colors">よくある質問</a>
+          <a href="#access" class="nav-link text-sm font-medium text-gray-600 hover:text-forest-700 transition-colors">アクセス</a>
+        </nav>
+
+        <!-- CTA + Phone -->
+        <div class="hidden lg:flex items-center gap-4">
+          <a href="tel:0573-00-0000" class="text-sm text-forest-700 font-medium flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            0573-00-0000
+          </a>
+          <a href="#contact" class="bg-forest-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-forest-800 transition-colors">
+            お問い合わせ
+          </a>
+        </div>
+
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-gray-600 hover:text-forest-700" aria-label="メニュー">
+          <svg class="w-6 h-6 hamburger-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg class="w-6 h-6 close-icon hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-forest-100">
+      <div class="px-4 py-4 space-y-1">
+        <a href="#about" class="mobile-nav-link block px-4 py-3 text-gray-600 hover:bg-forest-50 rounded-lg">事務所について</a>
+        <a href="#services" class="mobile-nav-link block px-4 py-3 text-gray-600 hover:bg-forest-50 rounded-lg">サービス</a>
+        <a href="#team" class="mobile-nav-link block px-4 py-3 text-gray-600 hover:bg-forest-50 rounded-lg">スタッフ</a>
+        <a href="#faq" class="mobile-nav-link block px-4 py-3 text-gray-600 hover:bg-forest-50 rounded-lg">よくある質問</a>
+        <a href="#access" class="mobile-nav-link block px-4 py-3 text-gray-600 hover:bg-forest-50 rounded-lg">アクセス</a>
+        <a href="#contact" class="block px-4 py-3 bg-forest-700 text-white text-center rounded-lg font-medium mt-2">お問い合わせ</a>
+        <a href="tel:0573-00-0000" class="block px-4 py-3 text-forest-700 text-center font-medium">
+          <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          0573-00-0000
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Background -->
+    <div class="absolute inset-0 hero-bg"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-forest-900/60 via-forest-800/40 to-forest-700/30"></div>
+
+    <!-- Decorative elements -->
+    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center pt-20">
+      <p class="text-forest-100 text-sm sm:text-base font-medium tracking-[0.3em] mb-6 animate-fade-in-up" style="animation-delay: 0.2s">
+        IMAI ACCOUNTING OFFICE
+      </p>
+      <h1 class="font-serif text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in-up" style="animation-delay: 0.4s">
+        地域と歩む、<br class="sm:hidden">確かな経営支援
+      </h1>
+      <p class="text-white/85 text-base sm:text-lg md:text-xl leading-relaxed mb-10 animate-fade-in-up" style="animation-delay: 0.6s">
+        中津川市・恵那市の中小企業と個人事業主を支える<br class="hidden sm:block">
+        税理士事務所です
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.8s">
+        <a href="#contact" class="inline-flex items-center justify-center bg-white text-forest-700 px-8 py-4 rounded-lg text-base font-bold hover:bg-forest-50 transition-all shadow-lg hover:shadow-xl">
+          無料相談のお問い合わせ
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="#about" class="inline-flex items-center justify-center border-2 border-white/60 text-white px-8 py-4 rounded-lg text-base font-medium hover:bg-white/10 transition-all">
+          事務所について
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section id="about" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-16 scroll-reveal">
+        <p class="text-forest-600 text-sm font-medium tracking-[0.2em] mb-3">ABOUT US</p>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-gray-900 mb-4">事務所について</h2>
+        <div class="w-16 h-1 bg-wood mx-auto rounded-full"></div>
+      </div>
+
+      <!-- Intro text -->
+      <div class="max-w-3xl mx-auto text-center mb-16 scroll-reveal">
+        <p class="text-gray-600 text-base sm:text-lg leading-relaxed">
+          今井会計事務所は、岐阜県中津川市を拠点に、
+          地域の中小企業・個人事業主の皆さまの経営を支えてまいりました。<br>
+          税務・会計の専門知識と最新のITツールを駆使し、
+          お客様一人ひとりに寄り添ったサービスを提供いたします。
+        </p>
+      </div>
+
+      <!-- 3 Pillars -->
+      <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+        <!-- Pillar 1 -->
+        <div class="group bg-warm-bg rounded-2xl p-8 lg:p-10 text-center hover:shadow-lg transition-all duration-300 scroll-reveal">
+          <div class="w-16 h-16 bg-forest-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-forest-700 group-hover:text-white transition-colors duration-300">
+            <svg class="w-8 h-8 text-forest-700 group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">地域密着の税務支援</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            中津川市・恵那市を中心に、東濃地域の事業者様に密着したきめ細やかなサポート。地域の実情を理解した的確なアドバイスをお届けします。
+          </p>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="group bg-warm-bg rounded-2xl p-8 lg:p-10 text-center hover:shadow-lg transition-all duration-300 scroll-reveal" style="animation-delay: 0.1s">
+          <div class="w-16 h-16 bg-forest-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-forest-700 group-hover:text-white transition-colors duration-300">
+            <svg class="w-8 h-8 text-forest-700 group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">相続・事業承継の<br>専門サポート</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            大切な資産と事業を次世代へ。相続税対策から事業承継まで、お客様のご家族と事業の未来を見据えた最適なプランをご提案します。
+          </p>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="group bg-warm-bg rounded-2xl p-8 lg:p-10 text-center hover:shadow-lg transition-all duration-300 scroll-reveal" style="animation-delay: 0.2s">
+          <div class="w-16 h-16 bg-forest-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-forest-700 group-hover:text-white transition-colors duration-300">
+            <svg class="w-8 h-8 text-forest-700 group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-gray-900 mb-3">IT・クラウド活用による<br>業務効率化</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            クラウド会計の導入支援からAIを活用した業務効率化まで。最新テクノロジーで経理業務の負担を軽減し、経営に集中できる環境を整えます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section id="services" class="py-20 lg:py-28 bg-warm-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 scroll-reveal">
+        <p class="text-forest-600 text-sm font-medium tracking-[0.2em] mb-3">SERVICES</p>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-gray-900 mb-4">サービス内容</h2>
+        <div class="w-16 h-1 bg-wood mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <!-- Service 1 -->
+        <div class="service-card bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 scroll-reveal">
+          <div class="w-12 h-12 bg-forest-100 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-forest-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg text-gray-900 mb-2">税務顧問</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">月次監査・決算・確定申告まで、事業の成長段階に合わせたトータルサポートを提供します。</p>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 scroll-reveal">
+          <div class="w-12 h-12 bg-forest-100 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-forest-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg text-gray-900 mb-2">相続税・贈与税対策</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">生前対策から申告まで、ご家族の大切な資産を守るための最適な相続プランをご提案します。</p>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 scroll-reveal">
+          <div class="w-12 h-12 bg-forest-100 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-forest-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg text-gray-900 mb-2">事業承継支援</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">次世代への円滑なバトンタッチを実現。税務面・法務面から事業承継をトータルでサポートします。</p>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 scroll-reveal">
+          <div class="w-12 h-12 bg-forest-100 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-forest-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg text-gray-900 mb-2">会社設立・創業支援</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">法人設立の手続きから創業融資、事業計画の策定まで、起業の第一歩をしっかりサポートします。</p>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="service-card bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 scroll-reveal">
+          <div class="w-12 h-12 bg-forest-100 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-forest-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg text-gray-900 mb-2">クラウド会計導入支援</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">クラウド会計ソフトの選定から導入、運用サポートまで。経理業務のデジタル化を推進します。</p>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="service-card bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 scroll-reveal">
+          <div class="w-12 h-12 bg-forest-100 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-forest-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg text-gray-900 mb-2">経営相談・資金繰り支援</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">経営課題の分析から資金調達のサポートまで、経営者の右腕としてお力添えいたします。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TEAM ========== -->
+  <section id="team" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 scroll-reveal">
+        <p class="text-forest-600 text-sm font-medium tracking-[0.2em] mb-3">TEAM</p>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-gray-900 mb-4">スタッフ紹介</h2>
+        <div class="w-16 h-1 bg-wood mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 lg:gap-16 max-w-5xl mx-auto">
+        <!-- Member 1 -->
+        <div class="scroll-reveal">
+          <div class="bg-warm-bg rounded-2xl overflow-hidden">
+            <div class="aspect-[4/3] bg-forest-100 flex items-center justify-center">
+              <div class="text-center">
+                <svg class="w-20 h-20 text-forest-300 mx-auto" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                  <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+                </svg>
+                <p class="text-forest-400 text-sm mt-2">Photo</p>
+              </div>
+            </div>
+            <div class="p-6 lg:p-8">
+              <p class="text-wood text-sm font-medium mb-1">所長・代表税理士</p>
+              <h3 class="font-serif text-2xl font-bold text-gray-900 mb-1">今井 正義</h3>
+              <p class="text-gray-400 text-sm mb-4">Masayoshi Imai</p>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                長年にわたり地域の中小企業を支援してまいりました。お客様の事業の発展と、ご家族の安心を第一に考え、誠実に対応いたします。お気軽にご相談ください。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="scroll-reveal" style="animation-delay: 0.15s">
+          <div class="bg-warm-bg rounded-2xl overflow-hidden">
+            <div class="aspect-[4/3] bg-forest-100 flex items-center justify-center">
+              <div class="text-center">
+                <svg class="w-20 h-20 text-forest-300 mx-auto" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                  <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+                </svg>
+                <p class="text-forest-400 text-sm mt-2">Photo</p>
+              </div>
+            </div>
+            <div class="p-6 lg:p-8">
+              <p class="text-wood text-sm font-medium mb-1">税理士</p>
+              <h3 class="font-serif text-2xl font-bold text-gray-900 mb-1">今井 泰斗</h3>
+              <p class="text-gray-400 text-sm mb-4">Taito Imai</p>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                クラウド会計やAIなど最新のテクノロジーを活用し、効率的で正確な税務・会計サービスを提供いたします。若い経営者の方もお気軽にご相談ください。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section id="faq" class="py-20 lg:py-28 bg-warm-bg">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 scroll-reveal">
+        <p class="text-forest-600 text-sm font-medium tracking-[0.2em] mb-3">FAQ</p>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-gray-900 mb-4">よくある質問</h2>
+        <div class="w-16 h-1 bg-wood mx-auto rounded-full"></div>
+      </div>
+
+      <div class="space-y-4 scroll-reveal">
+        <!-- FAQ 1 -->
+        <div class="faq-item bg-white rounded-xl overflow-hidden border border-gray-100">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+            <span class="font-medium text-gray-900 pr-4">初回の相談は無料ですか？</span>
+            <svg class="faq-icon w-5 h-5 text-forest-700 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-content hidden px-6 pb-6">
+            <p class="text-gray-600 text-sm leading-relaxed">はい、初回のご相談は無料で承っております。お気軽にお電話またはお問い合わせフォームよりご連絡ください。</p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item bg-white rounded-xl overflow-hidden border border-gray-100">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+            <span class="font-medium text-gray-900 pr-4">対応エリアはどこですか？</span>
+            <svg class="faq-icon w-5 h-5 text-forest-700 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-content hidden px-6 pb-6">
+            <p class="text-gray-600 text-sm leading-relaxed">中津川市・恵那市を中心に、東濃地域全域に対応しております。オンラインでの対応も可能ですので、遠方のお客様もお気軽にご相談ください。</p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item bg-white rounded-xl overflow-hidden border border-gray-100">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+            <span class="font-medium text-gray-900 pr-4">クラウド会計に対応していますか？</span>
+            <svg class="faq-icon w-5 h-5 text-forest-700 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-content hidden px-6 pb-6">
+            <p class="text-gray-600 text-sm leading-relaxed">はい、各種クラウド会計ソフトに対応しております。導入のご相談から運用サポートまで、お客様の環境に合わせた最適なソリューションをご提案いたします。</p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item bg-white rounded-xl overflow-hidden border border-gray-100">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+            <span class="font-medium text-gray-900 pr-4">顧問料の目安を教えてください</span>
+            <svg class="faq-icon w-5 h-5 text-forest-700 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-content hidden px-6 pb-6">
+            <p class="text-gray-600 text-sm leading-relaxed">お客様の事業規模やご依頼内容により異なりますので、まずはお気軽にお問い合わせください。初回相談時に、ご要望をお伺いした上でお見積りいたします。</p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item bg-white rounded-xl overflow-hidden border border-gray-100">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+            <span class="font-medium text-gray-900 pr-4">相続の相談はいつからすべきですか？</span>
+            <svg class="faq-icon w-5 h-5 text-forest-700 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-content hidden px-6 pb-6">
+            <p class="text-gray-600 text-sm leading-relaxed">できるだけ早い段階でのご相談をおすすめいたします。生前対策は時間をかけるほど選択肢が広がります。「まだ早いかな」と思われた時が最適なタイミングです。</p>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="faq-item bg-white rounded-xl overflow-hidden border border-gray-100">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
+            <span class="font-medium text-gray-900 pr-4">土日や夜間の相談は可能ですか？</span>
+            <svg class="faq-icon w-5 h-5 text-forest-700 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="faq-content hidden px-6 pb-6">
+            <p class="text-gray-600 text-sm leading-relaxed">事前にご予約いただければ、土日や夜間のご相談にも対応可能です。お忙しい経営者の方も、ご都合の良い日時をお知らせください。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ACCESS ========== -->
+  <section id="access" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 scroll-reveal">
+        <p class="text-forest-600 text-sm font-medium tracking-[0.2em] mb-3">ACCESS</p>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-gray-900 mb-4">アクセス</h2>
+        <div class="w-16 h-1 bg-wood mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <!-- Map -->
+        <div class="rounded-2xl overflow-hidden shadow-lg scroll-reveal">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51752.94025673878!2d137.4671!3d35.4879!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601cb7a7e25e4f2d%3A0x89e96d8ed24a3be3!2z5Lit5rSl5bed5biC!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
+            width="100%"
+            height="400"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="今井会計事務所の所在地">
+          </iframe>
+        </div>
+
+        <!-- Info -->
+        <div class="scroll-reveal">
+          <div class="space-y-6">
+            <div>
+              <h3 class="font-serif text-xl font-bold text-gray-900 mb-4">事務所情報</h3>
+              <table class="w-full text-sm">
+                <tbody>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 pr-4 text-gray-500 font-medium whitespace-nowrap w-24">事務所名</td>
+                    <td class="py-3 text-gray-900">今井会計事務所</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 pr-4 text-gray-500 font-medium whitespace-nowrap">所在地</td>
+                    <td class="py-3 text-gray-900">〒508-0000<br>岐阜県中津川市○○町○-○</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 pr-4 text-gray-500 font-medium whitespace-nowrap">電話番号</td>
+                    <td class="py-3 text-gray-900">
+                      <a href="tel:0573-00-0000" class="text-forest-700 hover:underline">0573-00-0000</a>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 pr-4 text-gray-500 font-medium whitespace-nowrap">FAX</td>
+                    <td class="py-3 text-gray-900">0573-00-0000</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 pr-4 text-gray-500 font-medium whitespace-nowrap">営業時間</td>
+                    <td class="py-3 text-gray-900">平日 9:00 - 17:00</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 pr-4 text-gray-500 font-medium whitespace-nowrap">定休日</td>
+                    <td class="py-3 text-gray-900">土曜・日曜・祝日</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="bg-forest-50 rounded-xl p-5">
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-forest-700 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0H21M3.375 14.25h17.25"/>
+                </svg>
+                <div>
+                  <p class="text-sm font-medium text-forest-800">駐車場あり</p>
+                  <p class="text-xs text-forest-600 mt-1">事務所前に駐車スペースをご用意しております。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contact" class="py-20 lg:py-28 bg-forest-700 relative overflow-hidden">
+    <!-- Decorative pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><circle cx=%2230%22 cy=%2230%22 r=%221%22 fill=%22white%22/></svg>'); background-size: 60px 60px;"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-12 scroll-reveal">
+        <p class="text-forest-200 text-sm font-medium tracking-[0.2em] mb-3">CONTACT</p>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-4">お問い合わせ</h2>
+        <div class="w-16 h-1 bg-wood mx-auto rounded-full mb-6"></div>
+        <p class="text-forest-100 text-base">
+          まずはお気軽にお問い合わせください。<br>初回相談は無料で承っております。
+        </p>
+      </div>
+
+      <!-- Phone CTA -->
+      <div class="text-center mb-12 scroll-reveal">
+        <a href="tel:0573-00-0000" class="inline-flex items-center gap-3 text-white group">
+          <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </div>
+          <div class="text-left">
+            <span class="block text-3xl sm:text-4xl font-bold tracking-wider">0573-00-0000</span>
+            <span class="text-forest-200 text-xs">受付時間: 平日 9:00 - 17:00</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Form -->
+      <form action="https://formspree.io/f/your-form-id" method="POST" class="bg-white rounded-2xl p-6 sm:p-8 lg:p-10 shadow-2xl scroll-reveal">
+        <div class="grid sm:grid-cols-2 gap-6 mb-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">お名前 <span class="text-red-500">*</span></label>
+            <input type="text" name="name" required
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-forest-500 focus:ring-2 focus:ring-forest-200 outline-none transition-all text-sm"
+              placeholder="今井 太郎">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
+            <input type="email" name="email" required
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-forest-500 focus:ring-2 focus:ring-forest-200 outline-none transition-all text-sm"
+              placeholder="example@email.com">
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-6 mb-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">電話番号</label>
+            <input type="tel" name="phone"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-forest-500 focus:ring-2 focus:ring-forest-200 outline-none transition-all text-sm"
+              placeholder="0573-00-0000">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">ご相談内容</label>
+            <select name="subject"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-forest-500 focus:ring-2 focus:ring-forest-200 outline-none transition-all text-sm text-gray-600">
+              <option value="">選択してください</option>
+              <option value="税務顧問">税務顧問について</option>
+              <option value="相続・贈与">相続・贈与について</option>
+              <option value="事業承継">事業承継について</option>
+              <option value="会社設立">会社設立について</option>
+              <option value="クラウド会計">クラウド会計について</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 mb-2">メッセージ <span class="text-red-500">*</span></label>
+          <textarea name="message" required rows="5"
+            class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-forest-500 focus:ring-2 focus:ring-forest-200 outline-none transition-all text-sm resize-vertical"
+            placeholder="ご相談内容をお書きください"></textarea>
+        </div>
+
+        <div class="text-center">
+          <button type="submit"
+            class="inline-flex items-center justify-center bg-forest-700 text-white px-10 py-4 rounded-lg text-base font-bold hover:bg-forest-800 transition-all shadow-lg hover:shadow-xl">
+            送信する
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="bg-gray-900 text-gray-400 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <!-- Brand -->
+        <div class="sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-forest-700 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+              </svg>
+            </div>
+            <span class="font-serif font-bold text-white text-base">今井会計事務所</span>
+          </div>
+          <p class="text-sm leading-relaxed">
+            岐阜県中津川市の税理士事務所。<br>
+            地域の中小企業と個人事業主の<br>
+            経営をサポートします。
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="text-white font-medium text-sm mb-4">ページ</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#about" class="hover:text-white transition-colors">事務所について</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">サービス</a></li>
+            <li><a href="#team" class="hover:text-white transition-colors">スタッフ紹介</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-medium text-sm mb-4">サポート</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#faq" class="hover:text-white transition-colors">よくある質問</a></li>
+            <li><a href="#access" class="hover:text-white transition-colors">アクセス</a></li>
+            <li><a href="#contact" class="hover:text-white transition-colors">お問い合わせ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-medium text-sm mb-4">お問い合わせ</h4>
+          <ul class="space-y-2 text-sm">
+            <li>〒508-0000</li>
+            <li>岐阜県中津川市○○町○-○</li>
+            <li><a href="tel:0573-00-0000" class="hover:text-white transition-colors">TEL: 0573-00-0000</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 text-center text-xs">
+        <p>&copy; 2026 今井会計事務所. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

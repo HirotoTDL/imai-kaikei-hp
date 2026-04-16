@@ -1,0 +1,186 @@
+/* ========== Base & Reset ========== */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== Hero Background ========== */
+.hero-bg {
+  background:
+    linear-gradient(135deg, #1a3a0a 0%, #2D5016 30%, #3a6230 60%, #1e3a0e 100%);
+  position: relative;
+}
+
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 80%, rgba(45, 80, 22, 0.6) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(58, 98, 48, 0.4) 0%, transparent 60%);
+}
+
+/* Subtle tree silhouette pattern */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 200'%3E%3Cpath d='M0,200 L0,120 Q50,80 100,120 Q130,60 160,100 Q200,40 240,90 Q270,50 300,80 Q340,30 380,70 Q410,20 440,60 Q480,10 520,50 Q550,30 580,70 Q620,20 660,60 Q700,40 740,80 Q780,30 820,70 Q850,50 880,90 Q920,40 960,80 Q1000,60 1040,100 Q1080,50 1120,90 Q1160,70 1200,120 L1200,200Z' fill='rgba(255,255,255,0.03)'/%3E%3C/svg%3E") no-repeat bottom center;
+  background-size: cover;
+}
+
+/* ========== Animations ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Scroll reveal */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== Header ========== */
+#header.scrolled {
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ========== Navigation ========== */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #2D5016;
+  border-radius: 1px;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ========== Service Cards ========== */
+.service-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2D5016, #B8860B);
+  transition: width 0.4s ease;
+  border-radius: 0 0 3px 0;
+}
+
+.service-card:hover::before {
+  width: 100%;
+}
+
+/* ========== FAQ ========== */
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.faq-item.active .faq-content {
+  max-height: 200px;
+}
+
+/* ========== Form ========== */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2D5016;
+  box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);
+}
+
+/* ========== Selection color ========== */
+::selection {
+  background: rgba(45, 80, 22, 0.15);
+  color: #1e3a0e;
+}
+
+/* ========== Scrollbar (webkit) ========== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9aba8d;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6d9a5a;
+}
+
+/* ========== Wood accent divider ========== */
+.wood-divider {
+  height: 4px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    #D4A56A 20%,
+    #B8860B 50%,
+    #D4A56A 80%,
+    transparent 100%
+  );
+  border-radius: 2px;
+}
+
+/* ========== Responsive adjustments ========== */
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 64px;
+  }
+
+  #hero {
+    min-height: 100svh;
+  }
+}
