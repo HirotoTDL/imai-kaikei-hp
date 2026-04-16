@@ -33,22 +33,44 @@ body {
   to { stroke-dashoffset: 0; }
 }
 
-.hero-line-art .line-draw {
-  --line-length: 2000;
-  stroke-dasharray: var(--line-length);
-  stroke-dashoffset: var(--line-length);
-  animation: drawLine 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  opacity: 0.35;
+/* SVG text line drawing */
+.hero-text-line-art .text-draw {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: drawLine 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  fill: transparent;
+  animation-fill-mode: forwards;
 }
 
-.hero-line-art rect.line-draw {
-  --line-length: 200;
-  animation-duration: 0.8s;
+.hero-text-line-art .text-draw-line {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: drawLine 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.hero-line-art line.line-draw {
-  --line-length: 200;
-  animation-duration: 0.6s;
+.hero-text-line-art .text-draw-sub {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: drawLine 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  fill: transparent;
+}
+
+/* After line draw completes, fill in the text */
+@keyframes fillText {
+  0% { fill: transparent; }
+  100% { fill: currentColor; }
+}
+
+.hero-text-line-art .text-draw {
+  animation: drawLine 2s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+             fillText 0.8s ease forwards 1.8s;
+  color: #5C4830;
+}
+
+.hero-text-line-art .text-draw-sub {
+  animation: drawLine 2s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+             fillText 0.8s ease forwards 2.5s;
+  color: #A88E6E;
 }
 
 /* ========== Animations ========== */

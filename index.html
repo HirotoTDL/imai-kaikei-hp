@@ -48,7 +48,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=20260416c">
+  <link rel="stylesheet" href="css/style.css?v=20260416d">
 </head>
 <body class="font-sans text-gray-800 bg-white">
 
@@ -108,47 +108,20 @@
 
   <!-- ========== HERO ========== -->
   <section id="hero" class="relative min-h-screen flex items-center overflow-hidden bg-warm-bg paper-texture">
-    <!-- Building illustration (right side, desktop) -->
-    <div class="absolute right-0 bottom-0 w-full lg:w-[55%] h-full pointer-events-none">
-      <div class="absolute inset-0 bg-gradient-to-r from-warm-bg via-warm-bg/80 to-transparent z-10 lg:block hidden"></div>
-      <div class="absolute inset-0 bg-warm-bg/60 lg:bg-transparent z-10 lg:hidden"></div>
-      <img src="images/building_hero.jpg" alt="" class="w-full h-full object-cover object-left opacity-40 lg:opacity-100" loading="eager">
-    </div>
-
-    <!-- SVG line drawing overlay -->
-    <div class="absolute right-0 bottom-0 w-full lg:w-[55%] h-full pointer-events-none z-20 hidden lg:block">
-      <svg class="hero-line-art w-full h-full" viewBox="0 0 700 525" fill="none" preserveAspectRatio="xMidYMid slice">
-        <!-- Building outline - animated stroke -->
-        <path class="line-draw" d="M100,480 L100,200 L200,120 L300,200 L300,150 L350,100 L400,150 L400,200 L550,200 L600,160 L650,200 L650,480" stroke="#5C4830" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <!-- Windows row 1 -->
-        <rect class="line-draw" x="130" y="230" width="50" height="40" rx="2" stroke="#5C4830" stroke-width="1" fill="none" style="animation-delay:1s"/>
-        <rect class="line-draw" x="200" y="230" width="50" height="40" rx="2" stroke="#5C4830" stroke-width="1" fill="none" style="animation-delay:1.1s"/>
-        <rect class="line-draw" x="320" y="230" width="50" height="40" rx="2" stroke="#5C4830" stroke-width="1" fill="none" style="animation-delay:1.2s"/>
-        <rect class="line-draw" x="420" y="230" width="50" height="40" rx="2" stroke="#5C4830" stroke-width="1" fill="none" style="animation-delay:1.3s"/>
-        <rect class="line-draw" x="500" y="230" width="50" height="40" rx="2" stroke="#5C4830" stroke-width="1" fill="none" style="animation-delay:1.4s"/>
-        <rect class="line-draw" x="570" y="230" width="50" height="40" rx="2" stroke="#5C4830" stroke-width="1" fill="none" style="animation-delay:1.5s"/>
-        <!-- Windows row 2 -->
-        <rect class="line-draw" x="130" y="300" width="50" height="40" rx="2" stroke="#5C4830" stroke-width="1" fill="none" style="animation-delay:1.6s"/>
-        <rect class="line-draw" x="200" y="300" width="50" height="40" rx="2" stroke="#5C4830" stroke-width="1" fill="none" style="animation-delay:1.7s"/>
-        <rect class="line-draw" x="320" y="300" width="50" height="40" rx="2" stroke="#5C4830" stroke-width="1" fill="none" style="animation-delay:1.8s"/>
-        <rect class="line-draw" x="420" y="300" width="50" height="40" rx="2" stroke="#5C4830" stroke-width="1" fill="none" style="animation-delay:1.9s"/>
-        <rect class="line-draw" x="500" y="300" width="50" height="40" rx="2" stroke="#5C4830" stroke-width="1" fill="none" style="animation-delay:2.0s"/>
-        <rect class="line-draw" x="570" y="300" width="50" height="40" rx="2" stroke="#5C4830" stroke-width="1" fill="none" style="animation-delay:2.1s"/>
-        <!-- Door -->
-        <rect class="line-draw" x="340" y="400" width="70" height="80" rx="3" stroke="#5C4830" stroke-width="1.5" fill="none" style="animation-delay:2.3s"/>
-        <!-- Sign: 八百健ビル -->
-        <line class="line-draw" x="140" y="380" x2="270" y2="380" stroke="#5C4830" stroke-width="1" style="animation-delay:2.5s"/>
-        <!-- Roof frame (red accent in original) -->
-        <path class="line-draw" d="M520,130 L620,130 L620,180 L520,180" stroke="#8A7058" stroke-width="2" fill="none" style="animation-delay:0.8s"/>
-      </svg>
-    </div>
 
     <!-- Content (left side) -->
-    <div class="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-28 pb-20 lg:pt-0 lg:pb-0">
-      <div class="lg:max-w-[50%]">
-        <p class="text-wood font-medium text-sm tracking-[0.25em] mb-6 animate-fade-in-up" style="animation-delay: 0.2s">
-          岐阜県中津川市の税理士事務所
-        </p>
+    <div class="relative z-30 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-28 pb-20">
+      <div class="text-center">
+        <!-- IMAI ACCOUNTING OFFICE - SVG line drawing text -->
+        <div class="mb-8 animate-fade-in-up" style="animation-delay: 0.1s">
+          <svg class="hero-text-line-art w-full max-w-md h-auto" viewBox="0 0 480 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text class="text-draw" x="0" y="20" font-family="'Noto Sans JP', sans-serif" font-size="18" font-weight="700" letter-spacing="8" stroke="#5C4830" stroke-width="0.8" fill="none">IMAI</text>
+            <text class="text-draw" x="105" y="20" font-family="'Noto Sans JP', sans-serif" font-size="18" font-weight="400" letter-spacing="4" stroke="#8C7252" stroke-width="0.6" fill="none" style="animation-delay:0.6s">ACCOUNTING</text>
+            <text class="text-draw" x="330" y="20" font-family="'Noto Sans JP', sans-serif" font-size="18" font-weight="400" letter-spacing="4" stroke="#8C7252" stroke-width="0.6" fill="none" style="animation-delay:1.0s">OFFICE</text>
+            <line class="text-draw-line" x1="0" y1="30" x2="420" y2="30" stroke="#C9A87C" stroke-width="0.5" style="animation-delay:1.4s"/>
+            <text class="text-draw-sub" x="0" y="43" font-family="'Noto Sans JP', sans-serif" font-size="10" letter-spacing="2" stroke="#A88E6E" stroke-width="0.4" fill="none" style="animation-delay:1.6s">岐阜県中津川市の税理士事務所</text>
+          </svg>
+        </div>
 
         <h1 class="font-serif text-forest-900 text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.25] mb-8 animate-fade-in-up" style="animation-delay: 0.4s">
           経営のこと、<br>相続のこと。<br>
@@ -158,12 +131,12 @@
           </span>
         </h1>
 
-        <p class="text-forest-400 text-base sm:text-lg leading-relaxed mb-10 max-w-lg animate-fade-in-up" style="animation-delay: 0.6s">
+        <p class="text-forest-400 text-base sm:text-lg leading-relaxed mb-10 max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 0.6s">
           中津川・恵那の経営者に寄り添い続けてきた事務所が、<br class="hidden sm:block">
           最新のIT・AIも活用して、あなたの「困った」を解決します。
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style="animation-delay: 0.8s">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.8s">
           <a href="#contact" class="btn-primary group inline-flex items-center justify-center bg-forest-700 text-white px-8 py-4 rounded-full text-base font-bold hover:bg-forest-800 transition-colors">
             初回無料 — まずは気軽にご相談
             <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
@@ -699,6 +672,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260416c"></script>
+  <script src="js/main.js?v=20260416d"></script>
 </body>
 </html>
