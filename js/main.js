@@ -1,102 +1,35 @@
-// ========== Mobile Menu ==========
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-const hamburgerIcon = mobileMenuBtn.querySelector('.hamburger-icon');
-const closeIcon = mobileMenuBtn.querySelector('.close-icon');
-let menuOpen = false;
+// ========== Nav scroll spy ==========
+const sections = ['about', 'services', 'team', 'faq', 'access', 'contact']
+  .map(id => document.getElementById(id))
+  .filter(Boolean);
+const navLinks = [...document.querySelectorAll('#nav a')];
 
-mobileMenuBtn.addEventListener('click', () => {
-  menuOpen = !menuOpen;
-  mobileMenu.classList.toggle('hidden', !menuOpen);
-  hamburgerIcon.classList.toggle('hidden', menuOpen);
-  closeIcon.classList.toggle('hidden', !menuOpen);
-});
-
-document.querySelectorAll('.mobile-nav-link, #mobile-menu a[href^="#"]').forEach(link => {
-  link.addEventListener('click', () => {
-    menuOpen = false;
-    mobileMenu.classList.add('hidden');
-    hamburgerIcon.classList.remove('hidden');
-    closeIcon.classList.add('hidden');
-  });
-});
-
-// ========== Header Shadow on Scroll ==========
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 20);
-}, { passive: true });
-
-// ========== FAQ Accordion ==========
-document.querySelectorAll('.faq-toggle').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const content = item.querySelector('.faq-content');
-    const isActive = item.classList.contains('active');
-
-    document.querySelectorAll('.faq-item.active').forEach(openItem => {
-      openItem.classList.remove('active');
-      const openContent = openItem.querySelector('.faq-content');
-      openContent.style.maxHeight = null;
-      openContent.classList.add('hidden');
-    });
-
-    if (!isActive) {
-      item.classList.add('active');
-      content.classList.remove('hidden');
-      content.style.maxHeight = content.scrollHeight + 'px';
-    }
-  });
-});
-
-// ========== Scroll Reveal (all variants) ==========
-const revealSelectors = '.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale, .counter-item';
-const revealElements = document.querySelectorAll(revealSelectors);
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const delay = entry.target.style.animationDelay || '0s';
-      const ms = parseFloat(delay) * 1000;
-      setTimeout(() => {
-        entry.target.classList.add('revealed');
-      }, ms);
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, {
-  threshold: 0.08,
-  rootMargin: '0px 0px -60px 0px'
-});
-
-revealElements.forEach(el => revealObserver.observe(el));
-
-// ========== Smooth scroll for anchor links ==========
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', (e) => {
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-});
-
-// ========== Hero band position sync ==========
-function syncHeroBand() {
-  const block = document.getElementById('hero-text-block');
-  const band = document.getElementById('hero-band');
-  if (block && band) {
-    const rect = block.getBoundingClientRect();
-    const heroRect = block.closest('section').getBoundingClientRect();
-    band.style.top = (rect.top - heroRect.top) + 'px';
-    band.style.height = rect.height + 'px';
-  }
+function onScroll() {
+  const y = window.scrollY + 140;
+  let active = null;
+  sections.forEach(s => { if (s.offsetTop <= y) active = s.id; });
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active));
 }
-syncHeroBand();
-window.addEventListener('resize', syncHeroBand);
+document.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
-// ========== Contact Form (Google Apps Script) ==========
+// ========== Mobile drawer ==========
+const menuBtn = document.getElementById('menu-btn');
+const drawer = document.getElementById('drawer');
+if (menuBtn && drawer) {
+  menuBtn.addEventListener('click', () => {
+    const open = document.body.classList.toggle('menu-open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  drawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.body.classList.remove('menu-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+// ========== Contact form (Google Apps Script) ==========
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', async (e) => {
@@ -114,13 +47,16 @@ if (contactForm) {
       const json = await res.json();
 
       if (json.result === 'success') {
-        contactForm.innerHTML = '<div class="text-center py-12">'
-          + '<div class="w-16 h-16 bg-forest-100 rounded-full flex items-center justify-center mx-auto mb-6">'
-          + '<svg class="w-8 h-8 text-forest-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>'
-          + '</div>'
-          + '<h3 class="font-serif text-2xl font-bold text-gray-900 mb-3">送信が完了しました</h3>'
-          + '<p class="text-gray-600">お問い合わせありがとうございます。<br>3営業日以内にご連絡いたします。</p>'
-          + '</div>';
+        contactForm.innerHTML =
+          '<div class="form-done">' +
+            '<div class="mark">' +
+              '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">' +
+                '<path d="M5 13l4 4L19 7"/>' +
+              '</svg>' +
+            '</div>' +
+            '<h4>送信が完了しました</h4>' +
+            '<p>お問い合わせありがとうございます。<br>3営業日以内にご連絡いたします。</p>' +
+          '</div>';
       } else {
         throw new Error(json.error || '送信エラー');
       }
