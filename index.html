@@ -361,13 +361,6 @@
   .hero h1 em {
     font-style: normal;
     color: var(--accent);
-    position: relative;
-  }
-  .hero h1 em::after {
-    content: "・"; position: absolute;
-    top: -0.6em; left: 50%;
-    transform: translateX(-50%);
-    font-size: .35em; color: var(--accent);
   }
   .hero h1 .light {
     color: var(--ink-soft);
@@ -453,11 +446,6 @@
     letter-spacing: .5em;
     line-height: 1.4;
     font-weight: 500;
-  }
-  .hero-vertical::before {
-    content: ""; position: absolute;
-    top: -14px; left: 50%; transform: translateX(-50%);
-    width: 1px; height: 32px; background: var(--accent);
   }
   .hero-mono-stack {
     position: absolute;
@@ -1095,9 +1083,12 @@
   }
   .access-img {
     background: var(--paper);
-    aspect-ratio: 4/3;
     position: relative;
     overflow: hidden;
+    min-height: 360px;
+  }
+  @media (max-width: 900px) {
+    .access-img { aspect-ratio: 4/3; min-height: 0; }
   }
   .access-img .ph {
     position: absolute; inset: 24px;
@@ -1451,7 +1442,6 @@
       </div>
     </div>
 
-    <div class="hero-year">1971</div>
   </div>
 </section>
 
