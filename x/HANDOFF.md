@@ -135,17 +135,20 @@ JPEG(q84, progressive) 化して格納（42MB→3.2MB）。
 1. **ユーザーの実機検閲（C案 Sum Zero Apparatus 版・未検閲）**: ドラム収束・捺印・
    検査光などの演出がwowに届いているか確認待ち。前回版の反省から「足し算で攻める」
    より先に質感・間・タイポの調整で応える方針
-2. **隠しリンク実装（完了 2026-06-10 / B-PC, commit 0be4c09）**: 表HP `index.html` 1861行の
-   中点を `<a class="dot" href="x/" rel="nofollow" aria-hidden="true" tabindex="-1"
-   style="cursor:default">·</a>` に置換済み。見た目は完全同一（oklch値で照合済み）。
-   表HPへの変更はこの1行のみ。
+2. **隠しリンク実装（完了 2026-06-10 / B-PC）**: 入口は「中点が扉」のモチーフで2箇所。
+   表HPへの変更はこの2行のみ。見た目はどちらも完全同一（実ブラウザでクリック遷移検証済み）。
+   - フッター copyline 1861行付近（commit 0be4c09）: `<a class="dot" href="x/" rel="nofollow"
+     aria-hidden="true" tabindex="-1" style="cursor:default">·</a>`
+   - 泰斗プロフィールのタグ「AI・DX推進」の全角中点 1650行付近: `AI<a href="x/" rel="nofollow"
+     aria-hidden="true" tabindex="-1" style="cursor:default">・</a>DX推進`
+     ＝研究室の主の、研究内容を表すタグ自身が入り口
 3. **モバイル実機調整**: 375px幅まで数値検証済みだが実機（タッチ・フォント描画）未検証
 4. **公開**: master へのマージ＝GitHub Pages 即公開。**ユーザーの明示許可なしに
    master へマージ/push しないこと**（このブランチ ura-dev 上で作業を続ける）
 
 ## 7. 開発上の注意
 
-- 表HP（ルートの index.html / css / js / images）には触れない（隠しリンク1行を除く）
+- 表HP（ルートの index.html / css / js / images）には触れない（隠しリンク2行を除く）
 - リポジトリは public。コミット内容は誰でも見られる前提で書く
 - コミットメッセージは日本語 conventional 風（既存履歴参照）
 - Windows環境由来の desktop.ini はコミットしない
