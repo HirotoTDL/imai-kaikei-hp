@@ -8,10 +8,20 @@
 <link rel="icon" type="image/png" href="assets/logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif&family=Noto+Serif+JP:wght@400;500;600&family=Shippori+Mincho+B1:wght@700;800&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/x.css">
 </head>
 <body>
+
+<!-- 印刷の紙粒（全画面グレイン） -->
+<div class="grain" aria-hidden="true"></div>
+<!-- 真鍮カーソル（pointer:fine のみ） -->
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-yen">¥</span></div>
+<!-- 左端の計測ルーラー -->
+<div class="gauge" id="gauge" aria-hidden="true">
+  <span class="gauge-rail"></span>
+  <span class="gauge-carriage" id="gaugeCarriage"><b>▶</b><i id="gaugeNo">No.00</i></span>
+</div>
 
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
@@ -20,13 +30,17 @@
     <span class="brand-tx">IMAI LAB<em>今井会計事務所</em></span>
   </a>
   <nav class="nav-links">
-    <a href="#concept">01 CONCEPT</a>
-    <a href="#office">02 OFFICE</a>
-    <a href="#people">03 PEOPLE</a>
-    <a href="#services">04 SERVICES</a>
-    <a href="#tools">05 TOOLS</a>
-    <a href="#contact">06 CONTACT</a>
+    <a href="#concept">01</a>
+    <a href="#office">02</a>
+    <a href="#people">03</a>
+    <a href="#services">04</a>
+    <a href="#tools">05</a>
+    <a href="#console">06</a>
+    <a href="#contact" class="nav-contact">07 CONTACT</a>
   </nav>
+  <button class="sound-toggle" id="soundToggle" aria-pressed="false">
+    <span class="st-mark"></span>SOUND <b id="soundState">OFF</b>
+  </button>
 </header>
 
 <main id="top">
@@ -36,12 +50,12 @@
     <div class="hero-type">
       <p class="hero-over mask"><span class="line">IMAI ACCOUNTING OFFICE — ANNEX LABORATORY</span></p>
       <h1 class="hero-title mask"><span class="line">IMAI&nbsp;LAB</span></h1>
-      <div class="hero-drums" id="drums" aria-label="DR 0000000 = CR 0000000">
+      <div class="hero-drums" id="heroDrums" aria-label="DR 0000000 = CR 0000000">
         <span class="drum-label">DR</span>
-        <span class="drum" data-drum="0000000"></span>
+        <span class="drum drum-hero" id="heroDrumDR"></span>
         <span class="drum-eq">=</span>
         <span class="drum-label">CR</span>
-        <span class="drum" data-drum="0000000"></span>
+        <span class="drum drum-hero" id="heroDrumCR"></span>
       </div>
       <p class="hero-proof" id="heroProof">
         <span class="proof-tx">SUM = ZERO — 検算済</span>
@@ -49,7 +63,10 @@
       </p>
     </div>
     <figure class="hero-bg">
-      <img src="assets/hero-machine.jpg" alt="">
+      <picture>
+        <source media="(max-width: 720px)" srcset="assets/hero-machine-portrait.jpg">
+        <img src="assets/hero-machine.jpg" alt="">
+      </picture>
     </figure>
     <p class="hero-meta hero-meta-tl">EST. 1971<br>NAKATSUGAWA · GIFU</p>
     <p class="hero-meta hero-meta-tr">DOUBLE-ENTRY<br>APPARATUS</p>
@@ -58,6 +75,7 @@
 
   <!-- ============ 01 CONCEPT ============ -->
   <section class="sec sec-paper" id="concept">
+    <div class="gear-slot gear-slot-concept" data-gear="concept" aria-hidden="true"></div>
     <div class="wrap">
       <p class="sec-no reveal">No. 01 — CONCEPT</p>
       <div class="balance-rules" aria-hidden="true">
@@ -71,20 +89,21 @@
         <p class="reveal">複式簿記には七百年、例外がない。借方と貸方 —— 左右の柱に同じ重さを置き、その差は必ず零に落ちる。帳簿とは、事業という運動を「均衡」で記述するための機構である。</p>
         <p class="reveal">私たちはその機構を、岐阜県中津川市で半世紀あまり運転してきた。雰囲気は研究室。中身は、創業1971年の税理士事務所である。</p>
       </div>
-      <p class="engrave" id="conceptEngrave">SUM = ZERO</p>
+      <p class="engrave reveal" id="conceptEngrave">SUM = ZERO</p>
     </div>
   </section>
 
   <!-- ============ INTERLUDE 1 ============ -->
   <figure class="interlude">
     <img src="assets/interlude-01-mechanism-wide.jpg" alt="" data-parallax>
+    <figcaption class="interlude-cap">FIG. 01 — THE APPARATUS, FULL VIEW</figcaption>
   </figure>
 
   <!-- ============ 02 OFFICE ============ -->
   <section class="sec sec-paper" id="office">
     <div class="wrap">
       <p class="sec-no reveal">No. 02 — OFFICE</p>
-      <h2 class="h2 reveal">研究室の体裁をした、<br class="sp">会計事務所。</h2>
+      <h2 class="h2 reveal">研究室の体裁をした、<br>会計事務所。</h2>
       <p class="h2-en reveal">REGISTERED PARTICULARS</p>
       <dl class="ledger">
         <div class="ledger-row reveal"><dt><i>001</i>商号</dt><dd>今井会計事務所 <span class="dd-en">IMAI ACCOUNTING OFFICE</span></dd></div>
@@ -124,6 +143,7 @@
 
   <!-- ============ 04 SERVICES ============ -->
   <section class="sec sec-dark" id="services">
+    <div class="gear-photo" aria-hidden="true"><img src="assets/gear-macro-a.jpg" alt="" loading="lazy"></div>
     <div class="wrap">
       <p class="sec-no reveal">No. 04 — SERVICES</p>
       <h2 class="h2 reveal">六つの演算。</h2>
@@ -172,10 +192,12 @@
   <!-- ============ INTERLUDE 2 ============ -->
   <figure class="interlude">
     <img src="assets/interlude-02-paper-drums.jpg" alt="" data-parallax>
+    <figcaption class="interlude-cap">FIG. 02 — REGISTERS, DETAIL</figcaption>
   </figure>
 
   <!-- ============ 05 TOOLS ============ -->
   <section class="sec sec-dark sec-tools" id="tools">
+    <div class="gear-slot gear-slot-tools" data-gear="tools" aria-hidden="true"></div>
     <div class="sweep" aria-hidden="true"></div>
     <div class="wrap">
       <p class="sec-no reveal">No. 05 — TOOLS</p>
@@ -206,11 +228,60 @@
     </div>
   </section>
 
-  <!-- ============ 06 CONTACT ============ -->
+  <!-- ============ INTERLUDE 3 ============ -->
+  <figure class="interlude interlude-thin">
+    <img src="assets/drum-band-closeup.jpg" alt="" data-parallax>
+    <figcaption class="interlude-cap">FIG. 03 — REGISTERS AT REST</figcaption>
+  </figure>
+
+  <!-- ============ 06 CONSOLE ============ -->
+  <section class="sec sec-dark sec-console" id="console">
+    <div class="wrap">
+      <p class="sec-no reveal">No. 06 — CONSOLE</p>
+      <h2 class="h2 reveal">触れてみるといい。</h2>
+      <p class="h2-en reveal">OPERATE THE APPARATUS — EVERY ENTRY BALANCES</p>
+      <p class="console-lead reveal">仕訳を打ってみてください。いくら積んでも貸借は必ず釣り合い、<br class="pc">検印とともに零へ戻ります。それが複式簿記です。</p>
+
+      <div class="console reveal" id="console-panel">
+        <div class="console-row">
+          <span class="c-label">DR<em>借方</em></span>
+          <span class="drum drum-console" id="consoleDrumDR"></span>
+        </div>
+        <div class="beam-wrap" aria-hidden="true">
+          <svg class="beam" id="beamSvg" viewBox="0 0 320 56">
+            <line class="beam-bar" id="beamBar" x1="24" y1="28" x2="296" y2="28"/>
+            <path class="beam-pivot" d="M160 30 l-7 14 h14 z"/>
+            <circle class="beam-pan" cx="24" cy="28" r="4"/>
+            <circle class="beam-pan" cx="296" cy="28" r="4"/>
+          </svg>
+        </div>
+        <div class="console-row">
+          <span class="c-label">CR<em>貸方</em></span>
+          <span class="drum drum-console" id="consoleDrumCR"></span>
+        </div>
+
+        <div class="console-keys" id="consoleKeys">
+          <button type="button" data-add="100">+100</button>
+          <button type="button" data-add="1000">+1,000</button>
+          <button type="button" data-add="10000">+10,000</button>
+          <button type="button" data-add="random">乱数</button>
+        </div>
+
+        <button type="button" class="stamp-btn" id="stampBtn">
+          <b>検</b><span>AUDIT — 締める</span>
+        </button>
+
+        <p class="ticket" id="ticket" aria-live="polite"></p>
+        <img class="console-seal" id="consoleSeal" src="assets/seal-02.png" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 CONTACT ============ -->
   <section class="sec sec-contact" id="contact">
     <figure class="contact-bg"><img src="assets/contact-bg.jpg" alt="" data-parallax></figure>
     <div class="wrap">
-      <p class="sec-no reveal">No. 06 — CONTACT</p>
+      <p class="sec-no reveal">No. 07 — CONTACT</p>
       <h2 class="h2 reveal">ここまでが演出。<br>ここからが実務。</h2>
       <p class="h2-en reveal">THE COUNTER IS REAL</p>
       <p class="contact-lead reveal">税のこと、承継のこと、自動化のこと。窓口は実在します。<br class="pc">平日9時から17時まで。初回のご相談は無料です。</p>
@@ -238,6 +309,11 @@
   <span>DR = CR</span>
   <span>NAKATSUGAWA · GIFU · JAPAN</span>
 </footer>
+
+<!-- 来訪記帳テープ（このセッションの仕訳が流れる） -->
+<aside class="journal" id="journal" aria-hidden="true">
+  <div class="journal-track" id="journalTrack"></div>
+</aside>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>

@@ -55,26 +55,39 @@ x/
 └── HANDOFF.md      … 本書
 ```
 
-### 体験の仕掛け（実装済み）
-- **Lenis スムーススクロール**（lerp 0.1）。プリローダーは廃止（クリシェ排除）
-- **ヒーロー**: Instrument Serif の巨大「IMAI LAB」マスクリビール →
-  DR/CR 数字ドラム(各7桁)が random→0 へ収束 → 「SUM=ZERO 検算済」＋朱印が捺される
-- **CONCEPT**: 天秤の罫線が左右から伸びて中央で釣り合う。SUM=ZERO の空押し刻印
-- **OFFICE**: 台帳形式の登記簿（No.001〜006、006は「検算 SUM=ZERO」の暗号行）
-- **PEOPLE**: 真鍮プレート2枚が clip-path で差し込まれる。朱印付き・ネジ穴ディテール
-- **SERVICES**: 6カード紙送り式出現。4:5画像・ホバーで僅かに回転(0.6deg)
-- **TOOLS**: 自社開発4ツールのスペックシート。行番号を5bitパンチ穴で刻印、
-  「検査光」＝暗い影の帯がスクロールでスイープ（発光禁止のため影で表現）
-- **CONTACT**: 「ここまでが演出。ここからが実務。」巨大TEL・朱の角印風CTA・捺印演出
+### 体験の仕掛け（実装済み・実ブラウザ検証済み）
+- **来訪記帳テープ（コア演出）**: 画面下端に穿孔紙テープが常駐し、来訪・各章の通過・
+  コンソール操作・音のON/OFFが「仕訳」として時刻付きで流れ続ける
+  （LEDGER OPENED — ENTRY <創業からの日数> / POSTED — 02 OFFICE / BALANCE HELD 等）。
+  「来訪そのものが記帳される」というサイト全体のフィクションの背骨
+- **ヒーロー**: Instrument Serif 巨大「IMAI LAB」マスクリビール → DR/CR 機械式
+  ドラム(各7桁・Odometerクラス)が random→0 へ収束 → 「SUM=ZERO 検算済」朱印が捺される。
+  モバイルは縦構図 hero-machine-portrait.jpg に `<picture>` で切替
+- **CONSOLE（06・触れる複式簿記）**: +100/+1,000/+10,000/乱数キーで借方ドラムが回る→
+  0.4秒遅れて貸方が自動平均→天秤SVGが傾いて elastic で水平復帰→「検 AUDIT」で
+  両ドラムが零へ巻き戻り朱印捺印＋伝票印字（E<日数>-<回数> / DR=CR / AUDITED hh:mm:ss）。
+  全操作が記帳テープにも流れる。サイト最大の見せ場
+- **WebAudio機械音（合成・アセット不要）**: ドラム1目盛ごとのラチェット音、キー打鍵、
+  捺印の低い打撃。ナビの SOUND トグルで有効化（既定OFF・autoplay規制対応）
+- **SVG歯車工房**: gearSVG(歯数,半径)で線画歯車を生成。CONCEPT右端(墨インク線)と
+  TOOLS左下(真鍮線・2枚が歯数比24:14で正しく噛合い逆回転)に配置、スクロール連動回転。
+  SERVICESには gear-macro-a.jpg（純黒背景）を mix-blend:screen で溶かし込み回転
+- **計測ルーラー**: 左端に目盛レール＋現在章No.のキャリッジがスクロール追従（>1100px）
+- **真鍮カーソル**: pointer:fine のみ。リンク上で朱の ¥ に変形
+- CONCEPT天秤罫線 / OFFICE台帳 / PEOPLE真鍮プレートclip-path / SERVICES紙送りカード /
+  TOOLS5bitパンチ穴＋検査光 / CONTACT捺印 は前版から継続
+- タイポ: 見出しを Shippori Mincho B1(800) に強化、紙セクションは空押しtext-shadow
+- 幕間3枚: FIG.01機構全景 / FIG.02レジスタ接写 / FIG.03ドラム帯(TOOLS→CONSOLE間)
 - フォールバック: GSAP/Lenis未読込 or prefers-reduced-motion 時は body.no-anim で
-  完成形を静的表示（ドラムは0で停止表示）
+  完成形を静的表示（ドラム0表示・コンソールは即時値表示で動作継続）
 
 ### 検証手段
 `py -m http.server 8080 --directory <repoルート>` → `http://localhost:8080/x/`。
-2026-06-10時点: コンソールエラー0 / ScrollTrigger 56個 / 画像14枚ロード成功 /
-1280px(svc3列・プレート2列)・375px(全1列・横はみ出し0) をeval検証済み。
+2026-06-10時点: Chrome実機（Chrome MCP/HomePC）で全章スクショ検閲済み。
+コンソールエラー0 / 1440px・414px 両方でレイアウト・ドラム収束・コンソール操作
+（+1,000+10,000→検印→E20249-1伝票＋朱印）・記帳テープ・歯車回転を実視確認。
 注意: ヘッドレスプレビューはウィンドウ非表示だと rAF が止まりアニメ検証不可。
-全画面スクショも詰まりがち。動作検証は実ブラウザで行うのが確実。
+実ブラウザ（Chrome MCP）で検証するのが確実。
 
 ## 4. コンテンツ（事実関係・変更時は要注意）
 
@@ -107,6 +120,10 @@ JPEG(q84, progressive) 化して格納（42MB→3.2MB）。
 | interlude-02-paper-drums.jpg | 幕間2: 紙テープと数字ドラム接写 2520x1080 |
 | texture-vellum.jpg / texture-metal.jpg | ベラム紙/黒鉄の質感タイル 1024x1024 |
 | contact-bg.jpg | CONTACT背景: 静かな機械室 1920x1080 |
+| hero-machine-portrait.jpg | モバイル用ヒーロー縦構図 1120x1400（picture切替） |
+| drum-band-closeup.jpg | 幕間3: ドラム帯 2520x1080（TOOLS→CONSOLE間） |
+| gear-macro-a/b.jpg | 純黒背景の真鍮歯車 1024x1024（screen合成用。bはストック） |
+| tape-strip-long.jpg | 穿孔紙テープ帯 2520x1080（未使用ストック） |
 | seal-01/02.png | 朱の角印・透過（旧世代から継続使用。捺印演出に使う） |
 | logo-mark.png | 篆刻風ロゴ印（favicon） |
 

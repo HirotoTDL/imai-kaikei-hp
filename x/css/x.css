@@ -25,6 +25,7 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:auto}
+html,body{overflow-x:clip}
 body{
   background:var(--ink);
   color:var(--ivory);
@@ -32,7 +33,6 @@ body{
   font-size:16px;
   line-height:1.9;
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
 }
 ::selection{background:var(--vermilion);color:var(--ivory)}
 img{max-width:100%;display:block}
@@ -171,7 +171,7 @@ figure{margin:0}
 @media (max-width:720px){.hero-meta{display:none}}
 
 /* ============ SECTION COMMON ============ */
-.sec{position:relative;padding:clamp(88px,13vh,150px) 0}
+.sec{position:relative;padding:clamp(88px,13vh,150px) 0;overflow:hidden}
 .sec-paper{
   background:var(--ivory) url(../assets/texture-vellum.jpg);
   background-size:512px;
@@ -197,10 +197,11 @@ figure{margin:0}
 }
 .sec-no::after{content:'';height:1px;flex:0 0 72px;background:var(--brass-line)}
 .h2{
-  font-family:var(--serif-jp);font-weight:600;
+  font-family:'Shippori Mincho B1',var(--serif-jp);font-weight:800;
   font-size:clamp(34px,5vw,68px);
   line-height:1.3;letter-spacing:.02em;
 }
+.sec-paper .h2{text-shadow:0 1px 0 rgba(255,255,255,.55)} /* 活版の空押し */
 .h2-en{
   font-family:var(--mono);font-size:11px;letter-spacing:.3em;
   margin-top:14px;
@@ -430,6 +431,230 @@ figure{margin:0}
   font-family:var(--mono);font-size:10px;letter-spacing:.2em;
   color:var(--ivory-dim);background:var(--ink);
 }
+
+/* ============ GRAIN（印刷の紙粒） ============ */
+.grain{
+  position:fixed;inset:-50%;z-index:58;pointer-events:none;
+  width:200%;height:200%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  opacity:.045;mix-blend-mode:overlay;
+}
+
+/* ============ CURSOR（真鍮の照準） ============ */
+.cursor{
+  position:fixed;left:0;top:0;z-index:70;pointer-events:none;
+  width:34px;height:34px;margin:-17px 0 0 -17px;
+  display:none;place-items:center;
+}
+.cursor.alive{display:grid}
+.cursor::before{
+  content:'';position:absolute;inset:8px;
+  border:1px solid var(--brass);border-radius:50%;
+  transition:inset .25s cubic-bezier(.2,.8,.2,1),opacity .25s;
+}
+.cursor::after{
+  content:'';position:absolute;left:50%;top:50%;
+  width:3px;height:3px;margin:-1.5px 0 0 -1.5px;border-radius:50%;
+  background:var(--brass);
+  transition:opacity .2s;
+}
+.cursor-yen{
+  font-family:var(--serif-en);font-size:13px;color:var(--vermilion);
+  opacity:0;transform:scale(.4);
+  transition:opacity .22s,transform .22s cubic-bezier(.2,.8,.2,1);
+}
+.cursor.is-link::before{inset:0;border-color:var(--vermilion)}
+.cursor.is-link::after{opacity:0}
+.cursor.is-link .cursor-yen{opacity:1;transform:scale(1)}
+@media (pointer:coarse){.cursor{display:none!important}}
+
+/* ============ GAUGE（左端の計測ルーラー） ============ */
+.gauge{
+  position:fixed;left:14px;top:0;bottom:0;z-index:40;
+  width:18px;pointer-events:none;
+}
+.gauge-rail{
+  position:absolute;left:8px;top:0;bottom:0;width:1px;
+  background:
+    repeating-linear-gradient(to bottom,
+      var(--brass-line) 0 1px,transparent 1px 14px) ,
+    var(--brass-line-dim);
+}
+.gauge-carriage{
+  position:absolute;left:0;top:6%;
+  display:flex;align-items:center;gap:5px;
+  color:var(--brass);
+}
+.gauge-carriage b{font-size:8px;font-weight:400;line-height:1}
+.gauge-carriage i{
+  font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.16em;
+  writing-mode:vertical-rl;
+}
+@media (max-width:1100px){.gauge{display:none}}
+
+/* ============ SOUND TOGGLE ============ */
+.sound-toggle{
+  display:flex;align-items:center;gap:8px;
+  background:none;border:1px solid var(--brass-line-dim);
+  padding:8px 14px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  color:var(--ivory-dim);cursor:pointer;
+  transition:border-color .3s,color .3s;
+}
+.sound-toggle:hover{border-color:var(--brass-line);color:var(--ivory)}
+.sound-toggle b{font-weight:600;color:var(--brass);min-width:24px;text-align:left}
+.st-mark{
+  width:6px;height:6px;border-radius:50%;
+  border:1px solid var(--brass);background:transparent;
+  transition:background .3s;
+}
+.sound-toggle.on .st-mark{background:var(--vermilion);border-color:var(--vermilion)}
+@media (max-width:880px){.sound-toggle{display:none}}
+
+/* ============ INTERLUDE CAPTION ============ */
+.interlude-cap{
+  position:absolute;right:clamp(16px,3vw,40px);bottom:14px;z-index:2;
+  font-family:var(--mono);font-size:9px;letter-spacing:.26em;
+  color:rgba(242,232,214,.55);
+}
+
+/* ============ GEARS（SVG歯車・発光なし線画） ============ */
+.gear-slot{position:absolute;pointer-events:none;z-index:0}
+.gear-slot svg{display:block}
+.gear-slot polygon,.gear-slot circle,.gear-slot line{
+  fill:none;stroke-width:1.1;vector-effect:non-scaling-stroke;
+}
+.gear-slot-concept{right:-180px;top:46%;opacity:.85}
+.gear-slot-concept polygon,.gear-slot-concept circle,.gear-slot-concept line{stroke:rgba(17,16,14,.16)}
+.gear-slot-tools{left:-120px;bottom:-140px;display:flex;align-items:flex-end;opacity:.5}
+.gear-slot-tools .gear-b{margin-left:-26px;margin-bottom:120px}
+.gear-slot-tools polygon,.gear-slot-tools circle,.gear-slot-tools line{stroke:rgba(176,138,74,.42)}
+@media (max-width:880px){.gear-slot{display:none}}
+
+/* ============ 06 CONSOLE（触れる複式簿記） ============ */
+.sec-console{padding-top:clamp(56px,8vh,90px)}
+.interlude-thin{height:clamp(180px,32vh,340px)}
+
+/* 真鍮歯車フォト（純黒背景をscreen合成で溶かす） */
+.gear-photo{
+  position:absolute;right:-120px;top:-110px;z-index:0;
+  width:min(380px,30vw);
+  mix-blend-mode:screen;opacity:.95;
+  pointer-events:none;
+}
+.gear-photo img{width:100%;height:auto}
+@media (max-width:880px){.gear-photo{display:none}}
+.console-lead{margin-top:clamp(22px,3.5vh,36px);font-size:clamp(15px,1.5vw,17px);color:var(--ivory-dim)}
+.console{
+  margin-top:clamp(34px,5vh,54px);
+  max-width:680px;
+  position:relative;
+  padding:clamp(28px,4vw,48px);
+  background:
+    linear-gradient(172deg,rgba(176,138,74,.1),rgba(176,138,74,.03) 40%,rgba(0,0,0,.25)),
+    var(--ink) url(../assets/texture-metal.jpg);
+  background-size:auto,auto,560px;
+  border:1px solid var(--brass-line);
+  box-shadow:0 30px 60px -38px rgba(0,0,0,.9),inset 0 1px 0 rgba(242,232,214,.08);
+}
+.console::before,.console::after{ /* パネルのリベット */
+  content:'';position:absolute;width:6px;height:6px;border-radius:50%;
+  background:rgba(176,138,74,.5);box-shadow:inset 0 -1px 1px rgba(0,0,0,.7);
+}
+.console::before{top:10px;left:10px}
+.console::after{top:10px;right:10px}
+.console-row{
+  display:flex;align-items:center;gap:clamp(14px,2.5vw,26px);
+  padding:10px 0;
+}
+.c-label{
+  font-family:var(--mono);font-size:13px;letter-spacing:.22em;color:var(--brass);
+  display:flex;flex-direction:column;line-height:1.5;min-width:54px;
+}
+.c-label em{font-style:normal;font-family:var(--sans-jp);font-size:9px;letter-spacing:.3em;color:var(--ivory-dim)}
+.drum-console{
+  font-size:clamp(22px,3.4vw,34px);
+  background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.15) 30%,rgba(0,0,0,.15) 70%,rgba(0,0,0,.55));
+  border:1px solid var(--brass-line-dim);
+  padding:6px 12px;
+}
+.beam-wrap{display:flex;justify-content:center;margin:4px 0}
+.beam{width:min(320px,70%);height:auto}
+.beam-bar{stroke:var(--brass);stroke-width:2}
+.beam-pivot{fill:var(--brass)}
+.beam-pan{fill:none;stroke:var(--brass-line);stroke-width:1}
+.console-keys{
+  margin-top:clamp(18px,3vh,28px);
+  display:flex;gap:10px;flex-wrap:wrap;
+}
+.console-keys button{
+  font-family:var(--mono);font-size:13px;letter-spacing:.1em;
+  color:var(--ivory);background:rgba(242,232,214,.05);
+  border:1px solid var(--brass-line);
+  padding:13px 20px;cursor:pointer;
+  box-shadow:0 3px 0 rgba(176,138,74,.35);
+  transition:transform .08s,box-shadow .08s,background .3s;
+}
+.console-keys button:hover{background:rgba(176,138,74,.16)}
+.console-keys button:active{transform:translateY(3px);box-shadow:0 0 0 rgba(0,0,0,0)}
+.stamp-btn{
+  margin-top:clamp(20px,3vh,30px);
+  display:inline-flex;align-items:center;gap:14px;
+  background:var(--vermilion);color:var(--ivory);
+  border:1px solid var(--vermilion);
+  padding:14px 26px;cursor:pointer;
+  box-shadow:0 4px 0 rgba(110,30,22,.9);
+  transition:transform .08s,box-shadow .08s;
+}
+.stamp-btn b{
+  font-family:var(--serif-jp);font-weight:600;font-size:22px;
+  width:38px;height:38px;border:1.5px solid var(--ivory);
+  display:grid;place-items:center;
+}
+.stamp-btn span{font-family:var(--mono);font-size:11px;letter-spacing:.24em}
+.stamp-btn:active,.stamp-btn.pressed{transform:translateY(4px);box-shadow:0 0 0 rgba(0,0,0,0)}
+.ticket{
+  margin-top:clamp(20px,3vh,30px);
+  min-height:2.4em;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;line-height:1.8;
+  color:var(--ink);
+  background:var(--ivory) url(../assets/texture-vellum.jpg);background-size:380px;
+  padding:10px 16px;
+  border-left:3px solid var(--vermilion);
+  box-shadow:0 8px 18px -12px rgba(0,0,0,.8);
+}
+.ticket:empty{visibility:hidden}
+.console-seal{
+  position:absolute;right:clamp(18px,3vw,40px);bottom:clamp(18px,3vw,40px);
+  width:clamp(54px,6vw,72px);opacity:0;
+  transform:rotate(-4deg);
+}
+
+/* ============ JOURNAL（来訪記帳テープ） ============ */
+.journal{
+  position:fixed;left:0;right:0;bottom:0;z-index:55;
+  height:30px;overflow:hidden;
+  background:var(--ivory) url(../assets/texture-vellum.jpg);background-size:380px;
+  border-top:1px solid rgba(17,16,14,.3);
+  box-shadow:0 -8px 20px -12px rgba(0,0,0,.55);
+}
+.journal::before,.journal::after{
+  content:'';position:absolute;left:0;right:0;height:7px;z-index:2;pointer-events:none;
+  background-image:radial-gradient(circle 2.5px at 7px 50%,rgba(17,16,14,.55) 95%,transparent);
+  background-size:26px 7px;background-repeat:repeat-x;
+}
+.journal::before{top:1px}
+.journal::after{bottom:1px}
+.journal-track{
+  display:inline-flex;white-space:nowrap;
+  height:30px;align-items:center;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  color:rgba(17,16,14,.78);
+}
+.journal-track span{padding-right:40px}
+.journal-track.run{animation:tape var(--tape-dur,30s) linear infinite}
+@keyframes tape{to{transform:translateX(calc(-1 * var(--tape-w,600px) - 40px))}}
+.foot{padding-bottom:64px}
 
 /* ============ MOTION SAFETY ============ */
 /* JS不達・reduced-motion時もコンテンツは常に可読 */
