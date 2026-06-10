@@ -112,6 +112,9 @@ computer-use で操作して行った。**別端末では同じ経路が無い�
 - Windows環境由来の desktop.ini はコミットしない
 - 元端末には別フォルダ `事務所ホームページG2`（同リポの旧作業コピー）があるが、その内容は
   origin/master(c54077c) に反映済み＝役目を終えている。触らない
+- ★clone先の鉄則: **Google Drive等のクラウド同期フォルダ内にcloneしない**こと
+  （例:「Claud作業フォルダ」はA-PC/B-PC間のDrive共有。同期がgit内部に desktop.ini を
+  注入しリポジトリを破壊する。`C:\dev` など同期外のローカルパスにcloneする）
 - ★既知の事故（2026-06-10に発生・修正済み）: 元端末は Google Drive 同期下にあり、
   `.git/refs` 内に `desktop.ini` が混入して fetch が壊れ、「origin/master と同期済み」と
   誤表示されたまま古いコミット(b627246)をベースに作業してしまった。
