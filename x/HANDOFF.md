@@ -95,10 +95,11 @@ computer-use で操作して行った。**別端末では同じ経路が無い�
 1. **ユーザーの実機検閲**: スクロール・シネマがwowに届いているか確認待ちの状態。
    届いていなければ更に攻める（候補: サービスカード3D化、ヒーローの過剰化、
    ページ遷移演出、音、WebGL画像トランジション）
-2. **隠しリンク実装（未着手）**: 表HP `index.html` のフッター（1861行付近）
-   `© 2026 IMAI ACCOUNTING OFFICE <span class="dot">·</span> ALL RIGHTS RESERVED` の
-   **中点「·」（既に独立した span.dot）だけ**を `x/` へのリンクにする。
-   表HPへの変更はこの1行のみ許可。視認性ゼロ・hover無装飾・SEO配慮（rel="nofollow"等）。
+2. **隠しリンク実装（完了 2026-06-10 / B-PC, commit 0be4c09）**: 表HP `index.html` 1861行の
+   中点を `<a class="dot" href="x/" rel="nofollow" aria-hidden="true" tabindex="-1"
+   style="cursor:default">·</a>` に置換済み。グローバル `a{color:inherit;text-decoration:none}` と
+   `.copyline .dot` 継承により見た目は完全同一（oklch値で照合済み）。クリック遷移・/x/ の
+   コンソールエラー0・ScrollTrigger 42個も検証済み。表HPへの変更はこの1行のみ。
 3. **モバイル実機調整**: レイアウトはレスポンシブ済みだが実機未検証。
    横スクロールピンのタッチ挙動とWebGL負荷を要確認
 4. **公開**: master へのマージ＝GitHub Pages 即公開。**ユーザーの明示許可なしに
@@ -112,6 +113,7 @@ computer-use で操作して行った。**別端末では同じ経路が無い�
 - Windows環境由来の desktop.ini はコミットしない
 - 元端末には別フォルダ `事務所ホームページG2`（同リポの旧作業コピー）があるが、その内容は
   origin/master(c54077c) に反映済み＝役目を終えている。触らない
+- B-PC (DESKTOP-BO4D133) の作業クローンは `C:\dev\imai-kaikei-hp`（2026-06-10作成・同期外）
 - ★clone先の鉄則: **Google Drive等のクラウド同期フォルダ内にcloneしない**こと
   （例:「Claud作業フォルダ」はA-PC/B-PC間のDrive共有。同期がgit内部に desktop.ini を
   注入しリポジトリを破壊する。`C:\dev` など同期外のローカルパスにcloneする）
