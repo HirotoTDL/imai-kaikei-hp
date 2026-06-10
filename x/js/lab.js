@@ -135,11 +135,15 @@
       }
       var extra = idx === n - 1 ? 2 : idx === n - 2 ? 1 : 0;
       var loops = (opts.loops != null ? opts.loops : 0) + extra;
+      var wasRolling = r.tween && r.tween.isActive();
+      if (r.tween) r.tween.kill(); /* 中断時は onUpdate が更新した r.digit から継ぐ */
       var steps = loops * 10 + ((to - r.digit) % 10 + 10) % 10;
-      if (steps === 0) return;
-      var html = '', d = r.digit;
+      if (steps === 0) {
+        if (!wasRolling) return; /* 静止中で目標一致なら何もしない */
+        steps = 10;              /* 回転中断からの収束は1周回して着地 */
+      }
+      var html = '', d = r.digit, from = r.digit;
       for (var s = 0; s <= steps; s++) { html += '<i>' + d + '</i>'; d = (d + 1) % 10; }
-      if (r.tween) r.tween.kill();
       r.strip.innerHTML = html;
       var h = r.strip.firstElementChild.offsetHeight;
       gsap.set(r.strip, { y: 0 });
@@ -151,7 +155,7 @@
         ease: opts.ease || 'power3.inOut',
         onUpdate: function(){
           var cur = Math.floor(this.progress() * steps);
-          if (cur !== last) { last = cur; SFX.tick(); }
+          if (cur !== last) { last = cur; r.digit = (from + cur) % 10; SFX.tick(); }
         },
         onComplete: function(){
           r.digit = to;
