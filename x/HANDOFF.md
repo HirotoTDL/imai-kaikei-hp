@@ -143,8 +143,10 @@ JPEG(q84, progressive) 化して格納（42MB→3.2MB）。
      aria-hidden="true" tabindex="-1" style="cursor:default">・</a>DX推進`
      ＝研究室の主の、研究内容を表すタグ自身が入り口
 3. **モバイル実機調整**: 375px幅まで数値検証済みだが実機（タッチ・フォント描画）未検証
-4. **公開**: master へのマージ＝GitHub Pages 即公開。**ユーザーの明示許可なしに
-   master へマージ/push しないこと**（このブランチ ura-dev 上で作業を続ける）
+4. **公開（完了 2026-06-10）**: ユーザーの明示許可を得て master へ ff-merge・push 済み
+   （aa4b55e）。本番 https://hirototdl.github.io/imai-kaikei-hp/ で裏HPの動作と
+   隠しリンク2箇所の遷移を実ブラウザ確認済み。今後も**ユーザーの明示許可なしに
+   master へマージ/push しないこと**（作業は ura-dev 上で続ける）
 
 ## 7. 開発上の注意
 
