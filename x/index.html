@@ -3,168 +3,245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IMAI LAB — 今井会計事務所 / 数字を構造として扱う税理士事務所</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="今井会計事務所の技術面。複式簿記の均衡を、設計する。岐阜県中津川市。">
+<title>IMAI LAB — 今井会計事務所 / SUM=ZERO</title>
+<link rel="icon" type="image/png" href="assets/logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="icon" href="assets/logo-mark.png">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/x.css">
 </head>
 <body>
 
-<!-- ===== fixed WebGL stage (scroll-driven) ===== -->
-<canvas id="gl"></canvas>
-
-<!-- ===== overlays ===== -->
-<div class="grain"></div><div class="vignette"></div>
-<div class="grid-overlay" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-<div class="scanline"></div>
-
-<!-- ===== custom cursor ===== -->
-<div id="cursor"></div><div id="cursor-dot"></div>
-
-<!-- ===== scroll progress + chapter index ===== -->
-<div id="progress"><i></i></div>
-<nav id="chapters">
-  <a href="#index"    data-c="00"><span>INDEX</span></a>
-  <a href="#about"    data-c="01"><span>ABOUT</span></a>
-  <a href="#services" data-c="02"><span>SERVICES</span></a>
-  <a href="#method"   data-c="03"><span>METHOD</span></a>
-  <a href="#balance"  data-c="04"><span>BALANCE</span></a>
-  <a href="#contact"  data-c="05"><span>CONTACT</span></a>
-</nav>
-
-<!-- ===== preloader ===== -->
-<div id="boot"><div class="boot-inner">
-  <div class="boot-count"><span id="bootPct">0</span><i>%</i></div>
-  <div class="boot-bar"><i></i></div>
-  <div class="boot-txt" id="bootTxt">OPENING LEDGER</div>
-</div></div>
-
-<!-- ===== top nav ===== -->
-<header class="nav">
-  <a class="brand" href="#index"><i class="logo-mark"></i><span class="brand-tx"><b>IMAI&nbsp;LAB</b><em>今井会計事務所</em></span></a>
-  <div class="nav-right"><span class="dot live"></span><span id="clock">--:--:--·JST</span></div>
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top">
+    <span class="brand-yen">¥</span>
+    <span class="brand-tx">IMAI LAB<em>今井会計事務所</em></span>
+  </a>
+  <nav class="nav-links">
+    <a href="#concept">01 CONCEPT</a>
+    <a href="#office">02 OFFICE</a>
+    <a href="#people">03 PEOPLE</a>
+    <a href="#services">04 SERVICES</a>
+    <a href="#tools">05 TOOLS</a>
+    <a href="#contact">06 CONTACT</a>
+  </nav>
 </header>
 
-<!-- ================= ACT 0 — HERO ================= -->
-<section class="act hero" id="index">
-  <div class="wordmark">
-    <h1 data-split>IMAI<br>LAB</h1>
-    <p class="tagline"><b>今井会計事務所</b> / IMAI ACCOUNTING OFFICE<br>数字を構造として扱う、岐阜県中津川市の税理士事務所。</p>
-    <p class="tagline2">TAX · SUCCESSION · CLOUD ACCOUNTING · AUTOMATION</p>
-  </div>
-  <div class="ledger ledger-left" id="ledgerL"><div class="ledger-head"><span>DEBIT 借方</span><span>DR</span></div></div>
-  <div class="ledger ledger-right" id="ledgerR"><div class="ledger-head"><span>CR</span><span>貸方 CREDIT</span></div></div>
-  <div class="balance-readout">
-    <div class="bal-num"><span id="balNum">0.000000</span></div>
-    <div class="bal-cap">複式簿記 — 貸借は必ず均衡する。&nbsp; SUM&nbsp;=&nbsp;<b id="sumState">BALANCED</b></div>
-  </div>
-  <div class="scrollcue"><span>SCROLL</span><i></i></div>
-</section>
+<main id="top">
 
-<!-- ================= ACT 1 — ABOUT (pinned) ================= -->
-<section class="act pin" id="about" data-act="01">
-  <div class="act-inner">
-    <span class="act-kicker" data-rise>01 — ABOUT</span>
-    <h2 class="act-h" data-rise>数字は、<br>構造である。<em>ACCOUNTING AS STRUCTURE</em></h2>
-    <div class="act-lead" data-rise>
-      <p>今井会計事務所は、岐阜県中津川市の税理士事務所。中津川・恵那・東濃の中小企業と個人事業主に伴走し、税務・会計を入口に「経営の均衡」を設計します。</p>
-      <p>複式簿記は、すべての取引を借方と貸方の<strong>均衡</strong>として記録する技術。私たちはその思想を、記帳の先——資金繰り、承継、次の一手——まで広げて使います。</p>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-type">
+      <p class="hero-over mask"><span class="line">IMAI ACCOUNTING OFFICE — ANNEX LABORATORY</span></p>
+      <h1 class="hero-title mask"><span class="line">IMAI&nbsp;LAB</span></h1>
+      <div class="hero-drums" id="drums" aria-label="DR 0000000 = CR 0000000">
+        <span class="drum-label">DR</span>
+        <span class="drum" data-drum="0000000"></span>
+        <span class="drum-eq">=</span>
+        <span class="drum-label">CR</span>
+        <span class="drum" data-drum="0000000"></span>
+      </div>
+      <p class="hero-proof" id="heroProof">
+        <span class="proof-tx">SUM = ZERO — 検算済</span>
+        <img class="proof-seal" src="assets/seal-01.png" alt="朱の角印">
+      </p>
     </div>
-    <ul class="fact-row" data-rise>
-      <li><span>OFFICE</span><b>今井会計事務所</b><em>今井正義 — 所長・代表税理士 / 今井泰斗 — 税理士</em></li>
-      <li><span>AREA</span><b>中津川 · 恵那 · 東濃</b><em>地域密着・巡回監査</em></li>
-      <li><span>STANCE</span><b>初回相談 無料</b><em>まず、数字を一緒に見る</em></li>
-    </ul>
-  </div>
-</section>
+    <figure class="hero-bg">
+      <img src="assets/hero-machine.jpg" alt="">
+    </figure>
+    <p class="hero-meta hero-meta-tl">EST. 1971<br>NAKATSUGAWA · GIFU</p>
+    <p class="hero-meta hero-meta-tr">DOUBLE-ENTRY<br>APPARATUS</p>
+    <p class="hero-hint"><span class="hint-bar"></span>FEED — SCROLL</p>
+  </section>
 
-<!-- ================= ACT 2 — SERVICES (pinned horizontal) ================= -->
-<section class="act act-h" id="services" data-act="02">
-  <div class="h-wrap"><div class="h-track" id="hTrack">
-    <div class="h-intro">
-      <span class="act-kicker">02 — SERVICES</span>
-      <h2 class="act-h">業務領域<em>WHAT WE BALANCE</em></h2>
-      <p class="h-hint">→ 横にスクロール</p>
+  <!-- ============ 01 CONCEPT ============ -->
+  <section class="sec sec-paper" id="concept">
+    <div class="wrap">
+      <p class="sec-no reveal">No. 01 — CONCEPT</p>
+      <div class="balance-rules" aria-hidden="true">
+        <span class="rule rule-l"></span>
+        <span class="rule-pivot">▲</span>
+        <span class="rule rule-r"></span>
+      </div>
+      <h2 class="h2 reveal">すべての数字は、<br class="sp">釣り合う。</h2>
+      <p class="h2-en reveal">THE LEDGER ALWAYS BALANCES</p>
+      <div class="concept-body">
+        <p class="reveal">複式簿記には七百年、例外がない。借方と貸方 —— 左右の柱に同じ重さを置き、その差は必ず零に落ちる。帳簿とは、事業という運動を「均衡」で記述するための機構である。</p>
+        <p class="reveal">私たちはその機構を、岐阜県中津川市で半世紀あまり運転してきた。雰囲気は研究室。中身は、創業1971年の税理士事務所である。</p>
+      </div>
+      <p class="engrave" id="conceptEngrave">SUM = ZERO</p>
     </div>
-    <article class="svc" data-img="svc-01"><i class="thumb"></i><div class="svc-c"><span class="c-i">02.1</span><h3>税務顧問<em>TAX ADVISORY</em></h3><p>月次巡回・記帳指導から決算・税務申告まで。経営の数字を、毎月きちんと見る。</p></div></article>
-    <article class="svc" data-img="svc-02"><i class="thumb"></i><div class="svc-c"><span class="c-i">02.2</span><h3>相続・事業承継<em>SUCCESSION</em></h3><p>相続税対策と事業承継の設計。築いた均衡を崩さず、次の世代へ渡す。</p></div></article>
-    <article class="svc hot" data-img="svc-03"><i class="thumb"></i><div class="svc-c"><span class="c-i">02.3</span><h3>クラウド会計・自動化<em>CLOUD &amp; AUTOMATION</em></h3><p>クラウド会計に、自社開発の自動仕訳を重ねる。記帳は機械へ、判断は人へ。</p></div></article>
-    <article class="svc" data-img="svc-04"><i class="thumb"></i><div class="svc-c"><span class="c-i">02.4</span><h3>経営支援<em>ADVISORY</em></h3><p>月次レポート・経営分析・資金繰り・損益分岐点。数字を意思決定の言葉に。</p></div></article>
-    <article class="svc" data-img="svc-05"><i class="thumb"></i><div class="svc-c"><span class="c-i">02.5</span><h3>会社設立<em>INCORPORATION</em></h3><p>創業・法人化の設計。最初の一行目から、整った帳簿を。</p></div></article>
-    <article class="svc" data-img="svc-06"><i class="thumb"></i><div class="svc-c"><span class="c-i">02.6</span><h3>確定申告<em>FILING</em></h3><p>個人・法人の確定申告。期限と精度を、淡々と守り切る。</p></div></article>
-  </div></div>
-</section>
+  </section>
 
-<!-- ===== INTERLUDE 01 ===== -->
-<section class="interlude" id="il1" data-img="interlude-01">
-  <div class="il-bg"></div>
-  <div class="il-cap"><span data-rise>— BALANCE FIELD</span><b data-rise>すべての取引は、二度記録される。</b><em data-rise>EVERY ENTRY HAS ITS COUNTER-ENTRY.</em></div>
-</section>
+  <!-- ============ INTERLUDE 1 ============ -->
+  <figure class="interlude">
+    <img src="assets/interlude-01-mechanism-wide.jpg" alt="" data-parallax>
+  </figure>
 
-<!-- ================= ACT 3 — METHOD (pinned) ================= -->
-<section class="act pin band" id="method" data-act="03" data-bg="3">
-  <div class="act-inner">
-    <span class="act-kicker" data-rise>03 — METHOD</span>
-    <h2 class="act-h" data-rise>道具は、<br>自分たちで作る。<em>WE BUILD OUR OWN TOOLS</em></h2>
-    <p class="act-lead solo" data-rise>AIと自動化で記帳の手数を消し、人は判断と対話に集中する——会計を<strong>工学する</strong>事務所であること。これが、表からは見えないもう一つの顔です。</p>
-    <div class="method-list">
-      <div class="m-row" data-rise><span class="m-no">/01</span><h4>自動仕訳エンジン</h4><p>取引データを学習済みルールで仕訳へ変換。月次の記帳を機械化。</p></div>
-      <div class="m-row" data-rise><span class="m-no">/02</span><h4>AI-OCR 読取</h4><p>通帳・請求書・明細をAIで読み取り、構造化データに。</p></div>
-      <div class="m-row" data-rise><span class="m-no">/03</span><h4>月次レポート自動生成</h4><p>確定帳票から、経営者が読める単月レポートを自動で。</p></div>
-      <div class="m-row" data-rise><span class="m-no">/04</span><h4>経営分析</h4><p>生データから中小企業特有のシグナルを抽出し、対話の材料に。</p></div>
+  <!-- ============ 02 OFFICE ============ -->
+  <section class="sec sec-paper" id="office">
+    <div class="wrap">
+      <p class="sec-no reveal">No. 02 — OFFICE</p>
+      <h2 class="h2 reveal">研究室の体裁をした、<br class="sp">会計事務所。</h2>
+      <p class="h2-en reveal">REGISTERED PARTICULARS</p>
+      <dl class="ledger">
+        <div class="ledger-row reveal"><dt><i>001</i>商号</dt><dd>今井会計事務所 <span class="dd-en">IMAI ACCOUNTING OFFICE</span></dd></div>
+        <div class="ledger-row reveal"><dt><i>002</i>創業</dt><dd>1971年（昭和46年）</dd></div>
+        <div class="ledger-row reveal"><dt><i>003</i>所在</dt><dd>〒508-0045 岐阜県中津川市かやの木町3-6 八百健ビル3F</dd></div>
+        <div class="ledger-row reveal"><dt><i>004</i>営業</dt><dd>平日 9:00 — 17:00</dd></div>
+        <div class="ledger-row reveal"><dt><i>005</i>初回相談</dt><dd>無料</dd></div>
+        <div class="ledger-row reveal"><dt><i>006</i>検算</dt><dd>SUM = ZERO <span class="dd-en">AT ALL TIMES</span></dd></div>
+      </dl>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ================= ACT 4 — BALANCE (pinned, equation) ================= -->
-<section class="act pin center-act" id="balance" data-act="04">
-  <div class="act-inner center">
-    <span class="act-kicker" data-rise>04 — BALANCE</span>
-    <h2 class="act-h center" data-rise>すべては、<br>均衡へ。<em>EVERYTHING RETURNS TO ZERO</em></h2>
-    <div class="big-equation"><span class="eq-side" id="eqL">+0000000</span><span class="eq-op">=</span><span class="eq-side" id="eqR">−0000000</span></div>
-    <div class="eq-zero" id="eqZero">= 0</div>
-    <p class="act-lead center" data-rise>借方は貸方に等しい。帳簿の上では、すべてが必ずゼロに戻る。<br>私たちの仕事は、その規律を経営の均衡にまで広げること。</p>
-  </div>
-</section>
-
-<!-- ===== INTERLUDE 02 ===== -->
-<section class="interlude" id="il2" data-img="interlude-02">
-  <div class="il-bg"></div>
-  <div class="il-cap right"><span data-rise>— ZERO-SUM —</span><b data-rise>帳簿の上では、すべてがゼロに戻る。</b><em data-rise>EVERYTHING RETURNS TO ZERO.</em></div>
-</section>
-
-<!-- ================= ACT 5 — CONTACT ================= -->
-<section class="act band end" id="contact" data-act="05" data-bg="1">
-  <div class="act-inner">
-    <span class="act-kicker" data-rise>05 — CONTACT</span>
-    <h2 class="act-h" data-rise>ACCESS<em>お問い合わせ</em></h2>
-    <div class="contact-grid">
-      <div class="ct-block" data-rise><label>OFFICE</label><b>今井会計事務所</b><span>IMAI ACCOUNTING OFFICE</span></div>
-      <div class="ct-block" data-rise><label>ADDRESS</label><b>〒508-0045</b><span>岐阜県中津川市かやの木町3-6<br>八百健ビル 3F</span></div>
-      <div class="ct-block" data-rise><label>TEL</label><b><a href="tel:0573-65-5054">0573-65-5054</a></b><span>FAX 0573-66-7772</span></div>
-      <div class="ct-block" data-rise><label>HOURS</label><b>平日 9:00–17:00</b><span>初回相談 無料</span></div>
+  <!-- ============ 03 PEOPLE ============ -->
+  <section class="sec sec-paper sec-people" id="people">
+    <div class="wrap">
+      <p class="sec-no reveal">No. 03 — PEOPLE</p>
+      <h2 class="h2 reveal">機構を運転する、二人。</h2>
+      <p class="h2-en reveal">OPERATORS</p>
+      <div class="plates">
+        <article class="plate">
+          <p class="plate-id">OP-01 / DIRECTOR</p>
+          <h3 class="plate-name">今井 正義</h3>
+          <p class="plate-role">所長・代表税理士</p>
+          <p class="plate-bio">地域の中小企業と個人事業主の税務を、長年にわたり預かる。帳簿の均衡を司る主任検算者。</p>
+          <img class="plate-seal" src="assets/seal-01.png" alt="">
+        </article>
+        <article class="plate">
+          <p class="plate-id">OP-02 / TAX ACCOUNTANT</p>
+          <h3 class="plate-name">今井 泰斗</h3>
+          <p class="plate-role">税理士</p>
+          <p class="plate-bio">クラウド会計と業務自動化の設計を担う。本館の静けさの裏で、この研究室を運転している。</p>
+          <img class="plate-seal" src="assets/seal-02.png" alt="">
+        </article>
+      </div>
     </div>
-    <a class="back-door" href="../index.html" data-rise>⟵ RETURN TO SURFACE — 通常サイトへ戻る</a>
-    <div class="end-foot"><span>IMAI LAB — 今井会計事務所 / NONPUBLIC TECHNICAL FACE</span><span id="footYr">© 2026</span></div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== libs ===== -->
+  <!-- ============ 04 SERVICES ============ -->
+  <section class="sec sec-dark" id="services">
+    <div class="wrap">
+      <p class="sec-no reveal">No. 04 — SERVICES</p>
+      <h2 class="h2 reveal">六つの演算。</h2>
+      <p class="h2-en reveal">SIX OPERATIONS — ALL ACTUAL PRACTICE</p>
+      <div class="svc-grid">
+        <article class="svc-card">
+          <figure><img src="assets/svc-01-tax-advisory.jpg" alt="" loading="lazy"></figure>
+          <p class="svc-id">SVC-01 / TAX ADVISORY</p>
+          <h3>税務顧問</h3>
+          <p>月次の帳簿確認から税務相談まで。経営の数字を、継続的に均衡へ保つ。</p>
+        </article>
+        <article class="svc-card">
+          <figure><img src="assets/svc-02-succession.jpg" alt="" loading="lazy"></figure>
+          <p class="svc-id">SVC-02 / SUCCESSION</p>
+          <h3>相続・事業承継</h3>
+          <p>資産と事業を、次の世代の歯車へ。生前対策から相続税申告まで。</p>
+        </article>
+        <article class="svc-card">
+          <figure><img src="assets/svc-03-cloud-automation.jpg" alt="" loading="lazy"></figure>
+          <p class="svc-id">SVC-03 / CLOUD &amp; AUTOMATION</p>
+          <h3>クラウド会計・自動化</h3>
+          <p>記帳の自動化とクラウド移行を、設計から運用まで支援する。</p>
+        </article>
+        <article class="svc-card">
+          <figure><img src="assets/svc-04-management-support.jpg" alt="" loading="lazy"></figure>
+          <p class="svc-id">SVC-04 / MANAGEMENT</p>
+          <h3>経営支援</h3>
+          <p>月次データを計器として読み、経営判断に使える形へ整える。</p>
+        </article>
+        <article class="svc-card">
+          <figure><img src="assets/svc-05-company-setup.jpg" alt="" loading="lazy"></figure>
+          <p class="svc-id">SVC-05 / INCORPORATION</p>
+          <h3>会社設立</h3>
+          <p>法人化の判断から設立後の届出・経理体制づくりまで、刻印を打つ。</p>
+        </article>
+        <article class="svc-card">
+          <figure><img src="assets/svc-06-tax-return.jpg" alt="" loading="lazy"></figure>
+          <p class="svc-id">SVC-06 / TAX RETURN</p>
+          <h3>確定申告</h3>
+          <p>個人事業・不動産・譲渡所得。期日までに、正確に送り出す。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTERLUDE 2 ============ -->
+  <figure class="interlude">
+    <img src="assets/interlude-02-paper-drums.jpg" alt="" data-parallax>
+  </figure>
+
+  <!-- ============ 05 TOOLS ============ -->
+  <section class="sec sec-dark sec-tools" id="tools">
+    <div class="sweep" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="sec-no reveal">No. 05 — TOOLS</p>
+      <h2 class="h2 reveal">会計を、工学する。</h2>
+      <p class="h2-en reveal">IN-HOUSE ENGINEERING — BUILT AND USED HERE</p>
+      <ol class="tools">
+        <li class="tool-row reveal">
+          <span class="tool-id">TL-01</span>
+          <div class="tool-tx"><h3>自動仕訳エンジン</h3><p>仕訳を、機械に。証憑から帳簿への変換を自動化する。</p></div>
+          <span class="punch" data-punch="1" aria-hidden="true"></span>
+        </li>
+        <li class="tool-row reveal">
+          <span class="tool-id">TL-02</span>
+          <div class="tool-tx"><h3>AI-OCR</h3><p>紙を、データに。領収書・通帳の読み取りを学習させる。</p></div>
+          <span class="punch" data-punch="2" aria-hidden="true"></span>
+        </li>
+        <li class="tool-row reveal">
+          <span class="tool-id">TL-03</span>
+          <div class="tool-tx"><h3>月次レポート自動生成</h3><p>月次を、待たせない。締めと同時に経営資料へ変換する。</p></div>
+          <span class="punch" data-punch="3" aria-hidden="true"></span>
+        </li>
+        <li class="tool-row reveal">
+          <span class="tool-id">TL-04</span>
+          <div class="tool-tx"><h3>経営分析</h3><p>数字を、判断に。推移と構造を可視化する。</p></div>
+          <span class="punch" data-punch="4" aria-hidden="true"></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 06 CONTACT ============ -->
+  <section class="sec sec-contact" id="contact">
+    <figure class="contact-bg"><img src="assets/contact-bg.jpg" alt="" data-parallax></figure>
+    <div class="wrap">
+      <p class="sec-no reveal">No. 06 — CONTACT</p>
+      <h2 class="h2 reveal">ここまでが演出。<br>ここからが実務。</h2>
+      <p class="h2-en reveal">THE COUNTER IS REAL</p>
+      <p class="contact-lead reveal">税のこと、承継のこと、自動化のこと。窓口は実在します。<br class="pc">平日9時から17時まで。初回のご相談は無料です。</p>
+      <a class="contact-tel reveal" href="tel:0573655054">0573-65-5054</a>
+      <dl class="contact-rows">
+        <div class="reveal"><dt>FAX</dt><dd>0573-66-7772</dd></div>
+        <div class="reveal"><dt>ADDRESS</dt><dd>〒508-0045 岐阜県中津川市かやの木町3-6 八百健ビル3F</dd></div>
+        <div class="reveal"><dt>HOURS</dt><dd>平日 9:00 — 17:00</dd></div>
+      </dl>
+      <div class="contact-cta reveal">
+        <a class="cta-stamp" href="tel:0573655054">電話で相談する<span>FIRST CONSULTATION — FREE</span></a>
+        <a class="cta-ghost" href="../">表の顔へ<span>OFFICIAL SITE</span></a>
+      </div>
+      <p class="contact-proof">
+        <img class="proof-seal proof-seal-lg" id="contactSeal" src="assets/seal-02.png" alt="朱の角印">
+        <span class="engrave">AUDITED — SUM = ZERO</span>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span>© 2026 IMAI ACCOUNTING OFFICE</span>
+  <span>DR = CR</span>
+  <span>NAKATSUGAWA · GIFU · JAPAN</span>
+</footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-<script type="importmap">
-{ "imports": {
-  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-} }
-</script>
-<script type="module" src="js/x.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/scroll.js"></script>
+<script src="js/lab.js"></script>
 </body>
 </html>

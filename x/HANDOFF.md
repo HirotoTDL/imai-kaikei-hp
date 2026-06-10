@@ -25,40 +25,56 @@
    バイオレット〜マゼンタ）＋朱(#ff2532)** のカラー版 v3 を生成。
 3. **v3-2「中央3Dリング・天秤型」がデザイン確定版**。
 4. 初期実装が「抽象的すぎて意味不明・ヒーローだけ豪華で下が貧相」とFBを受け、
-   設計思想を初期化 → **スクロール・シネマ**（ユーザー選択）として再構築。現在に至る。
+   設計思想を初期化 → **スクロール・シネマ**として再構築。
+5. (2026-06-10 B-PC) スクロール・シネマ版が「コンセプトは伝わり始めたが正直ダサい」と
+   評価され**スクラップ＆ビルド**。敗因分析＝awwwards系クリシェの寄せ集め・高彩度虹色が
+   安っぽい・統一美学の不在。Codex GPT-5.5 に新規3案（A: Silent Ledger 紙と余白 /
+   B: Audit Theater 天秤の舞台装置 / C: Sum Zero Apparatus アナログ演算機）を出させ、
+   ユーザーが **C案 Sum Zero Apparatus を選択・確定**。
+   美学の核「帳簿を、詩的なアナログ演算機として再発明する」。**発光表現は全面禁止**、
+   影・摩擦・印刷の手触りで組む。
+
+### C案デザインシステム（Codex GPT-5.5 確定版・遵守すること）
+- パレット: 墨黒 `#11100E` / アイボリー `#F2E8D6` / 真鍮 `#B08A4A` /
+  青銅 `#2F6B63` / 朱 `#B33A2E`
+- タイポ (Google Fonts): IBM Plex Mono（ラベル/数字）・Instrument Serif（欧文見出し）・
+  Noto Serif JP（日本語本文）・Noto Sans JP（UI補助）
+- モーション: 数字ドラム random→0 収束で DR=CR / 罫線が左右から入り中央で釣り合う /
+  真鍮プレート clip-path 差し込み / カード紙送り出現 / 検査光（暗い影の帯）スイープ /
+  朱印 scale 1.4→1 の捺印。CTAは朱の角印風・角丸なし。
 
 ## 3. 現在のアーキテクチャ（/x/ 配下）
 
 ```
 x/
-├── index.html      … 6幕構成のスクロール・シネマ。実在の事務所情報入り
-├── css/x.css       … ブルータリズム骨格＋演出スタイル一式
-├── js/x.js         … Three.js WebGL常駐ステージ（ESM, importmap, three@0.160.0）
-├── js/scroll.js    … 体験統括: Lenis + GSAP ScrollTrigger（CDN読込）
-├── js/ui.js        … データ層: 時計/台帳ティッカー/均衡0.000000/画像ローダー
-├── assets/         … GPT(codex)生成画像 15枚（下記§5）
+├── index.html      … 6章構成（HERO/CONCEPT/OFFICE/PEOPLE/SERVICES/TOOLS/CONTACT）
+├── css/x.css       … C案デザインシステム一式（CSS変数にパレット定義）
+├── js/lab.js       … 演出統括: Lenis + GSAP ScrollTrigger（CDN）。Three.js は廃止
+├── assets/         … C案世界観の生成画像12枚(.jpg) ＋ 朱印2枚・ロゴ(.png)（下記§5）
 │   └── _chromakey.py … 緑背景→透過PNG変換スクリプト（角印用に使用した）
 └── HANDOFF.md      … 本書
 ```
 
-### 体験の仕掛け（実装済み・検証済み）
-- **Lenis スムーススクロール**（lerp 0.1）
-- **プリローダー**: %カウント＋会計フレーズ（OPENING LEDGER → SUM → 0 → ACCESS GRANTED）
-- **ヒーロー**: 文字分割アニメ、DR/CR台帳ティッカー、SUM=0.000000均衡表示
-- **WebGLステージ**: 3D同心リング＋6000粒子＋ブルーム。`window.LAB_STATE` を
-  scroll.js が章ごとに gsap.to() でトゥイーン → x.js がlerpで追従（camZ/ringScale/
-  ringTilt/ringSpin/pSpeed/hue/core/bloom）。章ごとに色・速度・カメラが変わる
-- **SERVICES**: ピン留め横スクロールギャラリー（6業務カード、各カードにGPT画像背景）
-- **BALANCE**: ピン留めで「+N = −N」が左右に吹き飛び巨大な「= 0」へ収束（複式簿記の演出化）
-- **インタールード2枚**: 全面シネマ画像＋パララックス
-- **カスタムカーソル／章インデックス／進捗バー**
-- フォールバック: GSAP/Lenis未読込でも全文表示される（revealAll）
+### 体験の仕掛け（実装済み）
+- **Lenis スムーススクロール**（lerp 0.1）。プリローダーは廃止（クリシェ排除）
+- **ヒーロー**: Instrument Serif の巨大「IMAI LAB」マスクリビール →
+  DR/CR 数字ドラム(各7桁)が random→0 へ収束 → 「SUM=ZERO 検算済」＋朱印が捺される
+- **CONCEPT**: 天秤の罫線が左右から伸びて中央で釣り合う。SUM=ZERO の空押し刻印
+- **OFFICE**: 台帳形式の登記簿（No.001〜006、006は「検算 SUM=ZERO」の暗号行）
+- **PEOPLE**: 真鍮プレート2枚が clip-path で差し込まれる。朱印付き・ネジ穴ディテール
+- **SERVICES**: 6カード紙送り式出現。4:5画像・ホバーで僅かに回転(0.6deg)
+- **TOOLS**: 自社開発4ツールのスペックシート。行番号を5bitパンチ穴で刻印、
+  「検査光」＝暗い影の帯がスクロールでスイープ（発光禁止のため影で表現）
+- **CONTACT**: 「ここまでが演出。ここからが実務。」巨大TEL・朱の角印風CTA・捺印演出
+- フォールバック: GSAP/Lenis未読込 or prefers-reduced-motion 時は body.no-anim で
+  完成形を静的表示（ドラムは0で停止表示）
 
 ### 検証手段
-ルートで `py -m http.server 8080 --directory 事務所ホームページ` →
-`http://localhost:8080/x/`。コンソールエラー0、ScrollTrigger 42個生成を確認済み。
-注意: ページが長い(8000px超)ためヘッドレスの全画面スクショは詰まりがち。
-動作検証は eval/実ブラウザで行うのが確実。
+`py -m http.server 8080 --directory <repoルート>` → `http://localhost:8080/x/`。
+2026-06-10時点: コンソールエラー0 / ScrollTrigger 56個 / 画像14枚ロード成功 /
+1280px(svc3列・プレート2列)・375px(全1列・横はみ出し0) をeval検証済み。
+注意: ヘッドレスプレビューはウィンドウ非表示だと rAF が止まりアニメ検証不可。
+全画面スクショも詰まりがち。動作検証は実ブラウザで行うのが確実。
 
 ## 4. コンテンツ（事実関係・変更時は要注意）
 
@@ -78,30 +94,35 @@ computer-use で操作して行った。**別端末では同じ経路が無い�
 コミット済みのPNGをそのまま使えばよい。追加生成が必要なときは、ユーザーに
 「codexで生成するか、他の画像生成手段を使うか」を確認すること。
 
+2026-06-10、B-PC の Codex デスクトップアプリ（GPT-5.5 高推論 + imagegen）で
+C案世界観の12枚を再生成。生成物は `C:\Users\Luck\Desktop\Claude作業フォルダ\
+imai-lab-sum-zero-assets\` にPNG原本があり、リポジトリには Pillow で
+JPEG(q84, progressive) 化して格納（42MB→3.2MB）。
+
 | ファイル | 用途 |
 |---|---|
-| svc-01〜06.png | サービスカード背景（税務/承継/自動化/経営支援/創業/申告の象徴） |
-| interlude-01/02.png | 全面インタールード（均衡フィールド/ゼロサム収束） |
-| sec-bg-01〜03.png | CONTACT星図 / BALANCE天秤 / METHOD回路 |
-| seal-01/02.png | 朱の角印（緑クロマキー→_chromakey.pyで透過化済み） |
-| about-structure.png | ABOUT用縦長構造体（現レイアウトでは未使用・在庫） |
-| logo-mark.png | 篆刻風ロゴ印（ナビ＋favicon） |
+| hero-machine.jpg | ヒーロー背景（演算機・上部に文字用余白あり） 1920x1080 |
+| svc-01〜06-*.jpg | サービスカード 4:5（主計ダイヤル/歯車列/パンチカード/計器盤/真鍮プレート/紙送り） |
+| interlude-01-mechanism-wide.jpg | 幕間1: 機構全景 2520x1080 |
+| interlude-02-paper-drums.jpg | 幕間2: 紙テープと数字ドラム接写 2520x1080 |
+| texture-vellum.jpg / texture-metal.jpg | ベラム紙/黒鉄の質感タイル 1024x1024 |
+| contact-bg.jpg | CONTACT背景: 静かな機械室 1920x1080 |
+| seal-01/02.png | 朱の角印・透過（旧世代から継続使用。捺印演出に使う） |
+| logo-mark.png | 篆刻風ロゴ印（favicon） |
 
-画像プロンプトの共通トーン: 漆黒#050507基調・イリディセント発光＋朱差し色・
-文字/ロゴ/実在用語なし・背景用途は四隅が黒へフェード。
+画像プロンプトの共通トーン: 墨黒・アイボリー・真鍮・青銅・朱 / 金属・インク・
+ベラム紙・パンチカード・活字。UIテキスト・ナビは画像に入れない（刻印 DR/CR/¥/SUM=ZERO は可）。
 
 ## 6. 残タスク（優先順）
 
-1. **ユーザーの実機検閲**: スクロール・シネマがwowに届いているか確認待ちの状態。
-   届いていなければ更に攻める（候補: サービスカード3D化、ヒーローの過剰化、
-   ページ遷移演出、音、WebGL画像トランジション）
+1. **ユーザーの実機検閲（C案 Sum Zero Apparatus 版・未検閲）**: ドラム収束・捺印・
+   検査光などの演出がwowに届いているか確認待ち。前回版の反省から「足し算で攻める」
+   より先に質感・間・タイポの調整で応える方針
 2. **隠しリンク実装（完了 2026-06-10 / B-PC, commit 0be4c09）**: 表HP `index.html` 1861行の
    中点を `<a class="dot" href="x/" rel="nofollow" aria-hidden="true" tabindex="-1"
-   style="cursor:default">·</a>` に置換済み。グローバル `a{color:inherit;text-decoration:none}` と
-   `.copyline .dot` 継承により見た目は完全同一（oklch値で照合済み）。クリック遷移・/x/ の
-   コンソールエラー0・ScrollTrigger 42個も検証済み。表HPへの変更はこの1行のみ。
-3. **モバイル実機調整**: レイアウトはレスポンシブ済みだが実機未検証。
-   横スクロールピンのタッチ挙動とWebGL負荷を要確認
+   style="cursor:default">·</a>` に置換済み。見た目は完全同一（oklch値で照合済み）。
+   表HPへの変更はこの1行のみ。
+3. **モバイル実機調整**: 375px幅まで数値検証済みだが実機（タッチ・フォント描画）未検証
 4. **公開**: master へのマージ＝GitHub Pages 即公開。**ユーザーの明示許可なしに
    master へマージ/push しないこと**（このブランチ ura-dev 上で作業を続ける）
 
