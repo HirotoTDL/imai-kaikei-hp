@@ -1,0 +1,468 @@
+/* ========== Base & Reset ========== */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* Paper texture background */
+  background-color: #FBF8F4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* ========== Paper texture overlay ========== */
+.paper-texture {
+  position: relative;
+}
+
+.paper-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ========== Hero SVG Line Drawing Animation ========== */
+@keyframes drawLine {
+  from { stroke-dashoffset: var(--line-length); }
+  to { stroke-dashoffset: 0; }
+}
+
+/* ========== Logo Grid Animation ========== */
+@keyframes svgFadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes drawStroke {
+  from { stroke-dashoffset: var(--dash-len); }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fillClean {
+  from { fill: transparent; stroke-opacity: 1; }
+  to { fill: currentColor; stroke-opacity: 0; }
+}
+
+@keyframes fillCleanKeepStroke {
+  from { fill: transparent; }
+  to { fill: currentColor; }
+}
+
+/* Container */
+.hero-grid-art {
+  opacity: 0;
+  animation: svgFadeIn 0.5s ease 0.3s forwards;
+}
+
+/* Grid circles - draw in smoothly */
+.hero-grid-art .grid-circle {
+  --dash-len: 700;
+  stroke-dasharray: var(--dash-len);
+  stroke-dashoffset: var(--dash-len);
+  animation: drawStroke 2s cubic-bezier(0.25, 0.1, 0.25, 1) 0.5s forwards;
+}
+
+/* Guide lines - quick draw */
+.hero-grid-art .grid-guide {
+  --dash-len: 600;
+  stroke-dasharray: var(--dash-len);
+  stroke-dashoffset: var(--dash-len);
+  animation: drawStroke 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 0.4s forwards;
+}
+
+/* Logo text - each char has individual timing via CSS vars */
+.hero-grid-art .logo-draw-char {
+  --dash-len: 800;
+  stroke-dasharray: var(--dash-len);
+  stroke-dashoffset: var(--dash-len);
+  animation: drawStroke 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) var(--draw-delay) forwards,
+             fillClean 0.8s ease var(--fill-delay) forwards;
+  color: rgba(92, 72, 48, 0.18);
+}
+
+/* Legacy class kept for compatibility */
+.hero-grid-art .logo-draw {
+  --dash-len: 3000;
+  stroke-dasharray: var(--dash-len);
+  stroke-dashoffset: var(--dash-len);
+  animation: drawStroke 3s cubic-bezier(0.25, 0.1, 0.25, 1) 1.5s forwards,
+             fillClean 1.2s ease 4s forwards;
+  color: rgba(92, 72, 48, 0.18);
+}
+
+/* Subtitle text */
+.hero-grid-art .logo-draw-sub {
+  --dash-len: 1500;
+  stroke-dasharray: var(--dash-len);
+  stroke-dashoffset: var(--dash-len);
+  animation: drawStroke 2s cubic-bezier(0.25, 0.1, 0.25, 1) 3s forwards,
+             fillClean 1s ease 4.5s forwards;
+  color: rgba(140, 114, 82, 0.22);
+}
+
+/* Bottom label */
+.hero-grid-art .logo-draw-label {
+  --dash-len: 1200;
+  stroke-dasharray: var(--dash-len);
+  stroke-dashoffset: var(--dash-len);
+  animation: drawStroke 2s cubic-bezier(0.25, 0.1, 0.25, 1) 3.5s forwards,
+             fillClean 1s ease 5s forwards;
+  color: rgba(168, 142, 110, 0.2);
+}
+
+/* ========== Animations ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in-left {
+  opacity: 0;
+  animation: fadeInLeft 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in-right {
+  opacity: 0;
+  animation: fadeInRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Scroll reveal with variants */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ========== Header ========== */
+#header {
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  background-color: rgba(251, 248, 244, 0.95);
+}
+
+#header.scrolled {
+  box-shadow: 0 4px 20px rgba(92, 72, 48, 0.08);
+  background-color: rgba(251, 248, 244, 0.98);
+}
+
+/* ========== Navigation ========== */
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #5C4830, #A68B5B);
+  border-radius: 1px;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* ========== Section wave dividers ========== */
+.wave-divider {
+  position: relative;
+  height: 80px;
+  margin-top: -80px;
+  pointer-events: none;
+}
+
+.wave-divider svg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+}
+
+/* ========== Decorative elements ========== */
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(92, 72, 48, 0.06);
+  pointer-events: none;
+}
+
+/* ========== Number badges for services ========== */
+.service-number {
+  position: absolute;
+  top: -12px;
+  right: 24px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(92, 72, 48, 0.05);
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.service-card:hover .service-number {
+  color: rgba(92, 72, 48, 0.10);
+}
+
+/* ========== Service Cards ========== */
+.service-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #5C4830, #C9A87C);
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 0 0 3px 0;
+}
+
+.service-card:hover::before {
+  width: 100%;
+}
+
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(92, 72, 48, 0.03) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(30%, 30%);
+  transition: transform 0.5s ease;
+}
+
+.service-card:hover::after {
+  transform: translate(20%, 20%);
+}
+
+/* ========== Team cards ========== */
+.team-card {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+}
+
+.team-photo-placeholder {
+  position: relative;
+  overflow: hidden;
+}
+
+.team-photo-placeholder::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(251, 248, 244, 0.8), transparent);
+}
+
+/* ========== FAQ ========== */
+.faq-item {
+  transition: box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.faq-item.active {
+  box-shadow: 0 4px 20px rgba(92, 72, 48, 0.08);
+  border-color: rgba(92, 72, 48, 0.15);
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+}
+
+.faq-item.active .faq-content {
+  max-height: 300px;
+}
+
+/* ========== Contact section glow ========== */
+.contact-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(166, 139, 91, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ========== Form ========== */
+input, select, textarea {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #5C4830;
+  box-shadow: 0 0 0 4px rgba(92, 72, 48, 0.08);
+}
+
+/* ========== Buttons ========== */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* ========== Gradient text ========== */
+.text-gradient {
+  background: linear-gradient(135deg, #5C4830 0%, #8C7252 50%, #A68B5B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== Selection color ========== */
+::selection {
+  background: rgba(92, 72, 48, 0.15);
+  color: #2E2318;
+}
+
+/* ========== Scrollbar (webkit) ========== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DFD0C0;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C4AD94;
+}
+
+/* ========== Counter animation ========== */
+.counter-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.counter-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== Responsive adjustments ========== */
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 64px;
+  }
+
+  #hero {
+    min-height: 100svh;
+  }
+
+  .service-number {
+    font-size: 3rem;
+    right: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wave-divider {
+    height: 120px;
+    margin-top: -120px;
+  }
+
+  .wave-divider svg {
+    height: 120px;
+  }
+}

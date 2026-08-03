@@ -1,0 +1,147 @@
+@charset "UTF-8";
+/* ===================================================================
+   オープニング・シーケンス（design.md §8-A）
+   style.css を読み込んだ上で追加する
+   =================================================================== */
+
+/* 再生中はスクロールを封じる */
+body.is-opening { overflow: hidden; }
+
+/* ★再生前の初期状態は CSS 側で持つ。
+   JS の gsap.set に頼ると、タイムライン生成前や巻き戻し時に
+   一瞬コピーが見えてしまう窓ができる（実測で確認） */
+body.is-opening #hero-bg-main,
+body.is-opening [data-part],
+body.is-opening #hero-char,
+body.is-opening #op-h1,
+body.is-opening #op-sub,
+body.is-opening #op-cta,
+body.is-opening #hdr{opacity:0}
+body.is-opening #hero-balloon{opacity:0;transform:scale(0)}
+
+/* 統合トップ（top.html）— 舞台の情景パーツとキャラクターはオープニングで出現させる */
+body.is-opening .stage__part,
+body.is-opening #companion,
+body.is-opening #companion-shadow{opacity:0}
+
+/* ヒーロー内に流し込む吹き出し（絶対配置ではなく本文の流れに置く）
+   ★#sec-hero を付けて詳細度を上げること。後段の .hero__balloon{position:absolute} に
+     負けると、H1 の上に重なる（実機で発生） */
+#sec-hero .hero__balloon--top{
+  position:static;display:inline-block;
+  margin:0 0 24px;max-width:min(90%,420px);
+  transform-origin:left bottom;
+}
+
+/* ---------- オーバーレイ ---------- */
+.op{
+  position:fixed;inset:0;z-index:500;
+  background:var(--c-bg);
+  display:flex;align-items:center;justify-content:center;
+}
+/* ★opacity:0 を CSS に置かないこと。ここを隠すと LCP が JS の実行完了待ちになり、
+   実測で LCP 6.2秒（描画待ちが93%）になった。隠すのは play() 側の fromTo に任せる */
+.op__logo{display:flex;flex-direction:column;align-items:center;gap:14px}
+.op__mark{
+  width:76px;height:76px;background:var(--c-accent);color:var(--c-text-inv);
+  display:flex;align-items:center;justify-content:center;
+  font:600 40px/1 var(--f-serif);
+}
+.op__name{font:600 clamp(22px,2.4vw,30px)/1.2 var(--f-serif);letter-spacing:.06em;color:var(--c-text)}
+.op__tag{font:400 11px/1 var(--f-en);letter-spacing:.16em;color:var(--c-text-sub)}
+
+/* ---------- スキップ（★参考①には無い当社の追加） ---------- */
+.op-skip{
+  position:fixed;right:20px;top:20px;z-index:520;
+  min-height:44px;padding:0 20px;
+  background:var(--c-surface);border:1px solid var(--c-border);border-radius:9999px;
+  font:500 15px/1 var(--f-jp);color:var(--c-text);cursor:pointer;
+  transition:background var(--t),border-color var(--t);
+}
+.op-skip:hover{border-color:var(--c-accent);background:var(--c-accent-tint)}
+.op-skip[hidden]{display:none}
+
+/* ---------- 検証用バー（本番では削除） ---------- */
+.devbar{
+  position:fixed;left:20px;bottom:20px;z-index:520;
+  display:flex;align-items:center;gap:8px;
+  background:var(--c-surface);border:1px solid var(--c-border);border-radius:9999px;padding:8px;
+  box-shadow:0 4px 24px rgba(33,40,54,.12);
+}
+.devbar__label{font:500 12px/1 var(--f-en);letter-spacing:.1em;color:var(--c-text-sub);padding:0 8px}
+.devbar button{
+  min-height:44px;padding:0 16px;border:none;border-radius:9999px;cursor:pointer;
+  background:var(--c-accent-tint);color:var(--c-accent);
+  font:500 14px/1 var(--f-jp);
+}
+.devbar button:hover{background:var(--c-accent);color:var(--c-text-inv)}
+
+/* ---------- ヒーロー ---------- */
+.hero{
+  position:relative;
+  min-height:min(100vh,860px);
+  padding-top:var(--hdr-h);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  overflow:hidden;
+}
+
+.hero__bg{position:absolute;inset:0;z-index:0}
+.hero__bg-main{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(100%,1400px);height:100%;
+  border:0;background:#E6E9ED;
+}
+.hero__part{position:absolute;border:0;background:#DCE1E6}
+.hero__part.p--mountain{left:6%;top:26%;width:46%;height:22%}
+.hero__part.p--town    {left:2%;bottom:16%;width:56%;height:16%}
+.hero__part.p--river   {right:4%;bottom:12%;width:36%;height:10%}
+.hero__part.p--tree-l  {left:3%;bottom:22%;width:11%;height:30%}
+.hero__part.p--tree-r  {right:8%;bottom:24%;width:8%;height:24%}
+.hero__part.p--cloud   {right:10%;top:16%;width:26%;height:9%}
+
+/* キャラクター — 着地位置をCSSで決め、MotionPath はそこへの相対移動を描く */
+.hero .hero__char{
+  position:absolute;z-index:2;
+  right:12%;bottom:30%;
+  width:clamp(120px,14vw,200px);aspect-ratio:1/1;
+  border:0;background:#CBD3DC;border-radius:50% 50% 46% 46%;
+  will-change:transform;
+}
+
+/* 吹き出し */
+.hero__balloon{
+  position:absolute;z-index:3;
+  right:6%;bottom:52%;
+  max-width:min(46vw,360px);
+  padding:18px 24px;
+  background:var(--c-surface);border:1px solid var(--c-border);border-radius:9999px;
+  transform-origin:right bottom;
+  font:500 clamp(15px,1.3vw,17px)/1.7 var(--f-jp);color:var(--c-text);
+}
+.hero__balloon-text span{
+  display:inline-block;white-space:pre;
+  opacity:0;transform:translateY(4px);
+  transition:opacity .35s ease,transform .35s ease;
+}
+.hero__balloon-text._show span{opacity:1;transform:translateY(0)}
+
+/* コピー */
+.hero__copy{
+  position:relative;z-index:4;
+  padding-top:clamp(40px,6vw,80px);padding-bottom:clamp(48px,7vw,96px);
+  display:flex;flex-direction:column;gap:clamp(20px,2.6vw,32px);
+}
+.hero__copy .h1{max-width:18em}
+.hero__copy .lead{max-width:32em}
+
+@media (max-width:1023px){
+  .hero__balloon{right:auto;left:4%;bottom:58%;max-width:70vw}
+  .hero .hero__char{right:6%;bottom:34%}
+}
+@media (max-width:767px){
+  .hero{min-height:auto}
+  .hero .hero__char{width:110px;right:4%;bottom:38%}
+  .hero__balloon{bottom:62%;padding:14px 18px}
+  .op__mark{width:60px;height:60px;font-size:32px}
+  .devbar{left:8px;bottom:8px}
+}

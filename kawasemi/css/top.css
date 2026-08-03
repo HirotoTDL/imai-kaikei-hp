@@ -1,0 +1,169 @@
+@charset "UTF-8";
+/* ===================================================================
+   統合トップ（top.html）の本文セクション
+   style.css / stage.css / opening.css の後に読み込む
+   =================================================================== */
+
+/* ---------- セクション共通 ---------- */
+.sect__head{display:flex;flex-direction:column;gap:16px;max-width:34em}
+.sect__num{font-family:var(--f-en);font-weight:500;font-size:13px;line-height:1;letter-spacing:.1em;color:var(--c-accent)}
+.sect--ink .sect__num{color:var(--c-onink-accent)}
+.sect--ink .eyebrow{color:var(--c-onink-sub)}
+.sect--ink .body,.sect--ink .note{color:rgba(255,255,255,.8)}
+
+/* ---------- 悩み（Q&A） ---------- */
+.qa2{display:flex;flex-direction:column;margin-top:clamp(32px,4vw,56px)}
+.qa2__row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(16px,3vw,48px);
+  padding:30px 0;border-top:1px solid var(--c-border)}
+.qa2__row:last-child{border-bottom:1px solid var(--c-border)}
+.qa2__q{margin:0;font-family:var(--f-jp);font-weight:700;font-size:clamp(19px,1.6vw,23px);line-height:1.6;letter-spacing:.04em}
+.qa2__a{margin:0;font-family:var(--f-jp);font-weight:400;font-size:17px;line-height:1.9;color:var(--c-text-sub);text-wrap:pretty}
+
+/* ---------- 相談の入口（1c から採用・悩みセクションの末尾に置く） ---------- */
+.entry--top{
+  margin-top:clamp(36px,5vw,64px);
+  border:1px solid var(--c-border);background:var(--c-surface);
+  padding:clamp(24px,3vw,40px);
+  display:flex;flex-direction:column;gap:20px;border-radius:2px;
+}
+.entry__catch{
+  margin:0;font-family:var(--f-jp);font-weight:700;
+  font-size:clamp(20px,2vw,26px);line-height:1.6;letter-spacing:.04em;
+}
+.entry__cols{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
+  gap:clamp(20px,3vw,44px);align-items:center;
+  padding-top:20px;border-top:1px solid var(--c-border);
+}
+.entry--top .entry__form{display:flex;flex-direction:column;gap:12px}
+.entry--top .entry__row{display:flex;flex-wrap:wrap;gap:12px}
+.entry--top .select{flex:1 1 200px;min-width:0}
+
+/* ---------- サービス6領域（紺墨・編集的な行組み） ----------
+   ★スティッキー＋スナップの「積み上がるカード」は撤去した。
+     520vh のあいだスクロールを固定する作りは閲覧者からスクロールを奪い、
+     それ自体がストレスでページ全体の使い勝手を落とす（ユーザー指摘）。
+     ここは素直な行組みにして、出現だけ ui.js の共通演出に任せる */
+.svc{background:var(--c-ink);color:var(--c-text-inv)}
+.svc__in{max-width:var(--maxw);margin:0 auto;padding:clamp(72px,10vw,132px) var(--pad)}
+.svc__head{display:flex;flex-direction:column;gap:14px;max-width:760px}
+.svc__eyebrow{font-family:var(--f-en);font-weight:500;font-size:14px;line-height:1.4;letter-spacing:.12em;color:var(--c-onink-sub)}
+.svc__h2{margin:0;font-family:var(--f-jp);font-weight:700;font-size:clamp(24px,2.8vw,36px);line-height:1.5;letter-spacing:.04em;color:var(--c-text-inv);text-wrap:pretty}
+.svc__lead{margin:0;font-family:var(--f-jp);font-weight:400;font-size:clamp(16px,1.3vw,19px);line-height:1.9;letter-spacing:.02em;color:rgba(255,255,255,.78);max-width:38em;text-wrap:pretty}
+
+/* 飛べる目次。押した場所へ素直に移動する（固定も逆算もしない） */
+.svc__index{list-style:none;margin:clamp(20px,2.6vw,32px) 0 0;padding:0;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:2px 20px}
+.svc__jump{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:14px;
+  min-height:44px;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.14);transition:border-color var(--t)}
+.svc__jump:hover{border-bottom-color:var(--c-onink-accent)}
+.svc__jno{font-family:var(--f-en);font-weight:500;font-size:13px;letter-spacing:.1em;color:var(--c-onink-accent)}
+.svc__jja{font-family:var(--f-jp);font-weight:500;font-size:15px;line-height:1.5;color:rgba(255,255,255,.82);transition:color var(--t)}
+.svc__jump:hover .svc__jja{color:#fff}
+
+.svc__rows{margin-top:clamp(40px,5vw,72px)}
+.svc__row{
+  display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);
+  gap:clamp(16px,3vw,48px);
+  padding:clamp(30px,4vw,52px) 0;
+  border-top:1px solid rgba(255,255,255,.18);
+  scroll-margin-top:calc(var(--hdr-h) + 20px);
+}
+.svc__row:last-child{border-bottom:1px solid rgba(255,255,255,.18)}
+.svc__mark{display:flex;flex-direction:column;gap:8px}
+.svc__no{font-family:var(--f-en);font-weight:500;font-size:clamp(28px,3.4vw,44px);line-height:1;letter-spacing:.02em;color:var(--c-onink-accent)}
+.svc__label{font-family:var(--f-en);font-weight:500;font-size:13px;line-height:1.4;letter-spacing:.12em;color:var(--c-onink-sub)}
+.svc__body{display:flex;flex-direction:column;gap:10px}
+.svc__h3{margin:0;font-family:var(--f-jp);font-weight:700;font-size:clamp(20px,2.1vw,28px);line-height:1.5;letter-spacing:.04em}
+.svc__en{font-family:var(--f-en);font-weight:400;font-size:14px;line-height:1.4;letter-spacing:.08em;color:var(--c-onink-sub)}
+.svc__txt{margin:6px 0 0;font-family:var(--f-jp);font-weight:400;font-size:17px;line-height:1.9;letter-spacing:.02em;color:rgba(255,255,255,.88);max-width:44em;text-wrap:pretty}
+.svc__more{align-self:flex-start;margin-top:6px;min-height:44px;display:inline-flex;align-items:center;
+  font-family:var(--f-jp);font-weight:500;font-size:16px;color:var(--c-onink-accent);
+  text-decoration:none;border-bottom:1px solid currentColor}
+.svc__more:hover{color:#fff}
+
+.svc__foot{margin-top:clamp(36px,5vw,64px)}
+.svc__link{display:inline-flex;align-items:center;min-height:56px;padding:0 28px;
+  border:1px solid rgba(255,255,255,.4);border-radius:9999px;color:var(--c-text-inv);text-decoration:none;
+  font-family:var(--f-jp);font-weight:500;font-size:17px;line-height:1;letter-spacing:.02em;
+  transition:background var(--t),border-color var(--t)}
+.svc__link:hover{background:rgba(255,255,255,.12);border-color:#fff}
+
+@media (max-width:639px){
+  .svc__row{grid-template-columns:1fr;gap:12px}
+  .svc__mark{flex-direction:row;align-items:baseline;gap:14px}
+  .svc__no{font-size:26px}
+}
+
+/* ---------- 事務所について ---------- */
+.about2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(32px,5vw,72px);align-items:center}
+.about2__fig{border:1px solid var(--c-border);background:var(--c-surface);padding:14px}
+.about2__fig img{display:block;width:100%;height:auto}
+.about2__cap{margin:10px 2px 0;font-family:var(--f-jp);font-weight:400;font-size:13px;line-height:1.7;color:var(--c-text-sub)}
+
+/* ---------- スタッフ ---------- */
+.people2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(24px,3vw,40px);margin-top:clamp(32px,4vw,56px)}
+.person2{background:var(--c-surface);border:1px solid var(--c-border);border-radius:2px;overflow:hidden;
+  display:grid;grid-template-columns:minmax(130px,40%) 1fr;transition:border-color var(--t),transform var(--t)}
+.person2:hover{border-color:var(--c-accent);transform:translateY(-4px)}
+/* ★枠の縦横比を素材(3:4)に合わせる。cover のまま縦長の枠に入れると
+   実測で31%が切り捨てられていた（2026-07-29） */
+.person2__img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;background:var(--c-ph);align-self:start}
+.person2__body{padding:clamp(20px,2vw,30px);display:flex;flex-direction:column;gap:9px}
+.person2__no{font-family:var(--f-en);font-weight:500;font-size:13px;line-height:1;letter-spacing:.1em;color:var(--c-accent)}
+.person2__name{font-family:var(--f-serif);font-weight:600;font-size:clamp(20px,1.8vw,24px);line-height:1.4}
+.person2__role{font-family:var(--f-en);font-weight:400;font-size:13px;line-height:1.4;letter-spacing:.08em;color:var(--c-text-sub)}
+.person2__txt{margin:0;font-family:var(--f-jp);font-weight:400;font-size:16px;line-height:1.9;color:var(--c-text-sub);text-wrap:pretty}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.tags span{font-family:var(--f-jp);font-weight:500;font-size:13px;line-height:1;padding:8px 12px;
+  background:var(--c-accent-tint);color:var(--c-accent);border-radius:9999px}
+
+/* ---------- アクセス ---------- */
+.access{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(32px,4vw,56px);align-items:start}
+.access__fig{position:relative;border:1px solid var(--c-border);background:var(--c-surface)}
+/* ★2026-07-30 に建物の絵を水彩で描き直した（旧素材は黒い輪郭線＋原色の空で、
+   ページ全体の水彩の色調から一枚だけ浮いていた）。
+   絵そのものが揃ったので、当座しのぎで掛けていた彩度落としの補正は外した。 */
+.access__fig img{display:block;width:100%;height:auto}
+.office-table{margin:0;display:flex;flex-direction:column}
+.office-table .row{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--c-border)}
+.office-table dt{font-family:var(--f-en);font-weight:500;font-size:13px;line-height:1.6;letter-spacing:.1em;color:var(--c-text-sub)}
+.office-table dd{margin:0;font-family:var(--f-jp);font-weight:400;font-size:17px;line-height:1.8}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.badges span{font-family:var(--f-jp);font-weight:500;font-size:14px;line-height:1;padding:10px 14px;
+  border:1px solid var(--c-border);border-radius:9999px;color:var(--c-text-sub);background:var(--c-surface)}
+.map{width:100%;aspect-ratio:16/9;border:1px solid var(--c-border);margin-top:20px}
+
+/* ---------- 末尾CTA ---------- */
+.cta2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(32px,5vw,72px);align-items:center}
+.cta2__right{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+
+/* ---------- フッター ---------- */
+.ftr{position:relative;z-index:10;background:var(--c-ink);color:var(--c-text-inv)}
+.ftr__in{max-width:var(--maxw);margin:0 auto;padding:clamp(56px,7vw,88px) var(--pad) 32px;
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:clamp(24px,3vw,48px)}
+.ftr__lead{margin:16px 0 0;font-family:var(--f-jp);font-weight:400;font-size:15px;line-height:1.9;color:rgba(255,255,255,.72);max-width:30em}
+.ftr .ftr__h{display:block;margin:0 0 14px;font-family:var(--f-en);font-weight:500;font-size:13px;letter-spacing:.12em;color:rgba(255,255,255,.55)}
+.ftr ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.ftr a{color:rgba(255,255,255,.86);text-decoration:none;font-family:var(--f-jp);font-size:15px;line-height:1.8}
+.ftr a:hover{color:#fff;text-decoration:underline}
+.ftr li{font-family:var(--f-jp);font-size:15px;line-height:1.8;color:rgba(255,255,255,.72)}
+.ftr .logo__name{color:#fff}
+.ftr .logo__tag{color:rgba(255,255,255,.5)}
+.ftr__btm{max-width:var(--maxw);margin:0 auto;padding:20px var(--pad) 40px;
+  border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;
+  font-family:var(--f-en);font-size:13px;letter-spacing:.08em;color:rgba(255,255,255,.5)}
+
+@media (max-width:900px){
+  .ftr__in{grid-template-columns:1fr 1fr}
+}
+@media (max-width:767px){
+  .qa2__row{grid-template-columns:1fr;gap:12px}
+  .person2{grid-template-columns:1fr}
+  .person2__img{aspect-ratio:4/3}
+  .ftr__in{grid-template-columns:1fr}
+  .p--building{width:74%;bottom:20%}
+}
+
+

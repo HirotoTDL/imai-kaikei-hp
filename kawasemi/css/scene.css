@@ -1,0 +1,187 @@
+@charset "UTF-8";
+/* ===================================================================
+   場面（Scene）と紙面（Paper）— design.md §8-D（2026-07-29 再設計）
+
+   ★固定の全画面舞台は持たない。各 Scene が自分の中に背景と鳥を閉じ込める。
+     これにより、はみ出し・ヘッダーへの潜り込み・本文との z-index 争いが
+     構造的に起こらない。
+   =================================================================== */
+
+
+/* ---------- 紙面（Paper）セクション ----------
+   ★これらは以前 stage.css にあった。舞台を廃止した際に一緒に外してしまい、
+     全セクションのレイアウトが消えて画面が崩壊した（2026-07-29）。
+     紙面の基本レイアウトはここに置く */
+.sect{padding:clamp(72px,11vh,132px) 0;display:flex;align-items:center;background:var(--c-bg)}
+.sect__in{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);width:100%}
+.sect--light{background:var(--c-surface)}
+.sect--ink{background:var(--c-ink);color:var(--c-text-inv)}
+.sect--ink .h2,.sect--ink .lead{color:var(--c-text-inv)}
+.sect--clear{background:transparent}
+
+/* ---------- 場面セクション共通 ---------- */
+.scene{position:relative;overflow:hidden;background:var(--c-bg)}
+.scene__bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+.scene__part{display:block;position:absolute;
+  background-repeat:no-repeat;background-size:contain;background-position:center bottom}
+
+/* ★雲と水面の素材は「絵が四辺いっぱいまで描かれた全面ブリード」（余白0pxを実測）。
+   箱に置くと必ず直線で切れる。ぼかして空・川に溶かす。
+   素材そのものを作り直すより、こちらで処理するほうが確実で軽い */
+/* ★半径を箱より大きく取ると、ぼかしが箱の外で完了して端が不透明のまま残る（実測）。
+   closest-side にして「箱の辺でちょうど透明になる」ようにする */
+.p--cloud{
+  -webkit-mask-image:radial-gradient(closest-side at 50% 50%,#000 52%,rgba(0,0,0,0) 100%);
+          mask-image:radial-gradient(closest-side at 50% 50%,#000 52%,rgba(0,0,0,0) 100%);
+}
+.p--water{
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);
+}
+/* 山並みも左右端まで描かれている。左は画面外へ逃がしてあるので、右だけ稜線を空へ溶かす */
+.p--mountain{
+  -webkit-mask-image:linear-gradient(90deg,#000 0,#000 58%,transparent 96%);
+          mask-image:linear-gradient(90deg,#000 0,#000 58%,transparent 96%);
+}
+/* 川の場面の左手前の木も左端まで描かれている。左を溶かす */
+.p--tree-l{
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 16%);
+}
+.scene__bird{
+  position:absolute;left:0;top:0;z-index:2;
+  width:var(--bird,170px);height:var(--bird,170px);
+  background-repeat:no-repeat;background-size:auto 100%;background-position:0 0;
+  pointer-events:none;will-change:transform,background-position;
+}
+.scene__body{position:relative;z-index:3}
+
+/* ---------- ヒーロー場面 ---------- */
+.scene--hero{
+  min-height:min(100vh,920px);
+  display:flex;flex-direction:column;justify-content:center;
+  padding-top:var(--hdr-h);
+  /* ★本文の下に「情景の帯」を確保する。ここが無いと絵の置き場が無く、
+     木や家並みがセクション境界に押し出されて切れる */
+  padding-bottom:clamp(96px,13vh,156px);
+  /* ★下端で地色を次セクション（白）へ送っておく。
+     ここに色の段差があると、ちょうど木の幹が終わる高さに横線が入り、
+     「絵が切り落とされた」ように見える（実測・ユーザー指摘） */
+  background:linear-gradient(180deg,var(--c-bg) 0%,var(--c-bg) 74%,var(--c-surface) 100%);
+}
+.scene--hero .scene__body{
+  max-width:var(--maxw);margin:0 auto;width:100%;padding:0 var(--pad);
+  display:flex;flex-direction:column;gap:clamp(20px,2.4vw,30px);
+}
+/* 情景は下端の帯に集約する。空と本文の領域は紙のまま空ける。
+   ★負のオフセットで外へ出さない（overflow:hidden に直線で切られる）
+   ★2026-07-29 実測で作り直し。以前は不透明度が .24〜.5 と低いうえに
+     覆い（::before）を全面 .9 で敷いていたため、**情景が完全に消えて
+     真っ白なヒーロー**になっていた。地は文字の側にだけ敷く */
+/* 情景の下端は、切り取られるのではなく紙に溶けて終わる。
+   これで木の幹も家並みもセクション境界で直線に切れなくなる */
+.scene--hero .scene__bg{
+  /* 下端のぼかしは「境界で直線に切れない」ための最小限に留める。
+     ここを厚くすると、本文の下に作った情景の帯まで消してしまう */
+  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 94%,rgba(0,0,0,0) 100%);
+          mask-image:linear-gradient(180deg,#000 0,#000 94%,rgba(0,0,0,0) 100%);
+}
+.scene--hero .p--cloud   {right:6%;top:6%;width:16%;min-width:104px;aspect-ratio:1/1;opacity:.6;
+  /* 同じ理由で雲も静止1コマを初期値に置く */
+  background-image:url('../assets/images/bg_cloud_sp1.webp')}
+.scene--hero .p--mountain{left:-3%;bottom:7%;width:50%;aspect-ratio:3/2;opacity:.62;
+  background-image:url('../assets/images/bg/bg_mountain.webp')}
+.scene--hero .p--town    {left:1%;bottom:0;width:38%;aspect-ratio:3/2;opacity:.82;
+  background-image:url('../assets/images/bg/bg_town.webp')}
+/* ★木は葉が揺れる4コマのループ。
+   縦横比は素材のコマ（276x439）に合わせる。ここがずれると葉が伸び縮みする */
+.scene--hero .p--tree    {right:6%;bottom:0;width:22%;min-width:168px;aspect-ratio:276/439;opacity:.92;
+  /* ★JSが読めなくても木が出るように、静止1コマをCSSの初期値として置く。
+     JSが動けば4コマの揺れる版に差し替わる。
+     実測（CDN障害の検証）: これが無いと GSAP が落ちた瞬間にヒーローの木が消えた */
+  background-image:url('../assets/images/bg_leaf_sp1.webp')}
+
+/* ヒーローの文字側にだけ、うっすら地を敷いて可読性を確保する。
+   右下（木＝カワセミのとまる場所）まで白で潰さないこと */
+/* ★覆いは「本文のある場所」だけに要る。全面に敷くと山と家並みがまるごと消え、
+   左半分が白紙になる（実測・ユーザー指摘）。
+   縦横の両方で効かせたい。ただし ::before に mask-image を足す手は実測で効かず
+   （同じ書き方でも実要素 .scene__bg では効いた）、覆いが全面に残って町が消えた。
+   → **本文の位置を中心にした放射状**にして、グラデーション一枚で済ませる。
+   中心（22% 38%）＝コピーの重心。そこから外側へ抜けるので、
+   下の情景の帯と右の木は覆われない */
+.scene--hero::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(125% 78% at 24% 40%,
+    rgba(246,247,248,.97) 0%, rgba(246,247,248,.94) 38%,
+    rgba(246,247,248,.62) 62%, rgba(246,247,248,0) 86%);
+}
+.scene--hero .h1{max-width:min(20em,58vw)}
+.scene--hero .lead{max-width:min(32em,52vw)}
+
+/* 横に並べられない幅では、上＝文字／下＝情景の二段に切り替える */
+@media (max-width:1023px){
+  .scene--hero{
+    justify-content:flex-start;
+    padding-top:calc(var(--hdr-h) + 5vh);
+    padding-bottom:clamp(170px,27vh,280px);
+  }
+  .scene--hero::before{
+    background:linear-gradient(180deg,
+      rgba(246,247,248,.94) 0%, rgba(246,247,248,.92) 56%,
+      rgba(246,247,248,.40) 74%, rgba(246,247,248,0) 88%);
+  }
+  .scene--hero .h1,.scene--hero .lead{max-width:100%}
+  .scene--hero .p--mountain{width:74%;bottom:9%}
+  .scene--hero .p--town    {width:58%;bottom:0}
+  .scene--hero .p--tree    {right:4%;width:38%;min-width:150px}
+  .scene--hero .p--cloud   {width:26%;top:4%;right:4%}
+  /* ★小画面には縮小版を配る（表示サイズの3〜4倍を配っていた） */
+  .scene--hero .p--mountain{background-image:url('../assets/images/bg/bg_mountain_sp.webp')}
+  .scene--hero .p--town    {background-image:url('../assets/images/bg/bg_town_sp.webp')}
+}
+
+/* ---------- 川の場面（カワセミを見せるだけの一枚） ----------
+   ★以前は 340vh ＋ sticky でスクロールを固定していた。撤去。
+     スクロールを奪う仕掛けは、それ自体が閲覧者のストレスで、
+     ページ全体の使い勝手を落とす（ユーザー指摘）。
+     ふつうの高さの一枚に収め、動きはアニメーション自身の時間で回す */
+.scene--river{
+  min-height:min(88vh,760px);
+  background:linear-gradient(180deg,var(--c-surface) 0%,#EDF1F5 42%,var(--c-bg) 100%);
+}
+.scene--river .scene__vp{position:relative;height:min(88vh,760px);overflow:hidden}
+.scene--river .scene__bird{--bird:180px}
+.scene--river .p--river{left:50%;transform:translateX(-50%);bottom:0;width:min(62%,760px);aspect-ratio:1/1;opacity:.92}
+.scene--river .p--tree-l{left:0;bottom:0;width:20%;aspect-ratio:1/1;opacity:.5}
+.scene--river .p--cloud {right:7%;top:7%;width:15%;aspect-ratio:1/1;opacity:.5}
+
+@media (max-width:767px){
+  .scene--river{min-height:min(74vh,560px)}
+  .scene--river .scene__vp{height:min(74vh,560px)}
+  .scene--river .scene__bird{--bird:126px}
+  .scene--river .p--river{width:88%}
+}
+
+/* ---------- 紙面の同伴者（UIにとまる・枝なし素材） ---------- */
+/* ★紙面では鳥を小さめにする。150pxだと、とまった相手の上の本文に
+   体が大きく被る（実測）。126pxで「乗っている」ことは十分伝わる */
+.companion{
+  position:fixed;left:0;top:0;z-index:30;
+  width:126px;height:126px;
+  background-repeat:no-repeat;background-size:auto 100%;background-position:0 0;
+  pointer-events:none;opacity:0;will-change:transform,background-position;
+}
+.companion[hidden]{display:none}
+
+@media (max-width:767px){
+  .scene__bird{--bird:120px}
+  .scene--river{height:300vh}
+  .scene--river .scene__bird{--bird:130px}
+  .scene--river .p--river{left:50%;width:86%}
+  .companion{width:104px;height:104px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .scene__bird,.companion{transition:none !important}
+}

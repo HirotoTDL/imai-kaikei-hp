@@ -1,0 +1,66 @@
+@charset "UTF-8";
+/* ===================================================================
+   オープニングのオーバーレイと吹き出し（design.md §8-A）
+   ※舞台まわりは scene.css。ここは「幕」と「セリフ」だけ
+   =================================================================== */
+
+body.is-opening{overflow:hidden}
+
+/* 再生前の初期状態は CSS 側で持つ（JSのgsap.setに頼ると一瞬見える窓ができる）。
+   ★ただしロゴだけは隠さない。隠すと LCP が JS の実行完了待ちになる */
+/* ★隠すのは「登場演出を実際に再生する画面幅」だけにする。
+   JS（GSAP など）が届くまで本文が opacity:0 のままになるため、
+   細い回線ではそこまで何も描画されず、実測で LCP が 6〜7秒台まで悪化していた。
+   小さい画面は演出そのものをやらないので、最初から出しておく。 */
+@media (min-width:900px){
+  body.is-opening #op-h1,
+  body.is-opening #op-sub,
+  body.is-opening #op-cta,
+  body.is-opening #hdr,
+  body.is-opening .scene__part,
+  body.is-opening .scene__bird{opacity:0}
+  body.is-opening #hero-balloon{opacity:0;transform:scale(0)}
+}
+/* 小さい画面では幕も出さない（JS を待たずに本文が出る） */
+@media (max-width:899px){
+  .op,.op-skip{display:none !important}
+}
+
+/* ---------- 幕 ---------- */
+.op{position:fixed;inset:0;z-index:500;background:var(--c-bg);
+  display:flex;align-items:center;justify-content:center}
+.op__logo{display:flex;flex-direction:column;align-items:center;gap:14px}
+.op__mark{width:76px;height:76px;background:var(--c-accent);color:var(--c-text-inv);
+  display:flex;align-items:center;justify-content:center;font:600 40px/1 var(--f-serif)}
+.op__name{font:600 clamp(22px,2.4vw,30px)/1.2 var(--f-serif);letter-spacing:.06em;color:var(--c-text)}
+.op__tag{font:400 11px/1 var(--f-en);letter-spacing:.16em;color:var(--c-text-sub)}
+
+/* ---------- スキップ（高齢の来訪者を待たせないための逃げ道） ---------- */
+.op-skip{position:fixed;right:20px;top:20px;z-index:520;
+  min-height:44px;padding:0 20px;
+  background:var(--c-surface);border:1px solid var(--c-border);border-radius:9999px;
+  font:500 15px/1 var(--f-jp);color:var(--c-text);cursor:pointer;
+  transition:background var(--t),border-color var(--t)}
+.op-skip:hover{border-color:var(--c-accent);background:var(--c-accent-tint)}
+.op-skip[hidden]{display:none}
+
+/* ---------- 吹き出し（本文の流れに置く。絶対配置にしない） ---------- */
+.balloon{
+  display:inline-block;align-self:flex-start;
+  max-width:min(90%,420px);margin:0;
+  padding:16px 24px;
+  background:var(--c-surface);border:1px solid var(--c-border);border-radius:9999px;
+  transform-origin:left bottom;
+  font:500 clamp(15px,1.3vw,17px)/1.7 var(--f-jp);color:var(--c-text);
+}
+/* ★一字ずつ出す。_show が付くのは内側の .balloon__text（JS がそこに付ける）。
+   ここを .balloon._show にしていたため一致せず、**文字が出ない空カプセル**になっていた。
+   さらに、JS が止まっても空にならないよう、隠すのは _hold が付いている間だけにする */
+.balloon__text span{display:inline-block;white-space:pre;
+  transition:opacity .35s ease,transform .35s ease}
+.balloon__text._hold span{opacity:0;transform:translateY(4px)}
+.balloon__text._hold._show span{opacity:1;transform:translateY(0)}
+
+@media (max-width:767px){
+  .op__mark{width:60px;height:60px;font-size:32px}
+}

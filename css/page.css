@@ -1,0 +1,213 @@
+@charset "UTF-8";
+/* ===================================================================
+   下層ページ共通（design.md §6「下層ページの型」）
+   style.css → top.css → page.css の順で読み込む
+   =================================================================== */
+
+body.page{background:var(--c-bg)}
+body.page main{padding-top:var(--hdr-h)}
+
+/* ---------- ページヘッダー帯（ヒーロー画像は置かない） ---------- */
+.phead{border-bottom:1px solid var(--c-border);background:var(--c-bg)}
+.phead__in{max-width:var(--maxw);margin:0 auto;padding:clamp(52px,8vh,88px) var(--pad) clamp(36px,5vh,52px);
+  min-height:clamp(200px,28vh,280px);display:flex;flex-direction:column;justify-content:center;gap:14px}
+.phead__num{font-family:var(--f-en);font-weight:500;font-size:13px;line-height:1;letter-spacing:.1em;color:var(--c-accent)}
+.phead__en{font-family:var(--f-en);font-weight:500;font-size:14px;line-height:1.4;letter-spacing:.12em;color:var(--c-text-sub)}
+.phead h1{margin:0;font-family:var(--f-jp);font-weight:700;font-size:clamp(26px,3.2vw,40px);line-height:1.5;letter-spacing:.04em;text-wrap:pretty}
+.phead__lead{margin:8px 0 0;font-family:var(--f-jp);font-weight:400;font-size:clamp(17px,1.4vw,19px);line-height:1.9;letter-spacing:.02em;color:var(--c-text-sub);max-width:34em;text-wrap:pretty}
+
+/* ---------- パンくず ---------- */
+.crumb{max-width:var(--maxw);margin:0 auto;padding:14px var(--pad);
+  font-family:var(--f-jp);font-weight:400;font-size:13px;line-height:1.8;color:var(--c-text-sub)}
+.crumb a{color:var(--c-text-sub);text-decoration:none}
+.crumb a:hover{color:var(--c-accent);text-decoration:underline}
+.crumb span{margin:0 8px;color:var(--c-border)}
+
+/* ---------- 本文 ---------- */
+.pbody{max-width:var(--maxw);margin:0 auto;padding:clamp(48px,7vw,88px) var(--pad) clamp(56px,8vw,104px)}
+.read{max-width:720px}
+.read p{margin:0 0 24px;font-family:var(--f-jp);font-weight:400;font-size:17px;line-height:1.9;letter-spacing:.02em;text-wrap:pretty}
+.read p:last-child{margin-bottom:0}
+
+.block{padding:clamp(36px,5vw,64px) 0;border-top:1px solid var(--c-border)}
+.block:first-of-type{border-top:0;padding-top:0}
+.block__grid{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:start}
+.block h2{margin:0;font-family:var(--f-jp);font-weight:700;font-size:clamp(22px,2.2vw,28px);line-height:1.6;letter-spacing:.04em;text-wrap:pretty}
+.block h3{margin:0 0 14px;font-family:var(--f-jp);font-weight:700;font-size:clamp(19px,1.7vw,23px);line-height:1.6;letter-spacing:.04em}
+.block__en{display:block;margin-top:8px;font-family:var(--f-en);font-weight:400;font-size:13px;letter-spacing:.1em;color:var(--c-text-sub)}
+.block__no{font-family:var(--f-en);font-weight:500;font-size:13px;letter-spacing:.1em;color:var(--c-accent)}
+
+.ulist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+.ulist li{position:relative;padding-left:20px;font-family:var(--f-jp);font-weight:400;font-size:17px;line-height:1.9;color:var(--c-text-sub)}
+.ulist li::before{content:"";position:absolute;left:2px;top:.85em;width:8px;height:1px;background:var(--c-accent)}
+/* ★行の中に「押せる大きさ（44px）」のリンクが入ると、行の高さが伸びて
+   行頭の記号だけ上に取り残される（404ページの一覧で発生）。
+   そういう行では記号を行の中央に置く。 */
+.ulist--links li::before{top:50%}
+.subhead{margin:0 0 10px;font-family:var(--f-en);font-weight:500;font-size:13px;letter-spacing:.1em;color:var(--c-text-sub)}
+.hitokoto{margin:20px 0 0;padding:20px 24px;background:var(--c-accent-tint);
+  font-family:var(--f-jp);font-weight:400;font-size:17px;line-height:1.9;color:var(--c-text);border-radius:2px}
+
+/* ---------- FAQ ---------- */
+.faq{display:flex;flex-direction:column;border-top:1px solid var(--c-border)}
+.faq details{border-bottom:1px solid var(--c-border)}
+.faq summary{display:flex;align-items:center;gap:16px;min-height:76px;padding:18px 0;cursor:pointer;list-style:none;
+  font-family:var(--f-jp);font-weight:700;font-size:clamp(17px,1.5vw,20px);line-height:1.6;letter-spacing:.02em}
+/* ★質問文は「裸のテキスト」ではなく要素にしてある。
+   フレックスの中の裸テキストは無名アイテムになり、
+   折り返しの制御が効かない（.nb を掛けたら段組みごと崩れた）。
+   ★text-wrap:balance は使わない。幅で均等に割るだけなので、
+     日本語では「相続の相談はいつ／からすべきですか？」のように語中で割れる。 */
+.faq summary .q__t{flex:1;min-width:0}
+/* ★スマホ幅では、番号と＋記号が横幅を食って設問が2文字だけ折り返していた
+   （実測: 375pxで「…していますか？」の『か？』が次行）。
+   飾りの占有を詰めて、設問に幅を渡す。 */
+@media (max-width:480px){
+  .faq summary{gap:10px}
+  .faq summary .q{font-size:11px;letter-spacing:0}
+  .faq summary::after{margin-left:8px;font-size:18px}
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"＋";margin-left:auto;font-family:var(--f-en);font-weight:400;font-size:20px;color:var(--c-accent)}
+.faq details[open] summary::after{content:"−"}
+.faq .q{font-family:var(--f-en);font-weight:500;font-size:13px;letter-spacing:.1em;color:var(--c-accent);flex:none}
+.faq .a{padding:0 0 26px 52px;font-family:var(--f-jp);font-weight:400;font-size:17px;line-height:1.9;color:var(--c-text-sub);text-wrap:pretty}
+@media (max-width:767px){ .faq .a{padding-left:0} }
+
+/* ---------- フォーム ---------- */
+.form{display:flex;flex-direction:column;gap:22px;max-width:720px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-family:var(--f-jp);font-weight:500;font-size:16px;line-height:1.6}
+.req{margin-left:8px;padding:4px 8px;border-radius:9999px;background:var(--c-accent-tint);color:var(--c-accent);
+  font-family:var(--f-jp);font-weight:500;font-size:13px;letter-spacing:.04em}
+.field input,.field select,.field textarea{
+  height:56px;padding:0 16px;border:1px solid var(--c-border);border-radius:2px;background:var(--c-surface);
+  font-family:var(--f-jp);font-weight:400;font-size:17px;line-height:1;color:var(--c-text)}
+.field textarea{height:auto;min-height:180px;padding:16px;line-height:1.9}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--c-accent)}
+.form__note{font-family:var(--f-jp);font-weight:400;font-size:14px;line-height:1.8;color:var(--c-text-sub)}
+
+/* ---------- 全下層共通の末尾CTA ---------- */
+.pcta{background:var(--c-ink);color:var(--c-text-inv)}
+.pcta__in{max-width:var(--maxw);margin:0 auto;padding:clamp(56px,8vw,96px) var(--pad);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(28px,5vw,64px);align-items:center}
+.pcta h2{margin:0;font-family:var(--f-jp);font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1.6;letter-spacing:.04em;color:#fff;text-wrap:pretty}
+.pcta p{margin:18px 0 0;font-family:var(--f-jp);font-weight:400;font-size:17px;line-height:1.9;color:rgba(255,255,255,.78)}
+.pcta__right{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.pcta .telblock__label{color:rgba(255,255,255,.6)}
+.pcta .telblock__num{color:#fff}
+.pcta .note{color:rgba(255,255,255,.7)}
+
+@media (max-width:767px){
+  .block__grid{grid-template-columns:1fr;gap:16px}
+}
+
+/* ---------- ページヘッダーに情景を通す（2026-07-29 追加） ----------
+   ★下層ページだけ「絵の無い平らな帯」になっていて、トップとの連続性が切れていた。
+     トップと同じ水彩の素材を、右側に薄く敷いて地続きにする。
+     JS は使わない（下層ページは GSAP を読み込まない）。
+     画像はトップで読み込み済みのものを使い回すので、追加の転送は実質ない。 */
+.phead{position:relative;overflow:hidden}
+.phead::after{
+  content:"";position:absolute;right:0;bottom:0;z-index:0;pointer-events:none;
+  width:min(46%,520px);aspect-ratio:3/2;
+  background:url('../assets/images/bg/bg_mountain.webp') no-repeat right bottom/contain;
+  opacity:.26;
+  /* ★山の素材は左右端まで絵が描かれている（実測）。両側を溶かさないと直線で切れる */
+  -webkit-mask-image:linear-gradient(100deg,rgba(0,0,0,0) 0,#000 40%,#000 74%,rgba(0,0,0,0) 100%);
+          mask-image:linear-gradient(100deg,rgba(0,0,0,0) 0,#000 40%,#000 74%,rgba(0,0,0,0) 100%);
+}
+.phead__in{position:relative;z-index:1}
+
+@media (max-width:767px){
+  .phead::after{width:70%;opacity:.26}
+}
+
+/* 下層ページの締めも、トップの余韻に寄せる */
+.pcta{position:relative;overflow:hidden}
+/* ★CTA帯は紺墨（濃色）。淡い水彩をそのまま重ねると、濃い地の上で
+   灰色のシミのように見える（実測）。輪郭を出さず、光の滲みとして置く */
+.pcta::before{
+  content:"";position:absolute;left:-4%;bottom:0;z-index:0;pointer-events:none;
+  width:min(42%,460px);aspect-ratio:3/2;
+  background:url('../assets/images/bg/bg_town.webp') no-repeat left bottom/contain;
+  opacity:.10;filter:grayscale(1) brightness(1.9);mix-blend-mode:soft-light;
+  -webkit-mask-image:linear-gradient(70deg,#000 30%,rgba(0,0,0,0) 92%);
+          mask-image:linear-gradient(70deg,#000 30%,rgba(0,0,0,0) 92%);
+}
+.pcta__in{position:relative;z-index:1}
+
+/* ---------- スタッフ詳細（2026-07-29 追加） ----------
+   ★トップの要約と同じ札を並べるだけでは、下層に来た意味がない。
+     載せる事実は原稿正本のまま、扱いだけ詳細ページの重さにする。
+     アンカーで飛んだとき見出しがヘッダーに隠れないよう scroll-margin も置く */
+.pperson__grid{
+  display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);
+  gap:clamp(24px,4vw,56px);align-items:start;
+}
+.pperson--rev .pperson__grid{grid-template-columns:minmax(0,1fr) minmax(0,340px)}
+.pperson--rev .pperson__fig{order:2}
+.pperson__fig{margin:0;border:1px solid var(--c-border);background:var(--c-surface);overflow:hidden}
+.pperson__fig img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top}
+.pperson__body{display:flex;flex-direction:column;gap:10px}
+.pperson__name{margin:6px 0 0;font-family:var(--f-serif);font-weight:600;
+  font-size:clamp(24px,2.4vw,32px);line-height:1.4;letter-spacing:.02em}
+.pperson__role{font-family:var(--f-en);font-weight:400;font-size:14px;line-height:1.6;
+  letter-spacing:.06em;color:var(--c-text-sub)}
+.pperson__txt{margin:10px 0 0;font-family:var(--f-jp);font-weight:400;font-size:17px;
+  line-height:1.9;letter-spacing:.02em;max-width:34em;text-wrap:pretty}
+.pperson__fields{margin-top:18px;padding-top:18px;border-top:1px solid var(--c-border)}
+.pperson__fh{display:block;margin-bottom:10px;font-family:var(--f-en);font-weight:500;
+  font-size:13px;letter-spacing:.1em;color:var(--c-text-sub)}
+.pperson__tags{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:10px}
+.pperson__tags a{
+  display:inline-flex;align-items:center;min-height:44px;padding:0 16px;
+  background:var(--c-accent-tint);color:var(--c-accent);border-radius:9999px;
+  font-family:var(--f-jp);font-weight:500;font-size:15px;line-height:1;text-decoration:none;
+  transition:background var(--t),color var(--t)}
+.pperson__tags a:hover{background:var(--c-accent);color:var(--c-text-inv)}
+
+[id^="svc-"]{scroll-margin-top:calc(var(--hdr-h) + 24px)}
+
+@media (max-width:767px){
+  .pperson__grid,.pperson--rev .pperson__grid{grid-template-columns:1fr}
+  .pperson--rev .pperson__fig{order:0}
+  .pperson__fig{max-width:320px}
+}
+
+/* ---------- アクセス：地図を主役にする（2026-07-30 追加） ----------
+   ★「アクセス」を見に来た人が最初に欲しいのは地図。
+     トップは要約（表＋小さな地図）、下層は地図を大きく出す。載せる事実は同じ */
+.accessmap{padding-top:0}
+.map--lg{width:100%;aspect-ratio:16/9;min-height:320px;max-height:min(58vh,520px);
+  border:1px solid var(--c-border);margin:0;display:block}
+.accessmap__aid{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;margin-top:20px}
+.badge-h{font-family:var(--f-en);font-weight:500;font-size:13px;letter-spacing:.1em;color:var(--c-text-sub)}
+.accessmap__aid .badges{margin:0}
+@media (max-width:767px){
+  .map--lg{aspect-ratio:4/3;min-height:260px}
+}
+
+/* ---------- 入力の間違いを伝える（design.md §5・2026-07-30 実装） ----------
+   ★:invalid だけで色を付けると、開いた瞬間に未入力の必須項目が全部赤くなる。
+     :user-invalid（一度触ってから／送信を試みてから）に限る。
+   ★色だけで伝えない。文言も出す。絵文字アイコンは使わない（§0-3） */
+.field{position:relative}
+.field__err{
+  display:none;margin-top:8px;
+  font-family:var(--f-jp);font-weight:500;font-size:14px;line-height:1.7;
+  color:#B3261E;
+}
+/* ★エラー文の表示に :has() を使わない。
+   エラー文は入力欄の**次の兄弟**なので、兄弟セレクタで届く。
+   :has() は Firefox 121（2023年末）以降でしか効かず、
+   それ以前の環境では**間違いの理由がまったく出ない**状態になっていた。
+   枠の色（:user-invalid 直接指定）だけ出て文言が出ないのはいちばん不親切。 */
+.form :is(input,select,textarea):user-invalid ~ .field__err{display:block}
+/* ラベルは入力欄より前にあるので兄弟セレクタで届かない。
+   ここは :has() のままにする（効かなくても文言と枠で伝わる＝上乗せ） */
+.field:has(:user-invalid) > label{color:#B3261E}
+.form :is(input,select,textarea):user-invalid{
+  border-color:#B3261E;box-shadow:0 0 0 1px #B3261E}
+/* 直せたことも分かるように */
+.form :is(input,select,textarea):user-valid{border-color:var(--c-accent)}

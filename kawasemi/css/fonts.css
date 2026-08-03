@@ -1,0 +1,10 @@
+@charset "UTF-8";
+/* 自動生成 — scripts/build_fonts.py。直接編集しないこと。
+   サイトで実際に使う文字だけにサブセットした自己ホストフォント。
+   Zen Kaku Gothic New / Noto Serif JP / Roboto はいずれも SIL Open Font License 1.1。 */
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:400;font-display:swap;src:url('../assets/fonts/zenkaku-400.woff2') format('woff2')}
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:500;font-display:swap;src:url('../assets/fonts/zenkaku-500.woff2') format('woff2')}
+@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:700;font-display:swap;src:url('../assets/fonts/zenkaku-700.woff2') format('woff2')}
+@font-face{font-family:'Noto Serif JP';font-style:normal;font-weight:600;font-display:swap;src:url('../assets/fonts/notoserif-600.woff2') format('woff2')}
+@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-display:swap;src:url('../assets/fonts/roboto-400.woff2') format('woff2')}
+@font-face{font-family:'Roboto';font-style:normal;font-weight:500;font-display:swap;src:url('../assets/fonts/roboto-500.woff2') format('woff2')}

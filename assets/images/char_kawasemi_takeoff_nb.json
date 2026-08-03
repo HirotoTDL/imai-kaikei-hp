@@ -1,0 +1,8 @@
+{
+ "frames": 5,
+ "frameW": 384,
+ "frameH": 384,
+ "source": "takeoff_nb_frames",
+ "pad": 10,
+ "alignedX": false
+}

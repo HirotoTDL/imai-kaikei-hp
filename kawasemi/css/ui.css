@@ -1,0 +1,163 @@
+@charset "UTF-8";
+/* ===================================================================
+   ui.css — ページ全体に効く土台（ui.js と対）
+
+   ★ここで隠す指定は、必ず .rv-ready（＝JSが動いたときだけ付く）配下に置く。
+     静的に隠すと、JSが落ちた瞬間に本文が出ないページになる。
+   =================================================================== */
+
+/* ---------- 濃い面に重なっている間のヘッダー ---------- */
+.hdr{transition:background var(--t),border-color var(--t)}
+.hdr .logo__mark,.hdr .logo__name,.hdr .logo__tag,
+.hdr .gnav a,.hdr .hdr__tel-label,.hdr .hdr__tel-num{
+  transition:color var(--t),background var(--t)}
+
+.hdr._on_dark{background:rgba(26,32,44,.86);border-bottom-color:rgba(255,255,255,.14)}
+.hdr._on_dark .logo__name,
+.hdr._on_dark .gnav a{color:var(--c-text-inv)}
+.hdr._on_dark .logo__tag,
+.hdr._on_dark .hdr__tel-label{color:var(--c-onink-sub)}
+.hdr._on_dark .hdr__tel-num{color:var(--c-onink-accent)}
+.hdr._on_dark .logo__mark{background:var(--c-text-inv);color:var(--c-ink)}
+.hdr._on_dark .gnav a:hover,
+.hdr._on_dark .gnav a:focus-visible{color:var(--c-onink-accent);border-bottom-color:var(--c-onink-accent)}
+/* 紺地に紺のボタンは沈むので、白抜きに入れ替える */
+.hdr._on_dark .hdr__cta{background:var(--c-text-inv);color:var(--c-ink);border-color:transparent}
+.hdr._on_dark .hdr__cta:hover{background:var(--c-accent-tint)}
+.hdr._on_dark .hamburger span{background:var(--c-text-inv)}
+
+/* いま読んでいる場所 */
+.gnav a._here{color:var(--c-accent);border-bottom-color:var(--c-accent)}
+.hdr._on_dark .gnav a._here{color:var(--c-onink-accent);border-bottom-color:var(--c-onink-accent)}
+
+/* ---------- 出現演出 ----------
+   ★遷移は CSS 側に持たせる。JS は class を付けるだけにして、
+     ライブラリ無しでも下層ページで同じ挙動になるようにする */
+/* ★出し方に opacity を使わない。
+   薄い状態の本文は、検査でも実際の見え方でも「読めない文字」でしかない。
+   実測: 透過で出していたとき、アクセシビリティのコントラスト検査が
+   本文6箇所で落ちた（演出を切ると100点だった）。
+   下から立ち上がる clip で出せば、文字はいつでも濃さを保ったまま出てくる。 */
+.rv-ready [data-rv]{
+  clip-path:inset(0 0 100% 0);
+  transform:translateY(16px);
+  transition:clip-path .8s cubic-bezier(.22,.61,.36,1),
+             transform .8s cubic-bezier(.22,.61,.36,1);
+  will-change:clip-path,transform;
+}
+.rv-ready [data-rv]._in{clip-path:inset(0 0 0 0);transform:none}
+/* 表の行は clip も translate も効きにくいので、行の中身を動かす */
+.rv-ready tr[data-rv]{clip-path:none;transform:none}
+.rv-ready tr[data-rv] > *{
+  transform:translateY(10px);
+  transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.rv-ready tr[data-rv]._in > *{transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  .rv-ready [data-rv],
+  .rv-ready tr[data-rv] > *{clip-path:none !important;transform:none !important;transition:none !important}
+  .hdr,.hdr *{transition:none !important}
+}
+
+/* ---------- 押せるものの寸法（design.md §0-1「最小44×44px」） ----------
+   ★機械検査で、全ページ16件が44px未満だった（2026-07-29 実測）。
+     顧客層に高齢の方が多く、ここは設計の前提そのもの。
+     文字の見た目は変えず、当たり判定だけを広げる。 */
+.gnav a,
+.skip-link,
+.ftr a,
+.crumb a,
+.link-under{
+  min-height:44px;display:inline-flex;align-items:center;
+}
+.logo{min-height:44px;align-items:center}
+/* 縦に並ぶリンクは、行間で稼がず自分の高さで確保する */
+.ftr ul{display:flex;flex-direction:column}
+.ftr li{display:flex}
+.ftr li a{width:100%}
+/* パンくずは行の中に収まるので、上下の余白で稼ぐ */
+.crumb a{padding:0 2px}
+/* 表の中の電話番号など、本文に埋もれたリンクも当たり判定を確保する */
+.office-table a,.info-table a,.access a,.pbody dd a{
+  min-height:44px;display:inline-flex;align-items:center}
+.crumb a{min-width:48px;justify-content:center}
+/* ★本文の途中に埋め込まれたリンクは inline-flex にしてはいけない。
+   行の流れから外れて改行が入り、行間もがたつく（実測）。
+   見た目を変えずに当たり判定だけ広げるため、余白を足して同じ分だけ戻す。 */
+.read a[href^="tel:"],.block a[href^="tel:"],p a[href^="tel:"]{
+  padding:12px 4px;margin:-12px -4px}
+
+/* ---------------- 印刷 ----------------
+   ★年配のお客様は「アクセス」を紙に出して持って来られることがある。
+     何も指定しないと、紺墨の背景・ヘッダー・末尾CTA・フッターがそのまま乗り、
+     インクを食うわりに肝心の住所と電話が読みにくい紙になる。
+   方針: 画面のための飾りを落とし、白地に黒で「どこに・どう行くか」を残す。 */
+@media print {
+  /* 固定ヘッダー・ドロワー・演出・末尾CTA・フッターは紙に要らない */
+  .hdr, .drawer, .op, .op-skip, .companion, .skip-link,
+  .scene__bird, .scene__bg, .pcta, .ftr, .crumb { display: none !important; }
+
+  html, body { background: #fff !important; }
+  body { color: #000 !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* 紺墨の面は紙では白地に戻す（べた塗りでインクを使わない） */
+  .sect--ink, .svc, .band--ink { background: #fff !important; color: #000 !important; }
+  .sect--ink *, .svc * { color: #000 !important; }
+
+  /* 余白は紙の余白に任せる */
+  .wrap--pad, .pbody, .phead__in, .sect__in { padding-top: 12mm; padding-bottom: 12mm; }
+  main { padding-top: 0 !important; }
+
+  /* ★URLを紙に書き出さない。
+     地図リンクの実体は200文字を超える符号化された長大なURLで、
+     紙からはみ出したうえリンク文字に重なった（実測）。
+     紙で必要なのは「住所と電話」であって、地図サービスのURLではない。 */
+  a::after { content: none !important; }
+  a { color: #000 !important; text-decoration: none !important; }
+
+  /* 見出し帯の飾り（山の淡彩）は紙に要らない。上の余白も詰めて、
+     住所と電話が1枚目に載るようにする */
+  .phead { background: #fff !important; }
+  .phead::after, .phead::before { display: none !important; }
+  .phead__in { padding-top: 0 !important; padding-bottom: 8mm !important; }
+
+  /* 見出しと本文を切り離さない */
+  h1, h2, h3 { break-after: avoid-page; }
+  p, li, tr, .office-table tr { break-inside: avoid; }
+  /* ★図版に break-inside:avoid を掛けると、入りきらない図が丸ごと次の紙へ送られ、
+     手前の紙が半分空く（実測: アクセスが2枚→3枚に増えた）。
+     写真の途中で切れるより、紙が増えるほうが困る。掛けない。 */
+
+  /* 地図の埋め込みは紙に出ないので、代わりに住所が読めれば足りる */
+  iframe { display: none !important; }
+
+  /* ★末尾の余白を残すと、まっさらな紙が1枚余分に出る（実測: 3枚目の印字率0.2%）。
+     消した要素（末尾CTA・フッター）の跡地も含めて、最後は詰め切る。 */
+  main, .pbody, .wrap--pad, .sect__in { padding-bottom: 0 !important; margin-bottom: 0 !important; }
+  main > *:last-child, .pbody > *:last-child { margin-bottom: 0 !important; }
+  html, body { height: auto !important; }
+  /* 紙の余白は @page で持つ（要素側の余白と二重に効かせない） */
+  @page { margin: 14mm 12mm; }
+  /* 本文より後ろに残っている要素は、跡地ごと畳む */
+  main ~ * { display: none !important; }
+
+  /* ★飾りの「場面」は中身を消しても箱の高さが残り、白紙が量産される
+     （実測: トップが13ページ・うち4ページが空白）。箱ごと畳む。 */
+  .scene--river { display: none !important; }
+  .scene, .scene--hero { min-height: 0 !important; height: auto !important; }
+  .scene__vp { height: auto !important; min-height: 0 !important; }
+  /* ★地図の枠ごと消してはいけない。中に「JR中津川駅 車で5分／駐車場完備」など
+     紙でこそ役に立つ目印が入っている（実測で一度まるごと消してしまった）。
+     消すのは地図の絵（iframe）だけにして、枠の高さを詰める。 */
+  .accessmap, .map--lg { height: auto !important; min-height: 0 !important;
+                         background: none !important; border: 0 !important; }
+  .accessmap__aid { position: static !important; background: none !important;
+                    padding: 0 !important; box-shadow: none !important; }
+
+  /* ★最後の1枚が白紙で出るのは、消した要素の「手前の余白」が次の紙へこぼれるため。
+     本文の最終ブロックで断ち切る（実測: これで access 3→2、トップ 10→9 枚）。 */
+  main > :last-child, .pbody > :last-child,
+  .pbody > .read > :last-child { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+  main { padding-bottom: 0 !important; margin-bottom: 0 !important; }
+}

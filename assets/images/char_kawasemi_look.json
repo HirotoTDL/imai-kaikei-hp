@@ -1,0 +1,8 @@
+{
+ "frames": 6,
+ "frameW": 384,
+ "frameH": 384,
+ "source": "look_frames",
+ "pad": 10,
+ "alignedX": false
+}

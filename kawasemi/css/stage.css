@@ -1,0 +1,95 @@
+@charset "UTF-8";
+/* ===================================================================
+   全編横断ステージ（design.md §8-D）＋ セルアニメーション（§8-E）
+   style.css の後に読み込む
+   =================================================================== */
+
+/* ---------- 舞台レイヤー（すべて fixed。ページ全体で1つ） ---------- */
+.stage{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.stage__layer{position:absolute;inset:0;will-change:transform}
+
+/* 空 — 進行度で色が推移する。JS が --sky を書き換える */
+.stage__sky{background:var(--sky,#F6F7F8);transition:none}
+
+/* 遠景・中景・近景（本番は透過PNGに差し替え。いまは面で代用） */
+.stage__far,.stage__mid,.stage__near{background-repeat:no-repeat;background-position:center bottom;background-size:cover}
+/* 実素材が入ったので、仮の色帯は使わない（マークアップは残す） */
+.stage__layer .band{display:none}
+
+/* 舞台の情景パーツ — オープニングで乱数スタッガー入射し、以後ずっと舞台の一部として残る
+   ★静止画（山・街）と、差分ループ（雲・水面・葉）で扱いが違う。
+     ループ側は stage.js が background-image にシートを差し込むので、ここでは指定しない */
+.stage__part{display:block;position:absolute;background-repeat:no-repeat;background-size:contain;background-position:center bottom}
+
+/* ★情景は「画面下端の低い帯」に集約し、空と本文の領域は紙のまま空ける。
+   ★負のオフセットで画面外へはみ出させないこと。.stage は overflow:hidden なので
+     水彩の縁が直線でスパッと切れる（実機で発生・2026-07-29） */
+.p--mountain{left:0;bottom:6%;width:40%;aspect-ratio:3/2;
+  background-image:url('../assets/images/bg/bg_mountain.webp');opacity:.26}
+.p--town{left:1%;bottom:0;width:34%;aspect-ratio:3/2;
+  background-image:url('../assets/images/bg/bg_town.webp');opacity:.48}
+
+/* 差分ループ（画像は stage.js が差し込む） */
+.p--cloud{right:5%;top:2%;width:13%;aspect-ratio:1/1;opacity:.42}
+.p--river{right:2%;bottom:0;width:24%;aspect-ratio:1/1;opacity:.4}
+.p--tree-l{left:24%;bottom:0;width:11%;aspect-ratio:1/1;opacity:.48}
+.p--tree-r{right:30%;bottom:0;width:7.5%;aspect-ratio:1/1;opacity:.36;transform:scaleX(-1)}
+
+/* 着地点の影（近づくほど小さく濃くなる＝奥行きの手がかり） */
+.companion-shadow{
+  position:fixed;z-index:3;left:0;top:0;
+  width:var(--comp-size,180px);height:calc(var(--comp-size,180px) * .22);
+  border-radius:50%;background:rgba(33,40,54,.28);
+  filter:blur(6px);opacity:0;pointer-events:none;
+}
+
+/* ---------- キャラクター（スプライトシートのフレーム送り） ---------- */
+.companion{
+  position:fixed;z-index:4;left:0;top:0;
+  width:var(--comp-size,180px);height:var(--comp-size,180px);
+  pointer-events:none;
+  background-repeat:no-repeat;
+  background-size:auto 100%;      /* 高さをコマに合わせ、横は frames×幅 */
+  background-position:0 0;
+  will-change:transform,background-position;
+}
+/* 向きの反転は JS（gsap.set の scaleX）で行う。ここで transform を当てても
+   インライン transform に負けるため書かないこと */
+/* ★本文(main)は z-index:10。既定ではキャラはその裏にいる。
+   is-front で前面に出す。この裏⇄前面の切替が「本文との絡み」を作る */
+.companion.is-front{z-index:20}
+
+/* ---------- コンテンツはステージの上を流れる ---------- */
+.stagepage main{position:relative;z-index:10}
+.stagepage .hdr{z-index:200}
+
+/* セクションの地は半透明にして、舞台が透ける */
+.sect{padding:clamp(72px,12vh,140px) 0;min-height:70vh;display:flex;align-items:center}
+.sect__in{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);width:100%}
+.sect--light{background:rgba(246,247,248,.82);backdrop-filter:blur(2px)}
+.sect--ink{background:rgba(33,40,54,.9);color:var(--c-text-inv)}
+.sect--ink .h2,.sect--ink .lead{color:var(--c-text-inv)}
+.sect--clear{background:transparent}
+
+/* ---------- 計測バー（検証用・本番では削除） ---------- */
+.hud{
+  position:fixed;left:16px;bottom:16px;z-index:400;
+  background:rgba(255,255,255,.94);border:1px solid var(--c-border);border-radius:10px;
+  padding:10px 14px;font:500 12px/1.7 var(--f-en);color:var(--c-text);
+  box-shadow:0 4px 24px rgba(33,40,54,.12);min-width:210px;
+}
+.hud b{font-weight:500;color:var(--c-text-sub);display:inline-block;width:74px}
+
+@media (max-width:767px){
+  .companion{--comp-size:110px}
+  .hud{font-size:11px;min-width:180px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  /* 舞台は静止、キャラは待機1コマで固定（JS側でも停止する） */
+  .stage__layer{transform:none !important}
+  .companion{animation:none !important}
+}
+
+/* 差分ループを持つパーツは、色面ではなくスプライトを見せる */
+.stage__part[data-loop]{background-color:transparent}

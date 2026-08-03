@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>送信完了 | 今井会計事務所</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: {
+              50: '#FAF6F2', 100: '#F0E8DF', 200: '#DFD0C0',
+              700: '#5C4830', 800: '#453524',
+            },
+          },
+          fontFamily: {
+            sans: ['Noto Sans JP', 'sans-serif'],
+            serif: ['Noto Serif JP', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style>
+/* ===== 2つのホームページを行き来する細い帯 =====
+   ★両サイトともヘッダーが position:fixed なので、帯を普通に置くと**下に潜って重なる**
+     （実測: カワセミ #hdr top:0 高さ80 / レトロ .topbar top:0 高さ77）。
+     帯も固定にして最前面に置き、各サイトの固定ヘッダーを帯の高さぶん押し下げる。 */
+:root{--sw-h:36px}
+body{padding-top:var(--sw-h)}
+.sitesw{position:fixed;top:0;left:0;right:0;z-index:9999;
+  background:#EEF1F5;border-bottom:1px solid #DDE1E7;
+  font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;line-height:1}
+.sitesw__in{max-width:1186px;margin:0 auto;padding:0 20px;
+  min-height:var(--sw-h);display:flex;align-items:center;justify-content:flex-end;gap:12px}
+.sitesw__txt{color:#5B6478}
+.sitesw__go{display:inline-flex;align-items:center;min-height:28px;padding:0 12px;
+  border:1px solid #C7D0DB;border-radius:9999px;background:#fff;color:#14497F;
+  text-decoration:none;font-weight:500;white-space:nowrap}
+.sitesw__go:hover{background:#E8EEF5;border-color:#14497F}
+/* カワセミHP の固定ヘッダー・引き出し */
+.hdr{top:var(--sw-h) !important}
+.drawer{top:var(--sw-h) !important}
+/* レトロHP の固定ヘッダー・引き出し */
+.topbar{top:var(--sw-h) !important}
+.topbar ~ .drawer,.drawer{top:calc(64px + var(--sw-h)) !important}
+@media (max-width:520px){.sitesw__txt{display:none}.sitesw__in{justify-content:center}}
+</style></head>
+<body class="font-sans bg-forest-50 min-h-screen flex items-center justify-center px-4">
+<div class="sitesw"><div class="sitesw__in"><span class="sitesw__txt">以前のホームページ</span><a class="sitesw__go" href="../">新しいホームページ を見る</a></div></div>
+  <div class="text-center max-w-md">
+    <div class="w-20 h-20 bg-forest-100 rounded-full flex items-center justify-center mx-auto mb-8">
+      <svg class="w-10 h-10 text-forest-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+      </svg>
+    </div>
+    <h1 class="font-serif text-3xl font-bold text-forest-800 mb-4">送信が完了しました</h1>
+    <p class="text-gray-600 text-base leading-relaxed mb-8">
+      お問い合わせありがとうございます。<br>
+      3営業日以内にご連絡いたします。
+    </p>
+    <a href="index.html" class="inline-flex items-center justify-center bg-forest-700 text-white px-8 py-3 rounded-full font-medium hover:bg-forest-800 transition-colors">
+      トップページに戻る
+    </a>
+    <p class="text-gray-400 text-xs mt-8">&copy; 2026 今井会計事務所</p>
+  </div>
+</body>
+</html>

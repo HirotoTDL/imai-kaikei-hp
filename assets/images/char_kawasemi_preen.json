@@ -1,0 +1,8 @@
+{
+ "frames": 8,
+ "frameW": 384,
+ "frameH": 384,
+ "source": "preen_frames",
+ "pad": 10,
+ "alignedX": false
+}
