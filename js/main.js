@@ -41,23 +41,13 @@
     rv.forEach(function (el) { el.classList.add('is-in'); });
   }
 
-  // ヒーローのボイル: 2・3コマ目は読み込み後に取りに行き、揃ってから送る
-  // 保険: opening.js が読めなくても 9 秒後には人物を必ず出す
-  setTimeout(function () { qa('.hero__l').forEach(function (el) { el.classList.add('is-in'); }); }, 9000);
-  if (!q('#opening')) qa('.hero__l').forEach(function (el) { el.classList.add('is-in'); });
-
-  var hero = q('.hero');
-  if (hero && !reduce) {
-    var start = function () {
-      var lazy = qa('img[data-src]', hero), n = lazy.length;
-      if (!n) return;
-      lazy.forEach(function (img) {
-        img.onload = function () { if (--n === 0) hero.classList.add('is-boil'); };
-        img.src = img.getAttribute('data-src');
-      });
-    };
-    if (d.readyState === 'complete') start(); else addEventListener('load', start);
-  }
+  // ヒーローの登場（NSL 実測: 人物・小物が 0.11 秒ずつ・60px せり上がり）。キャッチと電話は最初から出ている
+  var hl = qa('.hero__l').sort(function (a, b) { return (+a.dataset.order || 0) - (+b.dataset.order || 0); });
+  hl.forEach(function (el, i) {
+    if (reduce) { el.classList.add('is-in'); return; }
+    el.style.transitionDelay = (0.35 + i * 0.11).toFixed(2) + 's';
+    requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add('is-in'); }); });
+  });
 
   // 地図は押したら読み込む（初回表示を軽くする）
   qa('.mapbox__btn').forEach(function (b) {
