@@ -440,3 +440,22 @@ body{background:var(--mustard)}
 .person__art .ill{height:100%;width:auto;max-width:100%;max-height:none;margin:0}
 @media (max-width:767px){.person__art{max-width:150px;width:100%}}
 @media (max-width:479px){.person__art{max-width:120px}}
+.kw{display:none}
+.js .kw{display:block;position:fixed;left:0;top:0;z-index:95;width:var(--kw-w,112px);aspect-ratio:1;pointer-events:none;
+will-change:transform;transition:opacity .22s}
+.kw__flip,.kw__body{position:absolute;inset:0}
+.kw-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0 0}
+.kw-img[hidden]{display:none}
+.kw-idle{aspect-ratio:auto;animation:kw3 1.5s step-end infinite}
+.kw-fly{animation:kw3 .36s step-end infinite}
+@keyframes kw3{0%{object-position:0 0}33.333%{object-position:50% 0}66.666%{object-position:100% 0}}
+.kw__hit{position:absolute;left:28%;top:40%;width:46%;height:50%;pointer-events:auto;cursor:pointer;border-radius:50%}
+.kw--squash .kw__body{animation:kwsq .16s ease-out}
+@keyframes kwsq{0%{transform:scale(1.12,.86)}100%{transform:none}}
+.kw--hop .kw__body{animation:kwhop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes kwhop{0%,100%{transform:none}40%{transform:translateY(-14%)}}
+.kw__body{transform-origin:50% 92%}
+.hero__perch{position:absolute;left:62%;top:41%;width:4%;height:14px;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.kw-img{animation:none!important}.kw__body{animation:none!important}}
+@media print{.kw{display:none!important}}
+.hero__rig{position:absolute;inset:0}
