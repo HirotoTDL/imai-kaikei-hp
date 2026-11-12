@@ -34,7 +34,7 @@
   var H = innerHeight, ticking = false;
   function frame() {
     ticking = false;
-    var sy = scrollY;
+    var sy = Math.max(0, scrollY - (window.__filmPin || 0));   // 入場フィルムでヒーローを留めている間のスクロールは数えない
     for (var i = 0; i < plx.length; i++) {
       var p = plx[i];
       if (p.ground) { p.el.style.translate = '0 ' + (-sy * p.sp).toFixed(1) + 'px'; continue; }

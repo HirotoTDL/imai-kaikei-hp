@@ -19,10 +19,11 @@
 <meta name="theme-color" content="#EDB141">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/shippori-500.woff2?v=b95ff269">
-<link rel="stylesheet" href="css/site.min.css?v=3b058dfc">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/shippori-500.woff2?v=308e8f2c">
+<link rel="stylesheet" href="css/site.min.css?v=f597d979">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preload" as="image" href="assets/img/hero_book_0.webp?v=1a760217">
+<script>(function(){try{var c=navigator.connection||{},r=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches||c.saveData||/(^|-)2g$/.test(c.effectiveType||'')||location.hash||sessionStorage.getItem('film-seen')||localStorage.getItem('film')==='off')return;r.classList.add('film-intro');setTimeout(function(){if(!window.__filmGo)r.classList.remove('film-intro')},7000)}catch(e){}})()</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"AccountingService","@id":"https://hirototdl.github.io/imai-kaikei-hp/#office","name":"今井会計事務所","url":"https://hirototdl.github.io/imai-kaikei-hp/","image":"https://hirototdl.github.io/imai-kaikei-hp/assets/img/og-card.jpg","logo":"https://hirototdl.github.io/imai-kaikei-hp/apple-touch-icon.png","description":"岐阜県中津川市の税理士事務所。税務顧問・相続税対策・事業承継・会社設立・クラウド会計導入・経営相談。","alternateName":"今井正義税理士事務所","foundingDate":"1971","telephone":"+81-573-65-5054","faxNumber":"+81-573-66-7772","address":{"@type":"PostalAddress","postalCode":"508-0045","addressCountry":"JP","addressRegion":"岐阜県","addressLocality":"中津川市","streetAddress":"かやの木町3-6 八百健ビル3F"},"geo":{"@type":"GeoCoordinates","latitude":35.485484,"longitude":137.5009146},"hasMap":"https://www.google.com/maps/search/?api=1&query=35.485484,137.5009146","areaServed":[{"@type":"City","name":"中津川市"},{"@type":"City","name":"恵那市"},{"@type":"AdministrativeArea","name":"岐阜県東濃地域"}],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"17:00"}],"knowsAbout":["税務顧問","相続税","贈与税","事業承継","会社設立","クラウド会計","資金繰り","確定申告","年末調整"]},{"@type":"WebSite","@id":"https://hirototdl.github.io/imai-kaikei-hp/#site","url":"https://hirototdl.github.io/imai-kaikei-hp/","name":"今井会計事務所","inLanguage":"ja","publisher":{"@id":"https://hirototdl.github.io/imai-kaikei-hp/#office"}}]}</script>
 </head><body>
 <a class="skip" href="#main">本文へ移動</a>
@@ -53,7 +54,9 @@
   <p class="free">初回相談は無料です</p>
 </div>
 <main id="main">
+<div class="hero-pin">
 <section class="hero">
+  <video class="hero__film" aria-hidden="true" tabindex="-1" muted loop playsinline disablepictureinpicture preload="none" width="1600" height="900" data-src="assets/video/hero_film.mp4?v=e50baa39" data-p-src="assets/video/hero_film_p.mp4?v=3cb0d625"></video>
   <div class="hero__art" aria-hidden="true"><div class="hero__rig" data-speed="-0.06">
     <span class="hero__perch" data-kw-perch></span>
     <div class="hero__book">
@@ -80,7 +83,12 @@
     </div>
     <p class="free" style="margin-top:14px">初回相談は無料です</p>
   </div>
+  <div class="hero__intro" aria-hidden="true"><video tabindex="-1" muted playsinline disablepictureinpicture preload="none" width="1600" height="900" data-r56-src="assets/video/hero_intro_56.mp4?v=cb4de583" data-r70-src="assets/video/hero_intro_70.mp4?v=3639df87" data-r91-src="assets/video/hero_intro_91.mp4?v=75d05004" data-r120-src="assets/video/hero_intro_120.mp4?v=2165e5cd" data-r155-src="assets/video/hero_intro_155.mp4?v=b6662c5f" data-r178-src="assets/video/hero_intro_178.mp4?v=73ddf27f" data-r220-src="assets/video/hero_intro_220.mp4?v=0bb68bfa" data-r273-src="assets/video/hero_intro_273.mp4?v=3472478e"></video></div>
+  <button class="hero__hint" type="button" hidden><i>Scroll</i><span>スクロールでページへ</span></button>
+  <button class="hero__replay" type="button" hidden><span class="hero__replay-ic" aria-hidden="true"></span><span class="hero__replay-t">紹介動画を見る</span></button>
+  <button class="hero__film-btn" type="button" aria-pressed="false" aria-label="背景の動画を止める" hidden><span aria-hidden="true"></span></button>
 </section>
+</div>
 
 <section class="state" aria-labelledby="st-h">
   <img class="ill boil state__flip state__flip--l" src="assets/img/page_flip_l.webp?v=9312959f" width="560" height="996" style="aspect-ratio:560/996" alt="" aria-hidden="true" loading="lazy" decoding="async">
@@ -316,8 +324,8 @@
   <a href="tel:0573655054"><small>お電話 平日9-17時</small><b>0573-65-5054</b></a>
   <a href="contact.html"><small>初回相談は無料</small>フォームで相談</a>
 </nav>
-<script src="js/main.js?v=24b0c9ae" defer></script>
-<script src="js/motion.js?v=f5be36af" defer></script>
+<script src="js/main.js?v=617192ef" defer></script>
+<script src="js/motion.js?v=581496a5" defer></script>
 <script src="js/kawasemi.js?v=39617e84" defer></script>
 </body>
 </html>
